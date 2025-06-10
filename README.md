@@ -105,9 +105,8 @@ tp_integrador/
 
 - **Falchi Massietti, Alexander** – Legajo 14949 – Rol (QA / Documentación)
 
-- **Doglio, Ramiro** – Legajo 16170 – Rol (QA / Documentación)
+- **Doglio, Ramiro** – Legajo 15071 – Rol (QA / Documentación)
 
-- **Mansilla, Pedro** – Legajo 16170 – Rol (QA / Documentación)
+- **Mansilla, Pedro** – Legajo 15667 – Rol (QA / Documentación)
 
 ---
-
