@@ -136,8 +136,8 @@ Rechazado --> [*]
 autonumber
 actor "__:AnalistaEnSismos__" as AES
 create boundary "__:PantallaRegistrarResultado__" as PRR
-AES --> PRR: 1. opcRegistrarResultadoManual()
-PRR -> PRR: 2. abrirVentana()
+AES --> PRR:opcRegistrarResultadoManual()
+PRR -> PRR:abrirVentana()
 create control "__:GestorRegistrarResultado__" as GRR
 PRR --> GRR: 3. newRevisiónManual()
 GRR -> GRR: 4. buscarEventosSísmicosAD()
@@ -184,7 +184,7 @@ end
 entity "__Actual:CambioEstado__" as ACE
 SES -> ACE : setFechaHoraFin()
 SES -> SES: crearCambioEstado()
-create entity "__New:CambioEstado__" as NCE
+create entity "__Bloqueado:CambioEstado__" as NCE
 SES --> NCE: new()
 SES -> SES : setEstado()
 GRR -> GRR: 20. buscarDatosSísmicos()
@@ -197,43 +197,80 @@ entity "__:OrigenDeGeneración__" as OG
 SES -> OG: 26. getNombre()
 loop Valores alcanzados sísmo
 else Mientras existan series temporales
-    entity "__:SerieTemporal__" as ST
-    SES --> ST: 27. getDatos()
+    entity "__:SerieTemporal__" as ST #LightCoral
+    SES --> ST:  getDatos()
     loop Valores muestras sísmicas
     else Mientras existan muestras sísmicas
         entity "__:MuestraSísmica__" as MS
-        ST --> MS: 28. getDatos()
+        ST --> MS:  getDatos()
         loop Valores detalle muestras sísmicas
         else Mientras existan detalles muestras sísmicas
             entity "__:DetalleMuestraSísmica__" as DMS
-            MS --> DMS: 29. getDatos()
+            MS --> DMS:  getDatos()
             entity "__:TipoDeDato__" as TD
-            DMS --> TD: 30. getDenominación()
-            DMS -> TD: 31. getNombreUnidadMedida()
-            DMS -> TD: 32. getValorUmbral()
+            DMS --> TD:  getDenominación()
+            DMS -> TD:  getNombreUnidadMedida()
+            DMS -> TD:  getValorUmbral()
             
         end
     end
 end
+GRR -> GRR:buscarDatosEstacion()
+GRR ->ST: getEstacionSismografica()
+loop Buscar Sismografo
+else mientras haya sismografos
+entity "__:Sismografo__" as S #LightCoral
+ST->S: sosMiSismografo()
+ST->S: getDatosEstacion()
 
-' GRR -> GRR: 33. clasificarPorEstación()????
-' GRR -> GRR: 34. llamarCUGenerarSismograma()????
-' GRR -> PRR: 35. solicitarSelecciónMapa()
-' AES -> PRR: 36. tomarSelecciónMapa()
-' PRR -> GRR: 37. tomarSeleccionMapa()
-' GRR -> PRR: 38. solicitarModificaciónDatosES()
-' AES -> PRR: 39. tomarModificaciónDatosES()
-' PRR -> GRR: 40. tomarModificaciónDatosES()
-' GRR -> PRR: 41. solicitarAcciónSobreEvento()
-' AES -> PRR: 42. tomarAcciónSobreEvento()
-' PRR -> GRR: 43. tomarAcciónSobreEvento()
-' GRR -> GRR: 44. validarDatos()
-' GRR -> GRR: 45. obtenerFechaHoraActual()
-' GRR -> GRR: 46. obtenerASLogueado()???
-' GRR -> SES: 47. rechazarEvento()
-' SES -> CE: 48. new()
-' CE -> E: 49. new()
-' GRR -> GRR: 50. finCU()
+entity "__Sismografo:Estacion Sismologica__" as SSE
+S-> SSE:getNombre()
+S->SSE:getCodigo()
+end
+GRR->GRR: ordenarCodigos()
+
+GRR -> GRR:  llamarCUGenerarSismograma()
+entity "__:CuGenerarSismograma__" as CGS #LightBlue
+GRR --> CGS:<<include>>
+
+GRR->PRR: mostrarDatos()
+
+GRR -> PRR:solicitarSelecciónMapa()
+AES -> PRR:tomarSelecciónMapa()
+PRR -> GRR:tomarSeleccionMapa()
+
+ GRR -> PRR:solicitarModificaciónDatosES()
+ AES -> PRR:tomarModificaciónDatosES()
+ PRR -> GRR:tomarModificaciónDatosES()
+
+ GRR -> PRR:solicitarAcciónSobreEvento()
+ AES -> PRR:tomarAcciónSobreEvento()
+ PRR -> GRR:tomarAcciónSobreEvento()
+
+ GRR -> GRR:validarDatos()
+
+
+ GRR -> GRR:obtenerFechaHoraActual()
+ GRR -> GRR:obtenerASLogueado()
+ GRR -> SES:rechazarEvento()
+ 
+
+loop Buscar estado bloqueado en revisión
+else Mientras existan estados
+    GRR -> Es: sosÁmbitoEventoSísmico()
+    GRR -> Es: sosRechazado()
+end
+GRR -> GRR :getFechaHoraActual()
+GRR -> GRR:bloquearEventoSísmico()
+entity "__Selecc:EventoSísmico__" as SES
+GRR -> SES: bloquearEventoSísmico()
+SES->NCE: setFechaHoraFin()a
+
+EV->EV: crearCambioEstado()
+entity "__Rechazado:Cambio Estado__" as RCE
+EV --> RCE: new()
+
+GRR -> GRR:finCU()
 @enduml
 
 @startuml Parte_Estática_CU_23
