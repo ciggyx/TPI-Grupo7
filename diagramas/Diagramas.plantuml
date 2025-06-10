@@ -111,7 +111,6 @@ hide empty description
 '38: Verificar eventos sísmicos auto detectados
 '39: Cerrar evento sísmico
 '67: Registrar resultado de revisión de un evento sismico derivado
-'113?: Generar informe de gestión de sismos XXXXX
 
 [*]-->AutoDetectado : 24. \n new() [magnitudSismo < 4.0]
 [*]-->AutoConfirmado : 24. \n new() [magnitudSismo >= 4.0]
@@ -134,6 +133,7 @@ Rechazado --> [*]
 @enduml
 
 @startuml Parte_Dinámica_CU_23
+autonumber
 actor "__:AnalistaEnSismos__" as AES
 create boundary "__:PantallaRegistrarResultado__" as PRR
 AES --> PRR: 1. opcRegistrarResultadoManual()
@@ -144,35 +144,57 @@ GRR -> GRR: 4. buscarEventosSísmicosAD()
 loop Eventos Sísmicos Auto Detectados
 else Mientras existan eventos sísmicos
     entity "__:EventoSísmico__" as ES #LightCoral
-    GRR --> ES: 5. estaRevisado()
-    entity "__:Estado__" as E
-    ES --> E: 6. getNombre()
-    GRR -> ES: 7. getFechaHoraOcurrenciaEvento()
-    GRR -> ES: 8. getLatitudEpicentro()
-    GRR -> ES: 9. getLongitudEpicentro()
-    GRR -> ES: 10. getLatitudHipocentro()
-    GRR -> ES: 11. getLongitudHipocentro()
+    GRR --> ES: 5. esPendienteRevisión()
+    entity "__:EventoEstado__" as E
+    ES --> E: 6. sosPendienteRevisión()
+    GRR --> ES: 5. esAutodetectado()
+    ES --> E: 6. sosAutodetectado()
+    GRR -> ES: getDatos()
+    ES -> ES: getFechaHoraOcurrenciaEvento()
+    ES -> ES: 8. getLatitudEpicentro()
+    ES -> ES: 9. getLongitudEpicentro()
+    ES -> ES: 10. getLatitudHipocentro()
+    ES -> ES: 11. getLongitudHipocentro()
 end
 GRR -> GRR: 12. ordenarEventosSísmicos()
 GRR -> PRR: 13. solicitarSelecciónEventoSísmico()
 AES -> PRR: 14. tomarSelecciónEventoSísmico()
 PRR -> GRR: 15. tomarSelecciónEventoSísmico()
+GRR -> GRR: 16. buscarEstadoBloqueado()
+entity "__:Estado__" as Es #LightCoral
+loop Buscar estado bloqueado en revisión
+else Mientras existan estados
+    GRR -> Es: sosÁmbitoEventoSísmico()
+    GRR -> Es: sosBloqueadoEnRevisión()
+end
+GRR -> GRR : getFechaHoraActual()
+GRR -> GRR : buscarEmpleadoLogueado()
+entity "__Actual:Sesión__" as ASS
+GRR -> ASS : getUsuarioLogueado()
+entity "__Logueado:Usuario__" as US
+ASS -> US: getEmpleado()
 GRR -> GRR: 16. bloquearEventoSísmico()
-entity "__Selec:EventoSísmico__" as SES
-GRR --> SES: 17. bloquearEventoSísmico()
-entity "__:CambioEstado__" as CE
-SES --> CE: 18. new()
-CE -> E: 19. new()
+entity "__Selecc:EventoSísmico__" as SES
+GRR -> SES: bloquearEventoSísmico() 
+loop Buscar último cambio estado
+else Mientras existan cambios de estado
+    entity "__:CambioEstado__" as CE #LightCoral
+    SES -> CE: esEstadoActual() 
+end
+entity "__Actual:CambioEstado__" as ACE
+SES -> ACE : setFechaHoraFin()
+SES -> SES: crearCambioEstado()
+create entity "__New:CambioEstado__" as NCE
+SES --> NCE: new()
+SES -> SES : setEstado()
 GRR -> GRR: 20. buscarDatosSísmicos()
-GRR -> SES: 21. getAlcance()
+GRR -> SES : getDatosSísmicos()
 entity "__:AlcanceSismo__" as AS
-SES --> AS: 22. getNombre()
-GRR -> SES: 23. getClasificación()
+SES -> AS: 22. getNombre()
 entity "__:ClasificaciónSismo__" as CS
-SES --> CS: 24. getNombre()
-GRR -> SES: 25. getOrigen()
+SES -> CS: 24. getNombre()
 entity "__:OrigenDeGeneración__" as OG
-SES --> OG: 26. getNombre()
+SES -> OG: 26. getNombre()
 loop Valores alcanzados sísmo
 else Mientras existan series temporales
     entity "__:SerieTemporal__" as ST
@@ -193,24 +215,25 @@ else Mientras existan series temporales
         end
     end
 end
-GRR -> GRR: 33. clasificarPorEstación()????
-GRR -> GRR: 34. llamarCUGenerarSismograma()????
-GRR -> PRR: 35. solicitarSelecciónMapa()
-AES -> PRR: 36. tomarSelecciónMapa()
-PRR -> GRR: 37. tomarSeleccionMapa()
-GRR -> PRR: 38. solicitarModificaciónDatosES()
-AES -> PRR: 39. tomarModificaciónDatosES()
-PRR -> GRR: 40. tomarModificaciónDatosES()
-GRR -> PRR: 41. solicitarAcciónSobreEvento()
-AES -> PRR: 42. tomarAcciónSobreEvento()
-PRR -> GRR: 43. tomarAcciónSobreEvento()
-GRR -> GRR: 44. validarDatos()
-GRR -> GRR: 45. obtenerFechaHoraActual()
-GRR -> GRR: 46. obtenerASLogueado()???
-GRR -> SES: 47. rechazarEvento()
-SES -> CE: 48. new()
-CE -> E: 49. new()
-GRR -> GRR: 50. finCU()
+
+' GRR -> GRR: 33. clasificarPorEstación()????
+' GRR -> GRR: 34. llamarCUGenerarSismograma()????
+' GRR -> PRR: 35. solicitarSelecciónMapa()
+' AES -> PRR: 36. tomarSelecciónMapa()
+' PRR -> GRR: 37. tomarSeleccionMapa()
+' GRR -> PRR: 38. solicitarModificaciónDatosES()
+' AES -> PRR: 39. tomarModificaciónDatosES()
+' PRR -> GRR: 40. tomarModificaciónDatosES()
+' GRR -> PRR: 41. solicitarAcciónSobreEvento()
+' AES -> PRR: 42. tomarAcciónSobreEvento()
+' PRR -> GRR: 43. tomarAcciónSobreEvento()
+' GRR -> GRR: 44. validarDatos()
+' GRR -> GRR: 45. obtenerFechaHoraActual()
+' GRR -> GRR: 46. obtenerASLogueado()???
+' GRR -> SES: 47. rechazarEvento()
+' SES -> CE: 48. new()
+' CE -> E: 49. new()
+' GRR -> GRR: 50. finCU()
 @enduml
 
 @startuml Parte_Estática_CU_23
