@@ -12,8 +12,8 @@ hide empty description
 [*]-->AutoDetectado : 24. \n new() [magnitudSismo < 4.0]
 [*]-->AutoConfirmado : 24. \n new() [magnitudSismo >= 4.0]
 AutoDetectado-->PendienteRevision :  25. \n revisar() \n [tiempoEspera=5min] 
-PendienteRevision-->BloqueadoRevision: 25 \n bloquearRevision() [revisionSi=Si \n & tiempoEspera<5min]
-PendienteRevision-->EventoSinRevision: 27. bloquearRevision() [revisionSi=No \n & tiempoEspera=5min]
+PendienteRevision-->BloqueadoRevision: 25 \n bloquear() [revisionSi=Si \n & tiempoEspera<5min]
+PendienteRevision-->EventoSinRevision: 27. bloquear() [revisionSi=No \n & tiempoEspera=5min]
 AutoDetectado --> BloqueadoRevision: 25. \n revisar() \n [tiempoEspera<5min]
 BloqueadoRevision-->Confirmado: 23.\n confirmarDirecto()
 BloqueadoRevision-->Rechazado:  23.\n rechazar()
@@ -35,86 +35,86 @@ skinparam maxmessagesize 60
 autonumber
 actor "__:AnalistaEnSismos__" as AES
 create boundary "__:PantallaRegistrarResultado__" as PRR
-AES --> PRR:opcRegistrarResultadoManual()
-PRR -> PRR:abrirVentana()
+AES --> PRR : opcRegistrarResultadoManual()
+PRR -> PRR : abrirVentana()
 create control "__:GestorRegistrarResultado__" as GRR
-PRR --> GRR: newRevisiónManual()
-GRR -> GRR: buscarEventosSísmicosSinRevision()
+PRR --> GRR : newRevisiónManual()
+GRR -> GRR : buscarEventosSísmicosSinRevision()
 loop Eventos Sísmicos Auto Detectados
 else Mientras existan eventos sísmicos
     entity "__:EventoSísmico__" as ES #LightCoral
-    GRR --> ES: esPendienteRevisión()
+    GRR --> ES : esPendienteRevisión()
     entity "__Evento:Estado__" as E
-    ES --> E:  sosPendienteRevisión()
-    GRR --> ES:  esAutodetectado()
-    ES --> E:  sosAutodetectado()
-    GRR -> ES: getDatos()
-    ES -> ES: getFechaHoraOcurrenciaEvento()
-    ES -> ES: getLatitudEpicentro()
-    ES -> ES: getLongitudEpicentro()
-    ES -> ES: getLatitudHipocentro()
-    ES -> ES: getLongitudHipocentro()
+    ES --> E : sosPendienteRevisión()
+    GRR --> ES : esAutodetectado()
+    ES --> E : sosAutodetectado()
+    GRR -> ES : getDatos()
+    ES -> ES : getFechaHoraOcurrenciaEvento()
+    ES -> ES : getLatitudEpicentro()
+    ES -> ES : getLongitudEpicentro()
+    ES -> ES : getLatitudHipocentro()
+    ES -> ES : getLongitudHipocentro()
 end
-GRR -> GRR: ordenarEventosSísmicos()
-GRR -> PRR:  solicitarSelecciónEventoSísmico()
-AES -> PRR:  tomarSelecciónEventoSísmico()
-PRR -> GRR:  tomarSelecciónEventoSísmico()
-GRR -> GRR:  buscarEstadoBloqueadoEnRevision()
+GRR -> GRR : ordenarEventosSísmicos()
+GRR -> PRR : solicitarSelecciónEventoSísmico()
+AES -> PRR : tomarSelecciónEventoSísmico()
+PRR -> GRR : tomarSelecciónEventoSísmico()
+GRR -> GRR : buscarEstadoBloqueadoEnRevision()
 entity "__:Estado__" as Es #LightCoral
 loop Buscar estado bloqueado en revisión
 else Mientras existan estados
-    GRR -> Es: sosÁmbitoEventoSísmico()
-    GRR -> Es: sosBloqueadoEnRevisión()
+    GRR -> Es : sosÁmbitoEventoSísmico()
+    GRR -> Es : sosBloqueadoEnRevisión()
 end
 GRR -> GRR : getFechaHoraActual()
 GRR -> GRR : buscarEmpleadoLogueado()
 entity "__Actual:Sesión__" as ASS
 GRR -> ASS : getUsuarioLogueado()
 entity "__Logueado:Usuario__" as US
-ASS -> US: getEmpleado()
-GRR -> GRR: bloquearEventoSísmico()
+ASS -> US : getEmpleado()
+GRR -> GRR : bloquearEventoSísmico()
 entity "__Selecc:EventoSísmico__" as SES
-GRR -> SES: bloquearEventoSísmico() 
+GRR -> SES : bloquear() 
 loop Buscar último cambio estado
 else Mientras existan cambios de estado
     entity "__:CambioEstado__" as CE #LightCoral
-    SES -> CE: esEstadoActual() 
+    SES -> CE : esEstadoActual() 
 end
 entity "__Actual:CambioEstado__" as ACE
 SES -> ACE : setFechaHoraFin()
-SES -> SES: crearCambioEstado()
+SES -> SES : crearCambioEstado()
 create entity "__Bloqueado:CambioEstado__" as NCE
 SES --> NCE: new()
 SES -> SES : setEstado()
-GRR -> GRR:  buscarDatosSísmicos()
+GRR -> GRR : buscarDatosSísmicos()
 GRR -> SES : getDatosSísmicos()
 entity "__:AlcanceSismo__" as AS
-SES -> AS: getNombre()
+SES -> AS : getNombre()
 entity "__:ClasificaciónSismo__" as CS
-SES -> CS:  getNombre()
+SES -> CS : getNombre()
 entity "__:OrigenDeGeneración__" as OG
-SES -> OG: getNombre()
+SES -> OG : getNombre()
 loop Valores alcanzados sísmo
 else Mientras existan series temporales
     entity "__:SerieTemporal__" as ST #LightCoral
-    SES --> ST:  getDatos()
+    SES --> ST : getDatos()
     loop Valores muestras sísmicas
     else Mientras existan muestras sísmicas
         entity "__:MuestraSísmica__" as MS
-        ST --> MS:  getDatos()
+        ST --> MS : getDatos()
         loop Valores detalle muestras sísmicas
         else Mientras existan detalles muestras sísmicas
             entity "__:DetalleMuestraSísmica__" as DMS
-            MS --> DMS:  getDatos()
+            MS --> DMS :  getDatos()
             entity "__:TipoDeDato__" as TD
-            DMS --> TD:  getDenominación()
-            DMS -> TD:  getNombreUnidadMedida()
-            DMS -> TD:  getValorUmbral()
+            DMS --> TD :  getDenominación()
+            DMS -> TD :  getNombreUnidadMedida()
+            DMS -> TD :  getValorUmbral()
         end
     end
 end
 GRR -> GRR : buscarDatosEstacion()
-GRR -> ST : getEstacionSismografica()
+GRR -> ST : *getEstacionSismografica()
 loop Buscar Sismografo
 else mientras haya sismografos
     entity "__:Sismografo__" as S #LightCoral
@@ -148,7 +148,7 @@ end
 GRR -> GRR :getFechaHoraActual()
 GRR -> GRR : rechazarEventoSísmico()
 entity "__Selecc:EventoSísmico__" as SES
-GRR -> SES : rechazarEventoSísmico()
+GRR -> SES : rechazar()
 SES -> NCE : setFechaHoraFin()
 SES -> SES : crearCambioEstado()
 entity "__Rechazado:CambioEstado__" as RCE
@@ -194,18 +194,27 @@ class GestorRegistrarRevisión<<Control>>{
     - longitudEpicentro
     - latidudHipocentro
     - longitudHipocentro
-    - eventoSísmico
+    - listaEventoSísmicoSinRevisión
     - eventoSísmicoSeleccionado
     - fechaHoraActual
     - ASLogueado
+    - estadoRechazado
+    - estadoBloqueado
+    - listaDatosSísmicos
+    - listaSeriesTemporales
+    - estaciónSismográfica
+    - sismograma
+    - mapaSeleccionado
+    - acciónSobreEvento
+    - estaciónSismográficaModificada
     + 3. newRevisiónManual()
     + 4. buscarEventosSísmicosSinRevision()
     + 15. ordenarEventosSísmicos()
     + 18. tomarSelecciónEventoSísmico()
+    + 19. buscarEstadoBloqueadoEnRevision()
     + 22. getFechaHoraActual()
     + 23. buscarEmpleadoLogueado()
     + 26. bloquearEventoSismico()
-    + 19. buscarEstadoBloqueadoEnRevision()
     + 33. buscarDatosSismicos()
     + 44. buscarDatosEstacion()
     + 50. ordenarPorCodigo() 
@@ -214,23 +223,17 @@ class GestorRegistrarRevisión<<Control>>{
     + 59. tomarModificaciónDatosES()
     + 62. tomarAcciónSobreEvento()
     + 63. validarDatos()
-    + 65. obtenerASLogueado()
+    + 64. buscarEstadoRechazado()
     + 68. rechazarEventoSismico()
     + 73. finCU()
 }
 
 class EventoSísmico<<Entity>>{
-    - estado
     - fechaHoraOcurrencia
     - latitudEpicentro
     - longitudEpicentro
     - latidudHipocentro
     - longitudHipocentro
-    - cambioEstado
-    - alcance
-    - clasificación
-    - origen
-    - serieTemporal
     + 5. esPendienteRevisión()
     + 7. esAutodetectado()
     + 9. getDatos()
@@ -239,11 +242,18 @@ class EventoSísmico<<Entity>>{
     + 12. getLongitudEpicentro()
     + 13. getLatitudHipocentro()
     + 14. getLongitudHipocentro()
-    + 27. bloquearEventoSísmico()
+    + 27. bloquear()
     + 30. crearCambioEstado()
     + 32. setEstado()
     + 33. getDatosSísmicos()
-    + 69. rechazarEventoSísmico()
+    + 69. rechazar()
+    + new()
+    + revisar()
+    + derivar()
+    + confirmarDerivado()
+    + confirmarDirecto()
+    + pendienteCerrar()
+    + cerrar()
 }
 
 class Estado<<Entity>>{
@@ -254,13 +264,11 @@ class Estado<<Entity>>{
     + 20. sosÁmbitoEventoSísmico()
     + 21. sosBloqueadoEnRevisión()
     + 66. sosRechazado()
-    + 49. new()
 }
 
 class CambioEstado<<Entity>>{
-    - estado
     - fechaHoraInicio
-    - ASLogueado
+    - fechaHoraFin
     + 28. esEstadoActual()
     + 29. setFechaHoraFin()
     + 31. new()
@@ -282,18 +290,15 @@ class OrigenDeGeneración<<Entity>>{
 }
 
 class SerieTemporal<<Entity>>{
-    - muestraSísmica
     + 38. getDatos()
     + 45. getEstaciónSismográfica()
 }
 
 class MuestraSísmica<<Entity>>{
-    - detalleMuestraSísmica
     + 39. getDatos()
 }
 
 class DetalleMuestraSísmica<<Entity>>{
-    - tipoDeDato
     + 40. getDatos()
 }
 
@@ -307,13 +312,20 @@ class TipoDeDato<<Entity>>{
 }
 
 class Sesion<<Entity>>{
-    -fechaHoraInicio
-    -fechaHoraFin
+    - fechaHoraInicio
+    - fechaHoraFin
     + 24. getUsuarioLogueado()
 }
 
 class Usuario<<Entity>>{
     + 25. getEmpleado()
+}
+
+class Empleado<<Entity>>{
+    - nombre
+    - apellido
+    - mail
+    - telefono 
 }
 
 class Sismografo<<Entity>>{
@@ -322,32 +334,29 @@ class Sismografo<<Entity>>{
 }
 
 class EstaciónSismológica<<Entity>>{
+    - nombre
+    - código
     + 48. getNombre()
     + 49. getCódigo()
 }
-
-Sesion -->"1" Usuario
-Usuario -->"1" Empleado
-
+Sesion "usuario" --> "1" Usuario
+Usuario "empleado" --> "1" Empleado
 PantallaRegistrarRevisión ..> GestorRegistrarRevisión
-
 GestorRegistrarRevisión ..> Sesion
 GestorRegistrarRevisión ..> PantallaRegistrarRevisión
 GestorRegistrarRevisión ..> EventoSísmico
-GestorRegistrarRevisión ..> Empleado
-
-EventoSísmico --> "1" Estado
-EventoSísmico --> "1..*" CambioEstado
-EventoSísmico --> "1" AlcanceSismo
-EventoSísmico --> "1" ClasificaciónSismo
-EventoSísmico --> "1" OrigenDeGeneración
-EventoSísmico --> "1..*" SerieTemporal
-
-CambioEstado --> "1" Empleado
-
-SerieTemporal o.. "1..*" MuestraSísmica
-
-MuestraSísmica o.. "1..*" DetalleMuestraSísmica
-
-DetalleMuestraSísmica --> "1" TipoDeDato
+EventoSísmico "estado" --> "1" Estado
+EventoSísmico "cambioEstado" --> "1..*" CambioEstado
+EventoSísmico "alcanceSismo" --> "1" AlcanceSismo
+EventoSísmico "clasificaciónSismo" --> "1" ClasificaciónSismo
+EventoSísmico "origenDeGeneración" --> "1" OrigenDeGeneración
+EventoSísmico "serieTemporal" --> "1..*" SerieTemporal
+CambioEstado "empleado" --> "1" Empleado
+CambioEstado "estado" --> "1" Estado
+SerieTemporal "muestraSísmica" o-- "1..*" MuestraSísmica
+SerieTemporal ..> Sismografo
+Sismografo "serieTemporal" --> "1..*" SerieTemporal 
+Sismografo "estaciónSismológica" --> "1" EstaciónSismológica
+MuestraSísmica "detalleMuestraSísmica" o-- "1..*" DetalleMuestraSísmica
+DetalleMuestraSísmica "tipoDeDato" --> "1" TipoDeDato
 @enduml 
