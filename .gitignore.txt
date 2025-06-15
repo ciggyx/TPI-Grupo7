@@ -1,6 +1,0 @@
-source/bin/
-source/obj/
-source/.vs/
-source/packages/
-
-
