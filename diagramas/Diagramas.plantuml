@@ -1,106 +1,3 @@
-@startuml Diagrama_de_clase_Estación_Sismica 
-
-class EventoSismico{
-    - fechaInicio
-    - horaInicio
-    - hipocentro
-    - alcance
-    + new()
-    + rechazarRevision()
-    + bloquearRevision()
-    + revisar()
-    + confirmarDirecto()
-    + derivar()
-    + confirmarDerivado()
-    + rechazarDerivado()
-    + pendienteCerrar()
-    + cerrar()
-}
-
-' Clase sujeta a cambios pq no se si entendí bien esto
-class Magnitud{
-    - nombre
-    - tamaño
-    - energiaLiberada Estado
-    + new()
-}
-
-class MuestraSismica{
-    - numMuestra
-    - fechaMuestra
-    - horaMuestra
-    - velocidadDeOnda
-    - frecuenciaOnda
-    - longitud
-    + new()
-}
-class OrigenGeneracion{
-    - nombre
-    - descripcion
-    + new()
-}
-
-class Clasificacion{
-    - nombre
-    - descripción
-    + new()
-}
-
-class EstacionSismica{
-    - nombre
-    - descripcion
-    - sismografo
-    + new()
-}
-
-class Sismografo{
-    - nroSerie
-    - fechaAdquisicion
-    - modelo
-    - fabricanteModelo
-    + new()
-}
-
-class Fabricante{
-    - nombre
-    - apellido
-    - modelosCreados
-    - contacto
-    + new()
-}
-
-class Estado{
-    - nombre
-    - ambito
-    - descripcion
-    + new()    
-}
-
-class CambioEstado{
-    - nombre
-    - descripcion
-    + new()
-}
-
-class Alcance{
-    - distancia
-    + new()
-}
-
-EventoSismico "clasificacion" --> "1" Clasificacion
-EventoSismico "origenGeneracion" -->"1" OrigenGeneracion
-EventoSismico "alcance" --> "1" Alcance
-EventoSismico "magnitud"--> "1" Magnitud
-EventoSismico "estaciónSismica"--> "1" EstacionSismica
-EventoSismico "muestraSismica" --> "1..*" MuestraSismica
-MuestraSismica "sismografo"-->"1..*" Sismografo
-Sismografo "fabricante" --> "1" Fabricante
-EstacionSismica "sismografo"--> "1" Sismografo
-EventoSismico "cambioEstado" -->"1" CambioEstado
-CambioEstado "estado" --> "1" Estado
-Sismografo "cambioEstado" --> "1" CambioEstado
-@enduml
-
 @startuml maquinaEstadoEventoSismico
 hide empty description
 'Casos de uso:
@@ -119,10 +16,10 @@ PendienteRevision-->BloqueadoRevision: 25 \n bloquearRevision() [revisionSi=Si \
 PendienteRevision-->EventoSinRevision: 27. bloquearRevision() [revisionSi=No \n & tiempoEspera=5min]
 AutoDetectado --> BloqueadoRevision: 25. \n revisar() \n [tiempoEspera<5min]
 BloqueadoRevision-->Confirmado: 23.\n confirmarDirecto()
-BloqueadoRevision-->Rechazado:  23.\n rechazarRevision()
+BloqueadoRevision-->Rechazado:  23.\n rechazar()
 BloqueadoRevision-->DerivadoExperto:  23.\n derivar()
 DerivadoExperto-->Confirmado: 67. \n confirmarDerivado()
-DerivadoExperto-->Rechazado: 67. \n rechazarDerivado()
+DerivadoExperto-->Rechazado: 67. \n rechazar()
 Confirmado-->PendienteCierre: 23. \n pendienteCerrar()
 AutoConfirmado-->PendienteCierre: 24.\n pendienteCerrar()
 PendienteCierre --> Cerrado: 39. \n cerrar()
@@ -133,34 +30,36 @@ Rechazado --> [*]
 @enduml
 
 @startuml Parte_Dinámica_CU_23
+skinparam roundcorner 20
+skinparam maxmessagesize 60
 autonumber
 actor "__:AnalistaEnSismos__" as AES
 create boundary "__:PantallaRegistrarResultado__" as PRR
 AES --> PRR:opcRegistrarResultadoManual()
 PRR -> PRR:abrirVentana()
 create control "__:GestorRegistrarResultado__" as GRR
-PRR --> GRR: 3. newRevisiónManual()
-GRR -> GRR: 4. buscarEventosSísmicosAD()
+PRR --> GRR: newRevisiónManual()
+GRR -> GRR: buscarEventosSísmicosSinRevision()
 loop Eventos Sísmicos Auto Detectados
 else Mientras existan eventos sísmicos
     entity "__:EventoSísmico__" as ES #LightCoral
-    GRR --> ES: 5. esPendienteRevisión()
-    entity "__:EventoEstado__" as E
-    ES --> E: 6. sosPendienteRevisión()
-    GRR --> ES: 5. esAutodetectado()
-    ES --> E: 6. sosAutodetectado()
+    GRR --> ES: esPendienteRevisión()
+    entity "__Evento:Estado__" as E
+    ES --> E:  sosPendienteRevisión()
+    GRR --> ES:  esAutodetectado()
+    ES --> E:  sosAutodetectado()
     GRR -> ES: getDatos()
     ES -> ES: getFechaHoraOcurrenciaEvento()
-    ES -> ES: 8. getLatitudEpicentro()
-    ES -> ES: 9. getLongitudEpicentro()
-    ES -> ES: 10. getLatitudHipocentro()
-    ES -> ES: 11. getLongitudHipocentro()
+    ES -> ES: getLatitudEpicentro()
+    ES -> ES: getLongitudEpicentro()
+    ES -> ES: getLatitudHipocentro()
+    ES -> ES: getLongitudHipocentro()
 end
-GRR -> GRR: 12. ordenarEventosSísmicos()
-GRR -> PRR: 13. solicitarSelecciónEventoSísmico()
-AES -> PRR: 14. tomarSelecciónEventoSísmico()
-PRR -> GRR: 15. tomarSelecciónEventoSísmico()
-GRR -> GRR: 16. buscarEstadoBloqueado()
+GRR -> GRR: ordenarEventosSísmicos()
+GRR -> PRR:  solicitarSelecciónEventoSísmico()
+AES -> PRR:  tomarSelecciónEventoSísmico()
+PRR -> GRR:  tomarSelecciónEventoSísmico()
+GRR -> GRR:  buscarEstadoBloqueadoEnRevision()
 entity "__:Estado__" as Es #LightCoral
 loop Buscar estado bloqueado en revisión
 else Mientras existan estados
@@ -173,7 +72,7 @@ entity "__Actual:Sesión__" as ASS
 GRR -> ASS : getUsuarioLogueado()
 entity "__Logueado:Usuario__" as US
 ASS -> US: getEmpleado()
-GRR -> GRR: 16. bloquearEventoSísmico()
+GRR -> GRR: bloquearEventoSísmico()
 entity "__Selecc:EventoSísmico__" as SES
 GRR -> SES: bloquearEventoSísmico() 
 loop Buscar último cambio estado
@@ -187,14 +86,14 @@ SES -> SES: crearCambioEstado()
 create entity "__Bloqueado:CambioEstado__" as NCE
 SES --> NCE: new()
 SES -> SES : setEstado()
-GRR -> GRR: 20. buscarDatosSísmicos()
+GRR -> GRR:  buscarDatosSísmicos()
 GRR -> SES : getDatosSísmicos()
 entity "__:AlcanceSismo__" as AS
-SES -> AS: 22. getNombre()
+SES -> AS: getNombre()
 entity "__:ClasificaciónSismo__" as CS
-SES -> CS: 24. getNombre()
+SES -> CS:  getNombre()
 entity "__:OrigenDeGeneración__" as OG
-SES -> OG: 26. getNombre()
+SES -> OG: getNombre()
 loop Valores alcanzados sísmo
 else Mientras existan series temporales
     entity "__:SerieTemporal__" as ST #LightCoral
@@ -211,66 +110,50 @@ else Mientras existan series temporales
             DMS --> TD:  getDenominación()
             DMS -> TD:  getNombreUnidadMedida()
             DMS -> TD:  getValorUmbral()
-            
         end
     end
 end
-GRR -> GRR:buscarDatosEstacion()
-GRR ->ST: getEstacionSismografica()
+GRR -> GRR : buscarDatosEstacion()
+GRR -> ST : getEstacionSismografica()
 loop Buscar Sismografo
 else mientras haya sismografos
-entity "__:Sismografo__" as S #LightCoral
-ST->S: sosMiSismografo()
-ST->S: getDatosEstacion()
-
-entity "__Sismografo:Estacion Sismologica__" as SSE
-S-> SSE:getNombre()
-S->SSE:getCodigo()
+    entity "__:Sismografo__" as S #LightCoral
+    ST -> S : sosMiSismografo()
+    ST -> S : getDatosEstacion()
+    entity "__Sismografo:Estacion Sismologica__" as SSE
+    S -> SSE : getNombre()
+    S -> SSE : getCodigo()
 end
-GRR->GRR: ordenarCodigos()
-
-GRR -> GRR:  llamarCUGenerarSismograma()
-entity "__:CuGenerarSismograma__" as CGS #LightBlue
-GRR --> CGS:<<include>>
-
-GRR->PRR: mostrarDatos()
-
-GRR -> PRR:solicitarSelecciónMapa()
-AES -> PRR:tomarSelecciónMapa()
-PRR -> GRR:tomarSeleccionMapa()
-
- GRR -> PRR:solicitarModificaciónDatosES()
- AES -> PRR:tomarModificaciónDatosES()
- PRR -> GRR:tomarModificaciónDatosES()
-
- GRR -> PRR:solicitarAcciónSobreEvento()
- AES -> PRR:tomarAcciónSobreEvento()
- PRR -> GRR:tomarAcciónSobreEvento()
-
- GRR -> GRR:validarDatos()
-
-
- GRR -> GRR:obtenerFechaHoraActual()
- GRR -> GRR:obtenerASLogueado()
- GRR -> SES:rechazarEvento()
- 
-
-loop Buscar estado bloqueado en revisión
+GRR -> GRR : ordenarPorCodigo()
+GRR -> GRR : llamarCUGenerarSismograma()
+create participant "GenerarSismograma" as GS
+GRR -> GS : generarSismograma()
+GRR -> PRR : mostrarDatos()
+GRR -> PRR : solicitarSelecciónMapa()
+AES -> PRR : tomarSelecciónMapa()
+PRR -> GRR : tomarSeleccionMapa()
+GRR -> PRR : solicitarModificaciónDatosES()
+AES -> PRR : tomarModificaciónDatosES()
+PRR -> GRR : tomarModificaciónDatosES()
+GRR -> PRR : solicitarAcciónSobreEvento()
+AES -> PRR : tomarAcciónSobreEvento()
+PRR -> GRR : tomarAcciónSobreEvento()
+GRR -> GRR : validarDatos()
+GRR -> GRR : buscarEstadoRechazado()
+loop Buscar estado rechazado
 else Mientras existan estados
-    GRR -> Es: sosÁmbitoEventoSísmico()
-    GRR -> Es: sosRechazado()
+    GRR -> Es : sosÁmbitoEventoSísmico()
+    GRR -> Es : sosRechazado()
 end
 GRR -> GRR :getFechaHoraActual()
-GRR -> GRR:bloquearEventoSísmico()
+GRR -> GRR : rechazarEventoSísmico()
 entity "__Selecc:EventoSísmico__" as SES
-GRR -> SES: bloquearEventoSísmico()
-SES->NCE: setFechaHoraFin()a
-
-EV->EV: crearCambioEstado()
-entity "__Rechazado:Cambio Estado__" as RCE
-EV --> RCE: new()
-
-GRR -> GRR:finCU()
+GRR -> SES : rechazarEventoSísmico()
+SES -> NCE : setFechaHoraFin()
+SES -> SES : crearCambioEstado()
+entity "__Rechazado:CambioEstado__" as RCE
+SES --> RCE : new()
+GRR -> GRR : finCU()
 @enduml
 
 @startuml Parte_Estática_CU_23
@@ -294,16 +177,17 @@ class PantallaRegistrarRevisión<<Boundary>>{
     - opcSolicitarRevisiónAExperto
     + 1. opcRegistrarResultadoManual()
     + 2. abrirVentana()
-    + 13. solicitarSelecciónEventoSísmico()
-    + 14. tomarSelecciónEventoSísmico()
-    + 17. mostrarEvSismPSel()
-    + 35. solicitarSelecciónMapa()
-    + 36. tomarSelecciónMapa()
-    + 38. solicitarModificaciónDatosES()
-    + 39. tomarModificaciónDatosES()
-    + 41. solicitarAcciónSobreEvento()
-    + 42. tomarAcciónSobreEvento()
+    + 16. solicitarSelecciónEventoSísmico()
+    + 17. tomarSeleccionEventoSismico()
+    + 53. mostrarDatos()
+    + 54. solicitarSelecciónMapa()
+    + 55. tomarSeleccionMapa()
+    + 57. solicitarModificacionDatosES()
+    + 58. tomarModificaciónDatosES()
+    + 60. solicitarAcciónSobreEvento()
+    + 61. tomarAcciónSobreEvento()
 }
+
 class GestorRegistrarRevisión<<Control>>{
     - fechaHoraOcurrencia
     - latitudEpicentro
@@ -315,21 +199,26 @@ class GestorRegistrarRevisión<<Control>>{
     - fechaHoraActual
     - ASLogueado
     + 3. newRevisiónManual()
-    + 4. buscarEventosSísmicosAD()
-    + 12. ordenarEventosSísmicos()
-    + 15. tomarSelecciónEventoSísmico()
-    + 16. bloquearEventoSísmico()
-    + 20. buscarDatosSísmicos()
-    + 33. clasificarPorEstación()
-    + 34. llamarCUGenerarSismograma()
-    + 37. tomarSelecciónMapa()
-    + 40. tomarModificaciónDatosES()
-    + 43. tomarAcciónSobreEvento()
-    + 44. validarDatos()
-    + 45. obtenerFechaHoraActual()
-    + 46. obtenerASLogueado()
-    + 50. finCU()
+    + 4. buscarEventosSísmicosSinRevision()
+    + 15. ordenarEventosSísmicos()
+    + 18. tomarSelecciónEventoSísmico()
+    + 22. getFechaHoraActual()
+    + 23. buscarEmpleadoLogueado()
+    + 26. bloquearEventoSismico()
+    + 19. buscarEstadoBloqueadoEnRevision()
+    + 33. buscarDatosSismicos()
+    + 44. buscarDatosEstacion()
+    + 50. ordenarPorCodigo() 
+    + 51. llamarCUGenerarSismograma()
+    + 56. tomarSelecciónMapa()
+    + 59. tomarModificaciónDatosES()
+    + 62. tomarAcciónSobreEvento()
+    + 63. validarDatos()
+    + 65. obtenerASLogueado()
+    + 68. rechazarEventoSismico()
+    + 73. finCU()
 }
+
 class EventoSísmico<<Entity>>{
     - estado
     - fechaHoraOcurrencia
@@ -342,82 +231,107 @@ class EventoSísmico<<Entity>>{
     - clasificación
     - origen
     - serieTemporal
-    + 5. estaRevisado()
-    + 7. getFechaHoraOcurrenciaEvento()
-    + 8. getLatitudEpicentro()
-    + 9. getLongitudEpicentro()
-    + 10. getLatitudHipocentro()
-    + 11. getLongitudHipocentro()
-    + 17. bloquearEventoSísmico()
-    + 21. getAlcance()
-    + 23. getClasificación()
-    + 25. getOrigen()
-    + 47. rechazarEvento()
+    + 5. esPendienteRevisión()
+    + 7. esAutodetectado()
+    + 9. getDatos()
+    + 10. getFechaHoraOcurrenciaEvento()
+    + 11. getLatitudLepicentro()
+    + 12. getLongitudEpicentro()
+    + 13. getLatitudHipocentro()
+    + 14. getLongitudHipocentro()
+    + 27. bloquearEventoSísmico()
+    + 30. crearCambioEstado()
+    + 32. setEstado()
+    + 33. getDatosSísmicos()
+    + 69. rechazarEventoSísmico()
 }
+
 class Estado<<Entity>>{
+    - ámbito
     - nombre
-    + 6. getNombre()
-    + 19. new()
+    + 6. sosPendienteRevisión()
+    + 8. sosAutodetectado()
+    + 20. sosÁmbitoEventoSísmico()
+    + 21. sosBloqueadoEnRevisión()
+    + 66. sosRechazado()
     + 49. new()
 }
+
 class CambioEstado<<Entity>>{
     - estado
     - fechaHoraInicio
     - ASLogueado
-    + 18. new()
-    + 48. new()
+    + 28. esEstadoActual()
+    + 29. setFechaHoraFin()
+    + 31. new()
 }
+
 class AlcanceSismo<<Entity>>{
     - nombre
-    + 22. getNombre()
+    + 35. getNombre()
 }
+
 class ClasificaciónSismo<<Entity>>{
     - nombre
-    + 24. getNombre()
+    + 36. getNombre()
 }
+
 class OrigenDeGeneración<<Entity>>{
     - nombre
-    + 26. getNombre()
+    + 37. getNombre()
 }
+
 class SerieTemporal<<Entity>>{
     - muestraSísmica
-    + 27. getDatos()
+    + 38. getDatos()
+    + 45. getEstaciónSismográfica()
 }
+
 class MuestraSísmica<<Entity>>{
     - detalleMuestraSísmica
-    + 28. getDatos()
+    + 39. getDatos()
 }
+
 class DetalleMuestraSísmica<<Entity>>{
     - tipoDeDato
-    + 29. getDatos()
+    + 40. getDatos()
 }
+
 class TipoDeDato<<Entity>>{
     - denominación
     - nombreUnidadMedida
     - valorUmbral
-    + 30. getDenominación()
-    + 31. getNombreUnidadMedida()
-    + 32. getValorUmbral()
-}
-
-class Empleado<<Entity>>{
+    + 41. getDenominación()
+    + 42. getNombreUnidadMedida()
+    + 43. getValorUmbral()
 }
 
 class Sesion<<Entity>>{
     -fechaHoraInicio
     -fechaHoraFin
+    + 24. getUsuarioLogueado()
 }
 
 class Usuario<<Entity>>{
-
+    + 25. getEmpleado()
 }
 
-GestorRegistrarRevisión ..> Sesion
+class Sismografo<<Entity>>{
+    + 46. sosMiSismográfo()
+    + 47. getDatosEstación()
+}
+
+class EstaciónSismológica<<Entity>>{
+    + 48. getNombre()
+    + 49. getCódigo()
+}
+
 Sesion -->"1" Usuario
 Usuario -->"1" Empleado
 
 PantallaRegistrarRevisión ..> GestorRegistrarRevisión
 
+GestorRegistrarRevisión ..> Sesion
 GestorRegistrarRevisión ..> PantallaRegistrarRevisión
 GestorRegistrarRevisión ..> EventoSísmico
 GestorRegistrarRevisión ..> Empleado
@@ -436,277 +350,4 @@ SerieTemporal o.. "1..*" MuestraSísmica
 MuestraSísmica o.. "1..*" DetalleMuestraSísmica
 
 DetalleMuestraSísmica --> "1" TipoDeDato
-
 @enduml 
-
-@startuml Parte_Dinámica_CU_23_Copy
-actor "__:AnalistaEnSismos__" as AES
-create boundary "__:PantallaRegistrarResultado__" as PRR
-AES --> PRR: 1. opcRegistrarResultadoManual()
-PRR -> PRR: 2. abrirVentana()
-create control "__GestorRegistrarResultado__" as GRR
-PRR --> GRR: 3. newRevisiónManual()
-GRR -> GRR: 4. buscarEventosSísmicosAD()
-
-loop Eventos Sísmicos Auto Detectados
-else Mientras existan eventos sísmicos
-    entity "__:EventoSísmico__" as ES #LightCoral
-    GRR --> ES: 5. esAutoDetectado()
-    entity "__:Estado__" as E #LightCoral
-
-    ES -> E: 6. sosAutodetected()
-    GRR -> ES: 7. esPendienteRevision()
-    ' aplicamos el patron experto' 
-
-
-    ES -> E: 8. esPendienteRevision()
-
-
-    GRR -> ES: 9. getDatosPrincipales
-    ES ->ES: 10. getFechaHora()
-    ES -> ES: 11. getValorMagnitud()
-    ES -> ES: 12. getLatitudEpicentro()
-    ES -> ES: 13. getLongitudEpicentro()
-    ES -> ES: 14. getLatitudHipocentro()
-    ES -> ES: 15. getLongitudHipocentro()
-end
-' Va acá xq lo ha
-GRR -> GRR: 16. ordenarEventosSísmicos()
-
-GRR -> PRR: 17. mostrarEvSismPSel()
-
-GRR -> PRR: 17. solicitarSelecciónEventoSísmico()
-
-AES -> PRR: 18. tomarSelecciónEventoSísmico()
-PRR -> GRR: 19. tomarSelecciónEventoSísmico()
-
-
-GRR->GRR: 20. buscarEstado()
-
-
-loop Estados p/EventoSismico
-else Mientras Exista estados
-GRR->E: esAmbitoEventoSísmico()
-GRR->E: esBloqueadoEnRevision()
-end
-
-GRR->GRR: tomarFechaHoraActual()
-GRR->GRR: buscarEmpleadoLogueado()
-entity "__Actual:Sesion__" as ASS
-GRR->ASS: obtenerUsuarioLogueado()
-entity "__Log:Usuario__" as LGUSER 
-ASS->LGUSER: getEmpleado()
-'create entity "__:Empleado__" as EMP #LightCoral
-
-create entity "__:CambioEstado__" as CE #LightCoral
-GRR -> CE: *esFinal
-GRR -> CE: setHoraFechaFin()
-GRR -> GRR: crearCambioEstado()
-' el set estado va en la clase que cambia el estado
-create entity "__Selec:EventoSísimico__" as SES
-GRR -> SES: algo  Poner logica LOCO 
-SES --> CE: newCambioEstado()
-GRR -> GRR: 21. bloquearEventoSísmico()
-
-GRR --> SES: 22. bloquearEventoSísmico()
-CE -> E: 24. new()
-GRR -> GRR: 25. buscarDatosSísmicos()
-GRR -> SES: 26. getAlcance()
-entity "__:AlcanceSismo__" as AS
-SES --> AS: 27. getNombre()
-GRR -> SES: 28. getClasificación()
-entity "__:ClasificaciónSismo__" as CS
-SES --> CS: 29. getNombre()
-GRR -> SES: 30. getOrigen()
-entity "__:OrigenDeGeneración__" as OG
-SES --> OG: 31. getNombre()
-loop Valores alcanzados sísmo
-else Mientras existan series temporales
-    entity "__:SerieTemporal__" as ST
-    SES --> ST: 32. getDatos()
-    loop Valores muestras sísmicas
-    else Mientras existan muestras sísmicas
-        entity "__:MuestraSísmica__" as MS
-        ST --> MS: 33. getDatos()
-        loop Valores detalle muestras sísmicas
-        else Mientras existan detalles muestras sísmicas
-            entity "__:DetalleMuestraSísmica__" as DMS
-            MS --> DMS: 34. getDatos()
-            entity "__:TipoDeDato__" as TD
-            DMS --> TD: 35. getDenominación()
-            DMS -> TD: 36. getNombreUnidadMedida()
-            DMS -> TD: 37. getValorUmbral()
-            
-        end
-    end
-    create entity "__:Sismografo__" as S
-    ST -> S: *buscarSismografoMio()
-    create entity "__:EstacionSismologica__" as ESM
-    S -> ESM: getNombre()
-end
-
-SES -> SES: 38. clasificarPorEstación()
-skinparam roundcorner 60
-skinparam maxmessagesize 60
-create participant "18.GenerarSismograma" as 18GS
-GRR -> 18GS: 39. include (llama al caso de uso n°18)
-'GRR -> GRR: 39. include (llama al caso de uso n°18)
-
-GRR -> PRR: 40. habilitarOpcVisualizaciónMapa()
-AES -> PRR: 41. tomarSelecciónMapa()
-PRR -> GRR: 42. tomarSeleccionMapa()
-
-
-GRR ->GRR: habilitarSolicitudModificarDatosES()
-GRR -> PRR: 43. solicitarModificaciónDatosES()
-
-AES -> PRR: 44. tomarModificaciónDatosES()
-PRR -> GRR: 45. tomarModificaciónDatosES()
-
-
-GRR -> PRR: 46. mostrarAcciónSobreEvento()
-
-AES -> PRR: 47. tomarOpciónRechazoSobreEvento()
-PRR -> GRR: 48. tomarOpciónRechazoSobreEvento()
-
-
-GRR -> GRR: 49. validarDatos()
-GRR -> GRR: 50. obtenerFechaHoraActual()
-
-' buscar el ambito, el estado rechazado todo dentro de un fragmento, tiramos el recahzar, preguntar si es actual, preguntarHoraFechaUltima, creamos un nuevo cambio de estado y verificamos los datos (fecha, hora, empleado)
-
-GRR -> GRR: 51. obtenerASLogueado()
-GRR -> SES: 52. rechazarEvento()
-
-SES -> CE: 53. new()
-' setear el estado actual falta
-' setear todos los atributos, como parametros y listo
-'patrón creador diria Julian
-
-CE -> E: 54. new()
-GRR -> GRR: 55. finCU()
-@enduml
-
-@startuml Parte_dinámica_CU_37
-autonumber
-' Las flechas son siempre sincrónicas (con la punta rellena) 
-create actor "__:ResponsableDeInspecciones__" as RI
-create boundary "__:PantallaCierreOrdenInspección__" as PCOI
-RI --> PCOI: opcCerrarOrdenInspección()
-PCOI -> PCOI: abrirVentana()
-create control "__:GestorCierreOrdenInspección__" as GCOI
-PCOI --> GCOI: newCierreOrdenInspección()
-GCOI -> GCOI: buscarEmpleadoLogueado()
-entity "__Actual:Sesión__" as ASS
-' sesión tiene: fecha hora inicio fecha hora fin
-' y un puntero al usuario
-GCOI -> ASS: obtenerUsuarioLogueado()
-entity "__Log:Usuario__" as LU
-ASS -> LU: getEmpleado()
-' ¿Acá se supone que el Gestor 
-' tiene el puntero del Empleado? Si, 
-' ya que no es necesario tener el nombre,
-' apellido del empleado, solo nos interesa
-' el puntero
-GCOI -> GCOI: buscarOrdenesDeInspecciónFinalizadas()
-loop Ordenes de Inspección
-else Mientras Existan Ordenes de Inspección
-    entity "__:OrdenDeInspección__" as ODI #LightCoral
-    GCOI --> ODI: esTuEmpleado()
-    GCOI -> ODI: estáCompletamenteRealizada()
-    '¿Está bien que sean muchos Estados? Teniendo 
-    ' en cuenta que en el diagrama solo tiene 1 estado
-    ' NOOOO, ESTÁ MAAAAAAL, ES UNO SOLO BURRO
-    entity "__OrdInsp:Estado__" as OIE 
-    ODI --> OIE: sosCompletamenteRealizada()
-    GCOI -> ODI: getDatosPrincipales()
-    ODI -> ODI: getNúmeroOrden()
-    ODI -> ODI: getFechaFinalización()
-    entity "__:EstaciónSismológica__" as ES 
-    ODI --> ES: getNombreEstación()
-    ODI -> ES: getSismografo()
-    entity "__:Sismografo__" as S 
-    ES -> S: getIdentificadorSismografo()
-end
-GCOI -> GCOI: ordenarPorFechaFinalización()
-GCOI -> PCOI: mostrarOrdenesDeInspección()
-GCOI -> PCOI: solicitarSeleccionOrdenInspección()
-RI -> PCOI: tomarSelecciónOrdenInspección()
-PCOI -> GCOI: tomarSelecciónOrdenInspección()
-GCOI -> PCOI: solicitarIngresoObservación()
-RI -> PCOI: tomarIngresoObservación()
-PCOI -> GCOI: tomarIngresoObservación()
-GCOI -> GCOI: buscarEstadoFueraSevicio()
-entity "__:Estado__" as E #LightCoral
-loop Encontrar estado Fuera Servicio
-else Mientras existan Estados
-    GCOI -> E: esÁmbitoSismografo()
-    GCOI -> E: esFueraDeServicio()
-end
-GCOI -> GCOI: buscarMotivosTipo()
-entity "__:MotivoTipo__" as MT
-GCOI --> MT: * getDescripción()
-GCOI -> PCOI: mostrarLosTiposMotivosFS()
-' ¿Es necesario hacer un loop acá debido 
-' a que hay varios Motivos y Comentarios? SUIIIIIIIII
-loop Motivos Fuera de Servicio
-else Mientras haya motivos tipo seleccionados 
-    GCOI -> PCOI: solicitarSeleccionarMyC()
-    RI -> PCOI: tomarMotivoFueraServicio()
-    RI -> PCOI: tomarComentarioFueraServicio()
-    PCOI -> GCOI: tomarSelecciónMyC()
-end
-GCOI -> PCOI: solicitarConfirmaciónCierreOI()
-RI -> PCOI: tomarSelecciónConfirmaciónCierreOI()
-PCOI -> GCOI: tomarSelecciónConfirmaciónCierreOI()
-GCOI -> GCOI: validarDatosIngresadoPorUsuario()
-loop Encontrar estado cerrada
-else Mientras existan Estados
-    GCOI -> E: esÁmbitoOrdenInspección()
-    GCOI -> E: esCerrada()
-end
-GCOI -> GCOI: getFechaYHoraActual()
-GCOI -> GCOI: cerrarOI()
-entity "__Selec:OrdenDeInspección__" as SODI
-GCOI -> SODI: cerrar()
-SODI -> SODI: setEstado()
-SODI -> SODI: setFechaHoraCierre()
-entity "__:Estado__" as E2
-SODI -> E2: new()
-entity "__Selec:Sismografo__" as SS
-GCOI --> SS: setEstadoActual()
-entity "__:CambioEstado__" as CE
-SS -> CE: new()
-entity "__:MotivoFueraServicio__" as MFS
-CE --> MFS: new()
-entity "__:MotivoTipo__" as MT
-MFS --> MT: new()
-'kileamos el actualizarEstado()
-' ¿Esto se supone que tiene que estar 
-' en color?
-entity "__:Estado__" as E3
-SS --> E3: new()
-' NO ENTIENDO NADA TANTAS PREGUNTAS SIN RESPONDER
-' CREO QUE ESTOY HACIENDO TODO MAL
-
-' LA PARTE LOCA DEL MAIL
-GCOI -> GCOI: buscarMailDeLosResnponsables()
-loop Mail de los responsables 
-else Mientras existan empleados
-    entity "__:Empleado__" as EM
-    GCOI --> EM: sosResponsableDeRepación()
-    entity "__:Rol__" as R
-    EM --> R: getNombreRol()
-    GCOI -> EM: obtenerMail()
-end
-GCOI -> GCOI: publicarEnMonitores()
-create boundary "InterfazCCRS" as IT
-GCOI -> IT: *publicar()
-GCOI -> GCOI: enviarMail()
-create boundary "InterfarEmail" as IM
-GCOI -> IM: enviarMail()
-' Si tuviera que imprimir algo tuviera una interfaz de impresora
-@enduml
-@startuml Parte_estática_CU_37
-class Sesión
-@enduml
