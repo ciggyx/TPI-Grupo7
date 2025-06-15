@@ -1,10 +1,86 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\pedro\\OneDrive\\Desktop\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\source\\",
+  "WorkspaceRootPath": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\tpi - dise\u00F1o\\tpi-grupo7\\source\\source\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\database\\contextdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:database\\contextdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\boundarys\\maininterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:boundarys\\maininterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\gestorescu\\gestorregistrarrevisionmanual.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:gestorescu\\gestorregistrarrevisionmanual.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\entidades\\eventosismo\\eventosismicogestor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:entidades\\eventosismo\\eventosismicogestor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\entidades\\eventosismo\\eventosismico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:entidades\\eventosismo\\eventosismico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\entidades\\origendegeneracion\\origengeneracionsismogestor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:entidades\\origendegeneracion\\origengeneracionsismogestor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\entidades\\estado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:entidades\\estado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\entidades\\serietemporal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:entidades\\serietemporal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\entidades\\origendegeneracion\\origendegeneracion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:entidades\\origendegeneracion\\origendegeneracion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\entidades\\clasificacionsismo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:entidades\\clasificacionsismo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\entidades\\alcancesismo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:entidades\\alcancesismo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\entidades\\sesion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:entidades\\sesion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\database\\databasegestor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:database\\databasegestor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\boundarys\\maininterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:boundarys\\maininterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\source.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:source.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\boundarys\\pantallaregistrarresultado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:boundarys\\pantallaregistrarresultado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\boundarys\\maininterface.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:boundarys\\maininterface.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\boundarys\\pantallaregistrarresultado.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:boundarys\\pantallaregistrarresultado.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\boundarys\\pantallaregistrarresultado.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:boundarys\\pantallaregistrarresultado.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|c:\\users\\pedro\\onedrive\\desktop\\proyectouni\\tpi - dise\u00F1o\\tpi-grupo7\\source\\boundarys\\pantallaregistrarresultado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB94B91A-868E-4433-B872-6395A8A19169}|source.csproj|solutionrelative:boundarys\\pantallaregistrarresultado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,14 +103,258 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\source\\Form1.cs",
-              "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\source\\Form1.cs [Design]",
-              "RelativeToolTip": "Form1.cs [Design]",
+              "Title": "ContextDB.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\DataBase\\ContextDB.cs",
+              "RelativeDocumentMoniker": "DataBase\\ContextDB.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\DataBase\\ContextDB.cs",
+              "RelativeToolTip": "DataBase\\ContextDB.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T14:08:49.522Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-06-15T13:20:40.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "OrigenGeneracionSismoGestor.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\OrigenDeGeneracion\\OrigenGeneracionSismoGestor.cs",
+              "RelativeDocumentMoniker": "Entidades\\OrigenDeGeneracion\\OrigenGeneracionSismoGestor.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\OrigenDeGeneracion\\OrigenGeneracionSismoGestor.cs",
+              "RelativeToolTip": "Entidades\\OrigenDeGeneracion\\OrigenGeneracionSismoGestor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T13:14:10.483Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EventoSismicoGestor.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\EventoSismo\\EventoSismicoGestor.cs",
+              "RelativeDocumentMoniker": "Entidades\\EventoSismo\\EventoSismicoGestor.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\EventoSismo\\EventoSismicoGestor.cs",
+              "RelativeToolTip": "Entidades\\EventoSismo\\EventoSismicoGestor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T13:11:08.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Estado.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\Estado.cs",
+              "RelativeDocumentMoniker": "Entidades\\Estado.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\Estado.cs",
+              "RelativeToolTip": "Entidades\\Estado.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwAwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:42:14.132Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SerieTemporal.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\SerieTemporal.cs",
+              "RelativeDocumentMoniker": "Entidades\\SerieTemporal.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\SerieTemporal.cs",
+              "RelativeToolTip": "Entidades\\SerieTemporal.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:41:32.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "OrigenDeGeneracion.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\OrigenDeGeneracion\\OrigenDeGeneracion.cs",
+              "RelativeDocumentMoniker": "Entidades\\OrigenDeGeneracion\\OrigenDeGeneracion.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\OrigenDeGeneracion\\OrigenDeGeneracion.cs",
+              "RelativeToolTip": "Entidades\\OrigenDeGeneracion\\OrigenDeGeneracion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:41:18.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ClasificacionSismo.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\ClasificacionSismo.cs",
+              "RelativeDocumentMoniker": "Entidades\\ClasificacionSismo.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\ClasificacionSismo.cs",
+              "RelativeToolTip": "Entidades\\ClasificacionSismo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:41:04.414Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AlcanceSismo.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\AlcanceSismo.cs",
+              "RelativeDocumentMoniker": "Entidades\\AlcanceSismo.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\AlcanceSismo.cs",
+              "RelativeToolTip": "Entidades\\AlcanceSismo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:40:42.546Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Sesion.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\Sesion.cs",
+              "RelativeDocumentMoniker": "Entidades\\Sesion.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\Sesion.cs",
+              "RelativeToolTip": "Entidades\\Sesion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:40:21.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EventoSismico.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\EventoSismo\\EventoSismico.cs",
+              "RelativeDocumentMoniker": "Entidades\\EventoSismo\\EventoSismico.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Entidades\\EventoSismo\\EventoSismico.cs",
+              "RelativeToolTip": "Entidades\\EventoSismo\\EventoSismico.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:39:48.904Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "DataBaseGestor.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\DataBase\\DataBaseGestor.cs",
+              "RelativeDocumentMoniker": "DataBase\\DataBaseGestor.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\DataBase\\DataBaseGestor.cs",
+              "RelativeToolTip": "DataBase\\DataBaseGestor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:37:31.057Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainInterface.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Boundarys\\MainInterface.cs",
+              "RelativeDocumentMoniker": "Boundarys\\MainInterface.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Boundarys\\MainInterface.cs",
+              "RelativeToolTip": "Boundarys\\MainInterface.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAvwBIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:34:17.959Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GestorRegistrarRevisionManual.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\GestoresCU\\GestorRegistrarRevisionManual.cs",
+              "RelativeDocumentMoniker": "GestoresCU\\GestorRegistrarRevisionManual.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\GestoresCU\\GestorRegistrarRevisionManual.cs",
+              "RelativeToolTip": "GestoresCU\\GestorRegistrarRevisionManual.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:32:17.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "source",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\source.csproj",
+              "RelativeDocumentMoniker": "source.csproj",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\source.csproj",
+              "RelativeToolTip": "source.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-15T12:29:28.144Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "MainInterface.resx",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Boundarys\\MainInterface.resx",
+              "RelativeDocumentMoniker": "Boundarys\\MainInterface.resx",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Boundarys\\MainInterface.resx",
+              "RelativeToolTip": "Boundarys\\MainInterface.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-06-15T12:28:01.177Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "PantallaRegistrarResultado.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Boundarys\\PantallaRegistrarResultado.cs",
+              "RelativeDocumentMoniker": "Boundarys\\PantallaRegistrarResultado.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Boundarys\\PantallaRegistrarResultado.cs",
+              "RelativeToolTip": "Boundarys\\PantallaRegistrarResultado.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:27:43.32Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "PantallaRegistrarResultado.resx",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Boundarys\\PantallaRegistrarResultado.resx",
+              "RelativeDocumentMoniker": "Boundarys\\PantallaRegistrarResultado.resx",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Boundarys\\PantallaRegistrarResultado.resx",
+              "RelativeToolTip": "Boundarys\\PantallaRegistrarResultado.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-06-15T12:27:39.528Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "PantallaRegistrarResultado.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Boundarys\\PantallaRegistrarResultado.Designer.cs",
+              "RelativeDocumentMoniker": "Boundarys\\PantallaRegistrarResultado.Designer.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Boundarys\\PantallaRegistrarResultado.Designer.cs",
+              "RelativeToolTip": "Boundarys\\PantallaRegistrarResultado.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:27:26.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "PantallaRegistrarResultado.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Boundarys\\PantallaRegistrarResultado.cs",
+              "RelativeDocumentMoniker": "Boundarys\\PantallaRegistrarResultado.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Boundarys\\PantallaRegistrarResultado.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Boundarys\\PantallaRegistrarResultado.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:27:20.361Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "MainInterface.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Boundarys\\MainInterface.cs",
+              "RelativeDocumentMoniker": "Boundarys\\MainInterface.cs",
+              "ToolTip": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISE\u00D1O\\TPI-Grupo7\\source\\Boundarys\\MainInterface.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Boundarys\\MainInterface.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:13:39.737Z",
+              "EditorCaption": " [Dise\u00F1o]"
             }
           ]
         }

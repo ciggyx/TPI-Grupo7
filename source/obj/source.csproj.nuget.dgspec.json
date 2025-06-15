@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pedro\\OneDrive\\Desktop\\TPI - DISEÑO\\TPI-Grupo7\\source\\source\\source.csproj": {}
+    "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISEÑO\\TPI-Grupo7\\source\\source.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pedro\\OneDrive\\Desktop\\TPI - DISEÑO\\TPI-Grupo7\\source\\source\\source.csproj": {
+    "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISEÑO\\TPI-Grupo7\\source\\source.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pedro\\OneDrive\\Desktop\\TPI - DISEÑO\\TPI-Grupo7\\source\\source\\source.csproj",
+        "projectUniqueName": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISEÑO\\TPI-Grupo7\\source\\source.csproj",
         "projectName": "source",
-        "projectPath": "C:\\Users\\pedro\\OneDrive\\Desktop\\TPI - DISEÑO\\TPI-Grupo7\\source\\source\\source.csproj",
+        "projectPath": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISEÑO\\TPI-Grupo7\\source\\source.csproj",
         "packagesPath": "C:\\Users\\pedro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pedro\\OneDrive\\Desktop\\TPI - DISEÑO\\TPI-Grupo7\\source\\source\\obj\\",
+        "outputPath": "C:\\Users\\pedro\\OneDrive\\Desktop\\ProyectoUni\\TPI - DISEÑO\\TPI-Grupo7\\source\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -49,6 +49,12 @@
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.6, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
