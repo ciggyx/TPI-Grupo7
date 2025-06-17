@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace source.Entidades
 {
-    internal class AlcanceSismo
+    internal class MuestraSismica
     {
-        private string nombre;
+        private DetalleMuestraSismica detalleMuestraSismica
     }
 
-    public getNombre()
+    public getDatos()
         {
 
         }

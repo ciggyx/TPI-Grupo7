@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace source.Entidades.EventoSismo
+namespace source.Entidades
 {
-    internal class EventoSismico
+    internal class Empleado
     {
-        //Atributos
-
     }
 }

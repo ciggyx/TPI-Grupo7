@@ -4,9 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace source.Entidades.OrigenDeGeneracion
+namespace source.Entidades
 {
     internal class OrigenDeGeneracion
     {
+        private string nombre;
     }
+    public getNombre()
+        {
+
+        }
 }

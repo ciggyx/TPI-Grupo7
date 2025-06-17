@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace source.Entidades
 {
-    internal class AlcanceSismo
+    internal class Sismografo
     {
-        private string nombre;
+        EstacionSismologica estacionSismologica;
     }
 
-    public getNombre()
-        {
+    public sosMiSismografo() { }
 
-        }
+    public getDatosEstacion() { }
 }

@@ -6,13 +6,20 @@ using System.Threading.Tasks;
 
 namespace source.Entidades
 {
-    internal class Sesion
+    internal class CambioEstado
     {
         private string fechaHoraInicio;
         private string fechaHoraFin;
+        private Estado estado;
+        private Empleado empleado;
     }
 
-    public getUsuarioLogueado()
+    public esEstadoActual()
+        {
+
+        }
+
+    public setFechaHoraFin()
         {
 
         }

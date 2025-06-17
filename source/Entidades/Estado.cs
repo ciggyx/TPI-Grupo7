@@ -20,4 +20,29 @@ namespace source.Entidades
         private string nombre;
     }
 
+    public sosPendienteRevision()
+        {
+
+        }
+
+    public sosAutoDetectado()
+        {
+
+        }
+
+    public sosAmbitoEventoSismico()
+        {
+
+        }
+
+    public sosBloqueadoEnRevision()
+        {
+
+        }
+
+    public sosRechazado()
+        {
+
+        }
+
 }

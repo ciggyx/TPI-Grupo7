@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace source.Entidades.OrigenDeGeneracion
+namespace source.Entidades
 {
-    internal class OrigenGeneracionSismoGestor
+    internal class Usuario
     {
-        //Atributos
-        
     }
 }

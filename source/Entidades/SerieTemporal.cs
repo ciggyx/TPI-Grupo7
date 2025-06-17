@@ -8,5 +8,10 @@ namespace source.Entidades
 {
     internal class SerieTemporal
     {
+        private MuestraSismica muestraSismica;
     }
+
+    public getDatos()
+        {
+        }
 }

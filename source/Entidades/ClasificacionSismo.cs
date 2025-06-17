@@ -8,5 +8,11 @@ namespace source.Entidades
 {
     internal class ClasificacionSismo
     {
+        private string nombre;
     }
+
+    public getNombre()
+        {
+
+        }
 }
