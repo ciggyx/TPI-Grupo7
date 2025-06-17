@@ -28,19 +28,54 @@
         /// </summary>
         private void InitializeComponent()
         {
+            dataGridEventosSismicos = new DataGridView();
+            Fecha = new DataGridViewTextBoxColumn();
+            Hipocentro = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)dataGridEventosSismicos).BeginInit();
             SuspendLayout();
+            // 
+            // dataGridEventosSismicos
+            // 
+            dataGridEventosSismicos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridEventosSismicos.Columns.AddRange(new DataGridViewColumn[] { Fecha, Hipocentro });
+            dataGridEventosSismicos.Location = new Point(177, 128);
+            dataGridEventosSismicos.Name = "dataGridEventosSismicos";
+            dataGridEventosSismicos.RowHeadersWidth = 51;
+            dataGridEventosSismicos.Size = new Size(627, 327);
+            dataGridEventosSismicos.TabIndex = 0;
+            // 
+            // Fecha
+            // 
+            Fecha.DataPropertyName = "fechaHoraOcurrencia";
+            Fecha.HeaderText = "Fecha";
+            Fecha.MinimumWidth = 6;
+            Fecha.Name = "Fecha";
+            Fecha.Width = 125;
+            // 
+            // Hipocentro
+            // 
+            Hipocentro.HeaderText = "Hipocentro";
+            Hipocentro.MinimumWidth = 6;
+            Hipocentro.Name = "Hipocentro";
+            Hipocentro.Width = 125;
             // 
             // PantallaRegistrarResultado
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1110, 648);
+            Controls.Add(dataGridEventosSismicos);
             Name = "PantallaRegistrarResultado";
             Text = "PantallaRegistrarResultado";
             Load += PantallaRegistrarResultado_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridEventosSismicos).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
+
+        private DataGridView dataGridEventosSismicos;
+        private DataGridViewTextBoxColumn Fecha;
+        private DataGridViewTextBoxColumn Hipocentro;
     }
 }

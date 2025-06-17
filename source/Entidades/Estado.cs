@@ -18,31 +18,34 @@ namespace source.Entidades
         //Atributos
         private Ambito ambito;
         private string nombre;
+
+
+        public bool sosPendienteRevision()
+        {
+
+        }
+
+        public bool sosAutoDetectado()
+        {
+
+        }
+
+        public bool sosAmbitoEventoSismico()
+        {
+
+        }
+
+        public bool sosBloqueadoEnRevision()
+        {
+
+        }
+
+        public bool sosRechazado()
+        {
+
+        }
     }
 
-    public sosPendienteRevision()
-        {
-
-        }
-
-    public sosAutoDetectado()
-        {
-
-        }
-
-    public sosAmbitoEventoSismico()
-        {
-
-        }
-
-    public sosBloqueadoEnRevision()
-        {
-
-        }
-
-    public sosRechazado()
-        {
-
-        }
+    
 
 }

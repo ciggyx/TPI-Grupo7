@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace source.Entidades.EventoSismo
 {
-    internal class EventoSismico
+    public class EventoSismico
     {
-        private string fechaHoraOcurrencia;
+        private DateTime fechaHoraOcurrencia;
         private float latitudEpicentro;
         private float longitudEpicentro;
         private float latitudHipocentro;
@@ -21,63 +21,67 @@ namespace source.Entidades.EventoSismo
         private OrigenDeGeneracion origenDeGeneracion;
         private CambioEstado cambioEstado;
 
+
+        public bool esPendienteRevision()
+        {
+            return estado.sosPendienteRevision(); //6. sosPendienteRevision
+        }
+        public bool esAutoDetectado()
+        {
+            return estado.sosAutoDetectado(); // 8. sosAutodetectado
+        }
+        public DateTime getFechaHoraOcurrencia()
+        {
+            return fechaHoraOcurrencia;
+        }
+
+
+        public getLatitudEpicentro()
+        {
+
+        }
+
+        public getLongitudEpicentro()
+        {
+
+        }
+
+        public getLatitudHipocentro()
+        {
+
+        }
+
+        public getLongitudHipocentro()
+        {
+
+        }
+
+        public bloquear()
+        {
+
+        }
+
+        public crearCambioEstado()
+        {
+
+        }
+
+        public setEstado()
+        {
+
+        }
+
+        public getDatosSismicos()
+        {
+
+        }
+
+        public rechazar()
+        {
+
+        }
+
     }
 
-    public Boolean esPendienteRevision()
-        {
-            return true;
-        }
-    public Boolean esAutoDetectado()
-        {
-            return true;
-        }
-
-    public getFechaHoraOcurrenciaDatos()
-        {
-        }
-
-    public getLatitudEpicentro()
-        {
-
-        } 
-
-    public getLongitudEpicentro()
-        {
-
-        }
-
-    public getLatitudHipocentro()
-        {
-
-        }
-
-    public getLongitudHipocentro()
-        {
-
-        }
-
-    public bloquear()
-        {
-
-        }
-
-    public crearCambioEstado()
-        {
-
-        }
-
-    public setEstado()
-        {
-
-        }
-
-    public getDatosSismicos()
-        {
-
-        }
-
-    public rechazar()
-        {
-
-        }
+    
 }
