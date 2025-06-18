@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace source.Entidades
 {
-    internal class Empleado
+    public class Empleado
     {
     }
 }

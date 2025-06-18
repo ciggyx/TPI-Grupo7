@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace source.Entidades
 {
-    internal class OrigenDeGeneracion
+    public class OrigenDeGeneracion
     {
         private string nombre;
-    }
-    public getNombre()
-        {
 
+        public string getNombre()
+        {
+            return nombre;
         }
+    }
+    
 }

@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace source.Entidades
 {
-    internal class AlcanceSismo
+    public class AlcanceSismo
     {
         private string nombre;
-    }
 
-    public getNombre()
+        public string getNombre()
         {
-
+            return nombre;
         }
 }
+    }
+
+    

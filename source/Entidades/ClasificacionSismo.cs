@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace source.Entidades
 {
-    internal class ClasificacionSismo
+    public class ClasificacionSismo
     {
         private string nombre;
+        private float kmProfundidadDesde;
+        private float kmProfundidadHasta;
+        public string getNombre()
+        {
+            return nombre;
+        }
     }
 
-    public getNombre()
-        {
-
-        }
+    
 }

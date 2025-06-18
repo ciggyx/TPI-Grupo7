@@ -19,7 +19,8 @@ namespace source.Entidades.EventoSismo
         private ClasificacionSismo clasificacionSismo;
         private AlcanceSismo alcanceSismo;
         private OrigenDeGeneracion origenDeGeneracion;
-        private CambioEstado cambioEstado;
+        private List<CambioEstado> listaCambioEstado;
+        private MagnitudRichter magnitud;
 
 
         public bool esPendienteRevision()
@@ -36,51 +37,83 @@ namespace source.Entidades.EventoSismo
         }
 
 
-        public getLatitudEpicentro()
+        public void getLatitudEpicentro()
         {
 
         }
 
-        public getLongitudEpicentro()
+        public void getLongitudEpicentro()
         {
 
         }
 
-        public getLatitudHipocentro()
+        public void getLatitudHipocentro()
         {
 
         }
 
-        public getLongitudHipocentro()
+        public void getLongitudHipocentro()
         {
 
         }
 
-        public bloquear()
+        public void bloquear(DateTime fechaHoraActual, Estado estadoBloqueado, Empleado empleadoLogueado)
         {
+            foreach (CambioEstado cambio in listaCambioEstado)
+            {
+                if (cambio.esEstadoActual())
+                {
+                    cambio.setFechaHoraFin(fechaHoraActual);
+                    break;
+                }
+            }
+            crearCambioEstado(fechaHoraActual, estadoBloqueado, empleadoLogueado);
+            setEstado(estadoBloqueado);
+        }
+
+        public void crearCambioEstado(DateTime fechaHoraActual, Estado estado, Empleado empleadoLogueado)
+        {
+            listaCambioEstado.Add(new CambioEstado(fechaHoraActual, estado, empleadoLogueado));
+        }
+
+        public void setEstado(Estado estado)
+        {
+            this.estado = estado;
+        }
+
+        public List<object> getDatosSismicos()
+        {
+            List<object> datos = [alcanceSismo.getNombre(), clasificacionSismo.getNombre(), origenDeGeneracion.getNombre()];
+            return datos;
 
         }
 
-        public crearCambioEstado()
+        public void rechazar(DateTime fechaHoraActual, Estado estadoRechazado, Empleado empleadoLogueado)
         {
-
+            foreach (CambioEstado cambio in listaCambioEstado)
+                        {
+                            if (cambio.esEstadoActual())
+                            {
+                                cambio.setFechaHoraFin(fechaHoraActual);
+                                break;
+                            }
+                        }
+                        crearCambioEstado(fechaHoraActual, estadoRechazado, empleadoLogueado);
+                        setEstado(estadoRechazado);
         }
-
-        public setEstado()
+        public MagnitudRichter getMagnitud()
         {
-
+            return magnitud;
         }
-
-        public getDatosSismicos()
+        public OrigenDeGeneracion getOrigen()
         {
-
+            return origenDeGeneracion;
         }
-
-        public rechazar()
-        {
-
-        }
-
+            
+        public AlcanceSismo getAlcance()
+            {
+                return alcanceSismo;
+            }    
     }
 
     

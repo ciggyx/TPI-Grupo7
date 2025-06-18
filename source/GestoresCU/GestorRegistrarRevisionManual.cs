@@ -12,15 +12,16 @@ namespace source.GestoresCU
     internal class GestorRegistrarRevisionManual
     {
         //ATRIBUTOS
-        private string fechaHoraOcurrencia;
+        private DateTime fechaHoraOcurrencia;
         private float latitudEpicentro;
         private float longitudEpicentro;
         private float latitudHipocentro;
         private float longitudHipocentro;
         private List<EventoSismico> listaEventoSismicosSinRevision;
+        private List<Estado> listaEstado;
         private List<EventoSismico> listaEventoSismicos = new List<EventoSismico>();
         private EventoSismico eventoSismicoSeleccionado;
-        private string fechaHoraActual;
+        private DateTime fechaHoraActual;
         private Empleado asLogueado;
         private Estado estadoRechazado;
         private Estado estadoBloqueado;
@@ -28,6 +29,7 @@ namespace source.GestoresCU
         private EstacionSismologica estacionSismologica;
         private string accionSobreEvento;
         private EstacionSismologica estacionSismologicaModificada;
+        private Sesion sesionActual;
 
 
         //Constructor
@@ -69,17 +71,43 @@ namespace source.GestoresCU
         
         public void tomarSeleccionEventoSismico() { }
 
-        public void buscarEstadoBloqueadoEnRevision() { }
+        public Estado buscarEstadoBloqueadoEnRevision()//19. bsucarEstadoBloqueadoEnRevision()
+        {
+            foreach (Estado estado in listaEstado)
+            {
+                if (estado.sosAmbitoEventoSismico() && estado.sosBloqueadoEnRevision())
+                {
+                    return estado;
+                }
+            }
+            return null;
+        }
 
-        public void getFechaHoraActual() { }
+        public DateTime getFechaHoraActual()
+        { 
+            fechaHoraActual = DateTime.Now;
+            return fechaHoraActual;
+        }
 
-        public void buscarEmpleadoLogueado() { }
+        public Empleado buscarEmpleadoLogueado()
+        {
+            return sesionActual.getUsuarioLogueado();
+        }
 
-        public void bloquerEventoSismico() { }
+        public void bloquearEventoSismico(EventoSismico eventoSismicoSeleccionado)
+        {
+            eventoSismicoSeleccionado.bloquear(getFechaHoraActual(), buscarEstadoBloqueadoEnRevision(),buscarEmpleadoLogueado());
+        }
 
-        public void buscarDatosSismicos() { }
+        public void buscarDatosSismicos(EventoSismico eventoSismicoSeleccionado)
+        {
+            eventoSismicoSeleccionado.getDatosSismicos();
+        }
+        public void buscarDatosEstacion()
+        { 
+            
 
-        public void buscarDatosEstacion() { }
+        }
 
         public void ordenarPorCodigo() { }
 
@@ -91,13 +119,36 @@ namespace source.GestoresCU
 
         public void tomarAccionSobreEvento() { }
 
-        public void validarDatos() { }
+        public bool validarDatos(EventoSismico eventoSismico)
+        {
+            if (eventoSismico.getMagnitud() is null || eventoSismico.getOrigen() is null || eventoSismico.getAlcance() is null || accionSobreEvento is null)
+            {
+                return false;
+            }
+            return true;
+         }
 
-        public void buscarEstadoRechazado() { }
+        public Estado buscarEstadoRechazado()
+        { 
+            foreach (Estado estado in listaEstado)
+            {
+                if (estado.sosAmbitoEventoSismico() && estado.sosRechazado())
+                {
+                    return estado;
+                }
+            }
+            return null;
+        }
 
-        public void rechazarEventoSismico() { }
+        public void rechazarEventoSismico()
+        {
+            eventoSismicoSeleccionado.rechazar(getFechaHoraActual(), buscarEstadoBloqueadoEnRevision(), buscarEmpleadoLogueado());
+        }
 
-        public void finCU() { }
+        public void finCU()
+        { 
+            //qué diantres hace esto?
+        }
 
 
         private void cargarDataBase() // Metodo de testeo!

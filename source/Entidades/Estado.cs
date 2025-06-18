@@ -13,7 +13,7 @@ namespace source.Entidades
     }
 
 
-    internal class Estado
+    public class Estado
     {
         //Atributos
         private Ambito ambito;

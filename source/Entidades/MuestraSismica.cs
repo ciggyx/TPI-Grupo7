@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace source.Entidades
 {
-    internal class MuestraSismica
+    public class MuestraSismica
     {
-        private DetalleMuestraSismica detalleMuestraSismica
+        private DetalleMuestraSismica detalleMuestraSismica;
+        public void getDatos()
+            {
+
+            }
+
     }
 
-    public getDatos()
-        {
-
-        }
+    
 }
