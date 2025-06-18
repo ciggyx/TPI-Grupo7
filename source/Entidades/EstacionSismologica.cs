@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace source.Entidades
+{
+    internal class EstacionSismologica
+    {
+        private string nombre;
+        private int codigo;
+    }
+
+    public getNombre() { }
+
+    public getCodigo() { }
+}
