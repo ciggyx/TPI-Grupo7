@@ -1,6 +1,6 @@
 ﻿namespace source.Entidades
 {
-    internal class Sismografo
+    public class Sismografo
     {
         private EstacionSismologica estacionSismologica;
         public Sismografo(EstacionSismologica estacionSismologica)

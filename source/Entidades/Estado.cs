@@ -11,7 +11,7 @@
         pendienteRevision, // 0
         autoDetectado,    // 1   
         bloqueadoRevision,   //2
-        rechadazado //3
+        rechazado //3
     }
 
     public class Estado
@@ -25,13 +25,12 @@
             this.nombre = nombre;
         }
 
-        public bool sosPendienteRevision()
+        public bool sosPendienteRevision(Nombre nombre)
         {
-            // ¿Esto es asi? ¿No utilizamos otro enum?
             return nombre == Nombre.pendienteRevision;
         }
 
-        public bool sosAutoDetectado()
+        public bool sosAutoDetectado(Nombre nombre)
         {
             return nombre == Nombre.autoDetectado;
         }
@@ -48,7 +47,12 @@
 
         public bool sosRechazado()
         {
-            return nombre == Nombre.rechadazado;
+            return nombre == Nombre.rechazado;
+        }
+
+        public Nombre getNombre()
+        {
+            return nombre;
         }
     }
 

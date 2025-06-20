@@ -31,19 +31,18 @@
             this.magnitud = magnitud;
         }
 
-        public bool esPendienteRevision()
+        public bool esPendienteRevision(Estado estado)
         {
-            return estado.sosPendienteRevision(); //6. sosPendienteRevision
+            return estado.sosPendienteRevision(estado.getNombre()); //6. sosPendienteRevision
         }
-        public bool esAutoDetectado()
+        public bool esAutoDetectado(Estado estado)
         {
-            return estado.sosAutoDetectado(); // 8. sosAutodetectado
+            return estado.sosAutoDetectado(estado.getNombre()); // 8. sosAutodetectado
         }
         public DateTime getFechaHoraOcurrencia()
         {
             return fechaHoraOcurrencia;
         }
-
 
         public float getLatitudEpicentro()
         {
@@ -74,7 +73,7 @@
                     cambio.setFechaHoraFin(fechaHoraActual); //29. setFechaHoraFin()
                     break;
                 }
-            } 
+            }
             crearCambioEstado(fechaHoraActual, estadoBloqueado, empleadoLogueado); //30. crearCambioEstado
             setEstado(estadoBloqueado);
         }
@@ -90,7 +89,7 @@
         }
 
         public (string Alcance, string Clasificacion, string Origen, double MagnitudValor, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) getDatosSismicos()
-            {
+        {
             //Primero que nada lo que hace esta verga es crear una tupla llamada "detalles" donde se va a guardar cada dato de cada detalle
             //de cada muestra, de cada serie temporal
             var detalles = serieTemporal
@@ -104,7 +103,7 @@
             ));
 
             // Despues retorna una lista que esta compuesta de cada atributo unico del evento sismico en orden y al final la tupla anterior con todos los datos
-            
+
             return (
                Alcance: alcanceSismo.getNombre(),
                Clasificacion: clasificacionSismo.getNombre(),
@@ -139,6 +138,12 @@
         {
             return alcanceSismo;
         }
+
+        public Estado getEstado()
+        {
+            return estado;
+        }
+
     }
 
 
