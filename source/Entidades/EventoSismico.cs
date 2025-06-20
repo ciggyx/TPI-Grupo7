@@ -89,11 +89,29 @@
             this.estado = estado;
         }
 
-        public List<object> getDatosSismicos()
-        {
-            List<object> datos = [alcanceSismo.getNombre(), clasificacionSismo.getNombre(), origenDeGeneracion.getNombre()];
-            return datos;
+        public (string Alcance, string Clasificacion, string Origen, double MagnitudValor, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) getDatosSismicos()
+            {
+            //Primero que nada lo que hace esta verga es crear una tupla llamada "detalles" donde se va a guardar cada dato de cada detalle
+            //de cada muestra, de cada serie temporal
+            var detalles = serieTemporal
+            .SelectMany(serie => serie.getMuestrasSismicas())
+            .SelectMany(muestra => muestra.getDetalleMuestraSismica())
+            .Select(detalle => (
+            Valor: detalle.getValor(),
+            TipoMuestraDenominacion: detalle.getTipoDeDato().getDenomincacion(),
+            TipoMuestraUnidad: detalle.getTipoDeDato().getNombreUnidadMedida(),
+            TipoMuestraValorUmbral: detalle.getTipoDeDato().getValorUmbral()
+            ));
 
+            // Despues retorna una lista que esta compuesta de cada atributo unico del evento sismico en orden y al final la tupla anterior con todos los datos
+            
+            return (
+               Alcance: alcanceSismo.getNombre(),
+               Clasificacion: clasificacionSismo.getNombre(),
+               Origen: origenDeGeneracion.getNombre(),
+               MagnitudValor: magnitud.getNombre(),
+               Detalles: detalles
+                    );
         }
         public void rechazar(DateTime fechaHoraActual, Estado estadoRechazado, Empleado empleadoLogueado)
         {

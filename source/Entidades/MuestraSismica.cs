@@ -11,7 +11,10 @@
             this.detalleMuestraSismica = detalleMuestraSismicas;
         }
 
-        public void getDatos() { }
+        public List<DetalleMuestraSismica> getDetalleMuestraSismica()
+        {
+            return detalleMuestraSismica;
+        }
 
     }
 

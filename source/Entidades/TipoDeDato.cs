@@ -23,7 +23,7 @@
             return nombreUnidadMedida;
         }
 
-        public float getValorUmbral()
+        public double getValorUmbral()
         {
             return valorUmbral;
         }

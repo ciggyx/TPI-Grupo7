@@ -2,7 +2,7 @@
 {
     internal class DetalleMuestraSismica
     {
-        private int valor;
+        private double valor;
         private TipoDeDato tipoDeDato;
 
         public DetalleMuestraSismica(int valor, TipoDeDato tipoDeDato)
@@ -11,6 +11,8 @@
             this.tipoDeDato = tipoDeDato;
         }
 
-        public void getDatos() { }
+        public double getValor() { return valor; }
+
+        public TipoDeDato getTipoDeDato() { return tipoDeDato; }
     }
 }

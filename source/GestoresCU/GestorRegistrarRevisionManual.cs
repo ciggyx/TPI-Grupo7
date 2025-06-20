@@ -29,6 +29,9 @@ namespace source.GestoresCU
         //Constructor
         public GestorRegistrarRevisionManual(PantallaRegistrarResultado pantallaRegistrarResultado)
         {
+            var EventoSismico = cargarDataBase(); //Aca estoy cargando un evento de prueba para testeo no mas esto no tendria que estar
+
+
             // 4. buscarEventosSimicosSinRevision
             listaEventoSismicosSinRevision = buscarEventoSismicoSinRevision(listaEventoSismicos);
             pantallaRegistrarResultado.mostrarEventoSismicoParaRevision(listaEventoSismicosSinRevision); // 16. mostrarEventoSimicosParaSeleccion
@@ -93,10 +96,26 @@ namespace source.GestoresCU
             eventoSismicoSeleccionado.bloquear(getFechaHoraActual(), buscarEstadoBloqueadoEnRevision(), buscarEmpleadoLogueado());
         }
 
-        public void buscarDatosSismicos(EventoSismico eventoSismicoSeleccionado)
-        {
-            eventoSismicoSeleccionado.getDatosSismicos();
-        }
+        public (string Alcance, string Clasificacion, string Origen, double MagnitudValor, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) buscarDatosSismicos(EventoSismico evento) 
+            {
+            //Esta aberracion de metodo retorna una lista gigante que contiene, primero los datos unicos de cada EventoSismico (los del punto 9.1) 
+            //uno atras del otro en el orden que estan listados ahi, y despues el ultimo elemento de la lista es una tupla que contiene todos los datos
+            //de todos los detalles de todas las muestras sismicas, de todas las series temporales del eventoSismico.
+            //La tupla viene contenida en un enumerator llamado Detalles, osea que para acceder a los datos de la tupla tenes que primero entrar en el detalle
+            //pero para los datos de la lista no hace falta. por ejemplo:
+
+            // resultado = buscarDatosSismicos()
+            // resultado.Alcance -> Te da el string del alcance
+            // resultado.Detalle.ToList() -> te da la lista entera con los chorrosientos millones de informacion acoplada
+
+            //Segun Gepeto la mejor forma de mostrar esto es poner los datos unicos en labels y para el Detalle usar un Grid, como no se manejar las pantallas
+            //se lo dejo al pedro eso.
+
+            return evento.getDatosSismicos(); 
+            //La logica de la obtencion de la info esta adentro del metodo en EventoSismico, me asegure de que respete la encapsulacion,
+            //osea esta todo hecho con gets()
+            }
+
         public void buscarDatosEstacion()
         {
 
@@ -145,7 +164,7 @@ namespace source.GestoresCU
         }
 
 
-        public void cargarDataBase() // Metodo de testeo!
+        public EventoSismico cargarDataBase() // Metodo de testeo!
         {
             var tipoDato = new TipoDeDato("Velocidad de onda", "km/seg", 7);
             var tipoDato2 = new TipoDeDato("Frecuencia de onda", "Hz", 10);
@@ -189,6 +208,8 @@ namespace source.GestoresCU
                 new List<CambioEstado> { cambioEstado },
                 magnitud
             );
+
+            return evento;
         }
     }
 
