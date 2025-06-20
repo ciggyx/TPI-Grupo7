@@ -13,9 +13,9 @@
             this.usuarioLogueado = usuarioLogueado;
         }
 
-        public Empleado getUsuarioLogueado()
-        {
-            return usuarioLogueado.getEmpleado();
+        public Empleado getUsuarioLogueado() //24.
+        {                                   
+            return usuarioLogueado.getEmpleado(); //25.
         }
     }
 
