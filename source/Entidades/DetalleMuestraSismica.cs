@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace source.Entidades
+﻿namespace source.Entidades
 {
     internal class DetalleMuestraSismica
     {
+        private int valor;
         private TipoDeDato tipoDeDato;
-    }
-    public getDatos()
-        {
 
+        public DetalleMuestraSismica(int valor, TipoDeDato tipoDeDato)
+        {
+            this.valor = valor;
+            this.tipoDeDato = tipoDeDato;
         }
+
+        public void getDatos() { }
+    }
 }

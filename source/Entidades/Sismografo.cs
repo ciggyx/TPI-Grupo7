@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace source.Entidades
+﻿namespace source.Entidades
 {
     internal class Sismografo
     {
-        EstacionSismologica estacionSismologica;
+        private EstacionSismologica estacionSismologica;
+        public Sismografo(EstacionSismologica estacionSismologica)
+        {
+            this.estacionSismologica = estacionSismologica;
+        }
+
+        public void sosMiSismografo() { }
+
+        public void getDatosEstacion() { }
     }
-
-    public sosMiSismografo() { }
-
-    public getDatosEstacion() { }
 }

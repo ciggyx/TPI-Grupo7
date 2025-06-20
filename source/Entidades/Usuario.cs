@@ -1,23 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace source.Entidades
+﻿namespace source.Entidades
 {
     internal class Usuario
     {
 
-        private Empleado empleadoLogueado;
-        private string contraseña;
+        private string contrasena;
         private string nombreUsuario;
-    public Empleado getEmpleado()
+        private Empleado empleadoLogueado;
+
+        public Usuario(string nombreUsuario, string contrasena, Empleado empleadoLogueado)
+        {
+            this.nombreUsuario = nombreUsuario;
+            this.contrasena = contrasena;
+            this.empleadoLogueado = empleadoLogueado;
+        }
+
+        public Empleado getEmpleado()
         {
             return empleadoLogueado;
-        }      
+        }
 
     }
-    
-    
+
+
 }

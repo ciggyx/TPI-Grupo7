@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.DirectoryServices;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace source.Entidades.EventoSismo
+﻿namespace source.Entidades.EventoSismo
 {
-    public class EventoSismico
+    internal class EventoSismico
     {
         private DateTime fechaHoraOcurrencia;
         private float latitudEpicentro;
         private float longitudEpicentro;
         private float latitudHipocentro;
         private float longitudHipocentro;
-        private SerieTemporal serieTemporal;
+        private List<SerieTemporal> serieTemporal;
         private Estado estado;
         private ClasificacionSismo clasificacionSismo;
         private AlcanceSismo alcanceSismo;
@@ -22,6 +15,21 @@ namespace source.Entidades.EventoSismo
         private List<CambioEstado> listaCambioEstado;
         private MagnitudRichter magnitud;
 
+        public EventoSismico(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, List<SerieTemporal> serieTemporal, Estado estado, ClasificacionSismo clasificacionSismo, AlcanceSismo alcanceSismo, OrigenDeGeneracion origenDeGeneracion, List<CambioEstado> listaCambioEstado, MagnitudRichter magnitud)
+        {
+            this.fechaHoraOcurrencia = fechaHoraOcurrencia;
+            this.latitudEpicentro = latitudEpicentro;
+            this.longitudEpicentro = longitudEpicentro;
+            this.latitudHipocentro = latitudHipocentro;
+            this.longitudHipocentro = longitudHipocentro;
+            this.serieTemporal = serieTemporal;
+            this.estado = estado;
+            this.clasificacionSismo = clasificacionSismo;
+            this.alcanceSismo = alcanceSismo;
+            this.origenDeGeneracion = origenDeGeneracion;
+            this.listaCambioEstado = listaCambioEstado;
+            this.magnitud = magnitud;
+        }
 
         public bool esPendienteRevision()
         {
@@ -37,24 +45,24 @@ namespace source.Entidades.EventoSismo
         }
 
 
-        public void getLatitudEpicentro()
+        public float getLatitudEpicentro()
         {
-
+            return latitudEpicentro;
         }
 
-        public void getLongitudEpicentro()
+        public float getLongitudEpicentro()
         {
-
+            return longitudEpicentro;
         }
 
-        public void getLatitudHipocentro()
+        public float getLatitudHipocentro()
         {
-
+            return latitudHipocentro;
         }
 
-        public void getLongitudHipocentro()
+        public float getLongitudHipocentro()
         {
-
+            return longitudHipocentro;
         }
 
         public void bloquear(DateTime fechaHoraActual, Estado estadoBloqueado, Empleado empleadoLogueado)
@@ -87,19 +95,18 @@ namespace source.Entidades.EventoSismo
             return datos;
 
         }
-
         public void rechazar(DateTime fechaHoraActual, Estado estadoRechazado, Empleado empleadoLogueado)
         {
             foreach (CambioEstado cambio in listaCambioEstado)
-                        {
-                            if (cambio.esEstadoActual())
-                            {
-                                cambio.setFechaHoraFin(fechaHoraActual);
-                                break;
-                            }
-                        }
-                        crearCambioEstado(fechaHoraActual, estadoRechazado, empleadoLogueado);
-                        setEstado(estadoRechazado);
+            {
+                if (cambio.esEstadoActual())
+                {
+                    cambio.setFechaHoraFin(fechaHoraActual);
+                    break;
+                }
+            }
+            crearCambioEstado(fechaHoraActual, estadoRechazado, empleadoLogueado);
+            setEstado(estadoRechazado);
         }
         public MagnitudRichter getMagnitud()
         {
@@ -109,12 +116,12 @@ namespace source.Entidades.EventoSismo
         {
             return origenDeGeneracion;
         }
-            
+
         public AlcanceSismo getAlcance()
-            {
-                return alcanceSismo;
-            }    
+        {
+            return alcanceSismo;
+        }
     }
 
-    
+
 }
