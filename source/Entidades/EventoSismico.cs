@@ -65,23 +65,23 @@
             return longitudHipocentro;
         }
 
-        public void bloquear(DateTime fechaHoraActual, Estado estadoBloqueado, Empleado empleadoLogueado)
+        public void bloquear(DateTime fechaHoraActual, Estado estadoBloqueado, Empleado empleadoLogueado) //27.
         {
-            foreach (CambioEstado cambio in listaCambioEstado)
+            foreach (CambioEstado cambio in listaCambioEstado) // Loop [Buscar ultimo cambio estado]
             {
-                if (cambio.esEstadoActual())
+                if (cambio.esEstadoActual()) //28.esEstadoActual
                 {
-                    cambio.setFechaHoraFin(fechaHoraActual);
+                    cambio.setFechaHoraFin(fechaHoraActual); //29. setFechaHoraFin()
                     break;
                 }
-            }
-            crearCambioEstado(fechaHoraActual, estadoBloqueado, empleadoLogueado);
+            } 
+            crearCambioEstado(fechaHoraActual, estadoBloqueado, empleadoLogueado); //30. crearCambioEstado
             setEstado(estadoBloqueado);
         }
 
         public void crearCambioEstado(DateTime fechaHoraActual, Estado estado, Empleado empleadoLogueado)
         {
-            listaCambioEstado.Add(new CambioEstado(fechaHoraActual, estado, empleadoLogueado));
+            listaCambioEstado.Add(new CambioEstado(fechaHoraActual, estado, empleadoLogueado)); //31. newBloqueado:CambioEstado
         }
 
         public void setEstado(Estado estado)

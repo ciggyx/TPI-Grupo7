@@ -1,6 +1,6 @@
 ﻿namespace source.Entidades
 {
-    internal class Sesion
+    public class Sesion
     {
         private DateTime fechaHoraInicio;
         private DateTime fechaHoraFin;
