@@ -1,4 +1,6 @@
-﻿namespace source.Entidades.EventoSismo
+﻿using source.GestoresCU.DTO;
+
+namespace source.Entidades.EventoSismo
 {
     public class EventoSismico
     {
@@ -85,7 +87,7 @@
         {
             foreach (CambioEstado cambio in listaCambioEstado) // Loop [Buscar ultimo cambio estado]
             {
-                if (cambio.esEstadoActual()) //28.esEstadoActual
+                if (cambio.esEstadoActual()) //28.esEstadoActual()
                 {
                     cambio.setFechaHoraFin(fechaHoraActual); //29. setFechaHoraFin()
                     break;
@@ -133,7 +135,10 @@
                MagnitudValor: magnitud.getNombre(),
                Detalles: detalles
                     );
+
         }
+
+
         public void rechazar(DateTime fechaHoraActual, Estado estadoRechazado, Empleado empleadoLogueado)
         {
             foreach (CambioEstado cambio in listaCambioEstado)

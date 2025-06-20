@@ -2,6 +2,7 @@
 using source.Boundarys;
 using source.Entidades;
 using source.Entidades.EventoSismo;
+using source.GestoresCU.DTO;
 
 namespace source.GestoresCU
 {
