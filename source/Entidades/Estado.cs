@@ -7,10 +7,10 @@
     }
     public enum Nombre
     {
-        pendienteRevision, // 0
-        autoDetectado,    // 1   
-        bloqueadoRevision,   //2
-        rechazado //3
+        PendienteRevision, // 0
+        AutoDetectado,    // 1   
+        BloqueadoRevision,   //2
+        Rechazado //3
     }
 
     public class Estado
@@ -24,14 +24,14 @@
             this.nombre = nombre;
         }
 
-        public bool sosPendienteRevision(Nombre nombre)
+        public bool sosPendienteRevision()
         {
-            return nombre == Nombre.pendienteRevision;
+            return nombre == Nombre.PendienteRevision;
         }
 
-        public bool sosAutoDetectado(Nombre nombre)
+        public bool sosAutoDetectado()
         {
-            return nombre == Nombre.autoDetectado;
+            return nombre == Nombre.AutoDetectado;
         }
 
         public bool sosAmbitoEventoSismico()
@@ -41,12 +41,12 @@
 
         public bool sosBloqueadoEnRevision()
         {
-            return nombre == Nombre.bloqueadoRevision;
+            return nombre == Nombre.BloqueadoRevision;
         }
 
         public bool sosRechazado()
         {
-            return nombre == Nombre.rechazado;
+            return nombre == Nombre.Rechazado;
         }
 
         public Nombre getNombre()

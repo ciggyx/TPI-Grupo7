@@ -45,13 +45,13 @@
                 );
         }
 
-        public bool esPendienteRevision(Estado estado)
+        public bool esPendienteRevision()
         {
-            return estado.sosPendienteRevision(estado.getNombre()); //6. sosPendienteRevision
+            return estado.sosPendienteRevision(); //6. sosPendienteRevision
         }
-        public bool esAutoDetectado(Estado estado)
+        public bool esAutoDetectado()
         {
-            return estado.sosAutoDetectado(estado.getNombre()); // 8. sosAutodetectado
+            return estado.sosAutoDetectado(); // 8. sosAutodetectado
         }
         public DateTime getFechaHoraOcurrencia() // 10. getFechaHoraOcurrenciaEvento()
         {
@@ -81,7 +81,7 @@
             return serieTemporal;
         }
 
-        public void bloquear(EventoSismico eventoSismicoSeleccionado, Estado estadoBloqueadoEnRevision, Empleado asLogueado, DateTime fechaHoraActual) //27. bloquear()
+        public void bloquear(Estado estadoBloqueadoEnRevision, Empleado asLogueado, DateTime fechaHoraActual) //27. bloquear()
         {
             foreach (CambioEstado cambio in listaCambioEstado) // Loop [Buscar ultimo cambio estado]
             {

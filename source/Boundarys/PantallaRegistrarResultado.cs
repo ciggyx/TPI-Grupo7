@@ -17,6 +17,7 @@
 
         }
 
+        // Pedro como actualizo esto si es de la pantalla!!
         public void mostrarEventoSismicoParaRevision(List<(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud)> eventosSismicosSinRevisionOrdenados)
         {
             eventosOriginales = eventosSismicosSinRevisionOrdenados;

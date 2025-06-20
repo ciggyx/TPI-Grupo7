@@ -5,13 +5,21 @@ public class BaseTestDataGenerator
 {
     private static Random random = new Random();
 
+    public Sesion GenerarSesion()
+    {
+        var empleado = new Empleado("Juan", "Pérez", "juan.perez@email.com", "3511234567");
+        var usuario = new Usuario("juanperez", "juanperez123", empleado);
+        var sesion = new Sesion(DateTime.Now, DateTime.Now.AddHours(2), usuario);
+        return sesion;
+    }
+
     public List<Estado> GenerarEstados()
     {
         return new List<Estado>
         {
-            new Estado(Ambito.EventoSismico, Nombre.pendienteRevision),
-            new Estado(Ambito.EventoSismico, Nombre.rechazado),
-            new Estado(Ambito.EventoSismico, Nombre.autoDetectado)
+            new Estado(Ambito.EventoSismico, Nombre.PendienteRevision),
+            new Estado(Ambito.EventoSismico, Nombre.Rechazado),
+            new Estado(Ambito.EventoSismico, Nombre.AutoDetectado)
         };
 
     }
@@ -31,9 +39,9 @@ public class BaseTestDataGenerator
 
         var listaEstado = new List<Estado>
         {
-            new Estado(Ambito.EventoSismico, Nombre.pendienteRevision),
-            new Estado(Ambito.EventoSismico, Nombre.rechazado),
-            new Estado(Ambito.EventoSismico, Nombre.autoDetectado)
+            new Estado(Ambito.EventoSismico, Nombre.PendienteRevision),
+            new Estado(Ambito.EventoSismico, Nombre.Rechazado),
+            new Estado(Ambito.EventoSismico, Nombre.AutoDetectado)
         };
 
         var alcances = new[] { "Regional", "Local", "Internacional" };
