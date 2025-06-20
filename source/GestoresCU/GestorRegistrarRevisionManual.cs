@@ -43,7 +43,7 @@ namespace source.GestoresCU
 
         public void newRevisionManual() { }
 
-        public List<EventoSismico> buscarEventoSismicoSinRevision(List<EventoSismico> listaEventosSimicos)
+        public List<EventoSismico> buscarEventoSismicoSinRevision(List<EventoSismico> listaEventoSismicos)
         {
             MessageBox.Show($"buscarEventoSismico: {listaEventoSismicos.Count}");
             foreach (EventoSismico evento in listaEventoSismicos) //Loop [Eventos Sismicos Auto Detectados]
