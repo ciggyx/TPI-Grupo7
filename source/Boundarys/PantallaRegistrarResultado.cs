@@ -20,7 +20,17 @@ namespace source.Boundarys
 
         public void mostrarEventoSismicoParaRevision(List<EventoSismico> eventosSismicosSinRevisionOrdenados)
         {
-            dataGridEventosSismicos.DataSource = eventosSismicosSinRevisionOrdenados;
+            List<EventoSismico> todos = eventosSismicosSinRevisionOrdenados;
+            var datosAMostrar = todos.Select(e => new
+            {
+                fechaHoraOcurrencia = e.getFechaHoraOcurrencia(),
+                lat_Hipocentro = e.getLatitudHipocentro(),
+                lng_Hipocentro = e.getLongitudHipocentro(),
+                lat_Epicentro = e.getLatitudEpicentro(),
+                lng_Epicentro = e.getLongitudEpicentro(),
+                magnitud = e.getMagnitud()
+            }).ToList();
+            dataGridEventosSismicos.DataSource = datosAMostrar;
         }
 
         private void PantallaRegistrarResultado_Load(object sender, EventArgs e)

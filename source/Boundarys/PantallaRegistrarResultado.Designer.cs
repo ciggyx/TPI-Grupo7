@@ -30,18 +30,22 @@
         {
             dataGridEventosSismicos = new DataGridView();
             Fecha = new DataGridViewTextBoxColumn();
-            Hipocentro = new DataGridViewTextBoxColumn();
+            Lat_Hipocentro = new DataGridViewTextBoxColumn();
+            Lng_Hipocentro = new DataGridViewTextBoxColumn();
+            lat_Epicentro = new DataGridViewTextBoxColumn();
+            lng_Epicentro = new DataGridViewTextBoxColumn();
+            Magnitud = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridEventosSismicos).BeginInit();
             SuspendLayout();
             // 
             // dataGridEventosSismicos
             // 
             dataGridEventosSismicos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridEventosSismicos.Columns.AddRange(new DataGridViewColumn[] { Fecha, Hipocentro });
-            dataGridEventosSismicos.Location = new Point(133, 60);
+            dataGridEventosSismicos.Columns.AddRange(new DataGridViewColumn[] { Fecha, Lat_Hipocentro, Lng_Hipocentro, lat_Epicentro, lng_Epicentro, Magnitud });
+            dataGridEventosSismicos.Location = new Point(169, 99);
             dataGridEventosSismicos.Name = "dataGridEventosSismicos";
             dataGridEventosSismicos.RowHeadersWidth = 51;
-            dataGridEventosSismicos.Size = new Size(627, 327);
+            dataGridEventosSismicos.Size = new Size(804, 327);
             dataGridEventosSismicos.TabIndex = 0;
             // 
             // Fecha
@@ -52,12 +56,45 @@
             Fecha.Name = "Fecha";
             Fecha.Width = 125;
             // 
-            // Hipocentro
+            // Lat_Hipocentro
             // 
-            Hipocentro.HeaderText = "Hipocentro";
-            Hipocentro.MinimumWidth = 6;
-            Hipocentro.Name = "Hipocentro";
-            Hipocentro.Width = 125;
+            Lat_Hipocentro.DataPropertyName = "lat_Hipocentro";
+            Lat_Hipocentro.HeaderText = "Lat_Hipocentro";
+            Lat_Hipocentro.MinimumWidth = 6;
+            Lat_Hipocentro.Name = "Lat_Hipocentro";
+            Lat_Hipocentro.Width = 125;
+            // 
+            // Lng_Hipocentro
+            // 
+            Lng_Hipocentro.DataPropertyName = "lng_Hipocentro";
+            Lng_Hipocentro.HeaderText = "Lng_Hipocentro";
+            Lng_Hipocentro.MinimumWidth = 6;
+            Lng_Hipocentro.Name = "Lng_Hipocentro";
+            Lng_Hipocentro.Width = 125;
+            // 
+            // lat_Epicentro
+            // 
+            lat_Epicentro.DataPropertyName = "lat_Epicentro";
+            lat_Epicentro.HeaderText = "Lat_Epicentro";
+            lat_Epicentro.MinimumWidth = 6;
+            lat_Epicentro.Name = "lat_Epicentro";
+            lat_Epicentro.Width = 125;
+            // 
+            // lng_Epicentro
+            // 
+            lng_Epicentro.DataPropertyName = "lng_Epicentro";
+            lng_Epicentro.HeaderText = "Lng_Epicentro";
+            lng_Epicentro.MinimumWidth = 6;
+            lng_Epicentro.Name = "lng_Epicentro";
+            lng_Epicentro.Width = 125;
+            // 
+            // Magnitud
+            // 
+            Magnitud.DataPropertyName = "magnitud";
+            Magnitud.HeaderText = "Magnitud";
+            Magnitud.MinimumWidth = 6;
+            Magnitud.Name = "Magnitud";
+            Magnitud.Width = 125;
             // 
             // PantallaRegistrarResultado
             // 
@@ -76,6 +113,10 @@
 
         private DataGridView dataGridEventosSismicos;
         private DataGridViewTextBoxColumn Fecha;
-        private DataGridViewTextBoxColumn Hipocentro;
+        private DataGridViewTextBoxColumn Lat_Hipocentro;
+        private DataGridViewTextBoxColumn Lng_Hipocentro;
+        private DataGridViewTextBoxColumn lat_Epicentro;
+        private DataGridViewTextBoxColumn lng_Epicentro;
+        private DataGridViewTextBoxColumn Magnitud;
     }
 }
