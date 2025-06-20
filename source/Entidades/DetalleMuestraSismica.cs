@@ -1,6 +1,6 @@
 ﻿namespace source.Entidades
 {
-    internal class DetalleMuestraSismica
+    public class DetalleMuestraSismica
     {
         private double valor;
         private TipoDeDato tipoDeDato;

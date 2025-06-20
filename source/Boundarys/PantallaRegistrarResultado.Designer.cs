@@ -38,7 +38,7 @@
             // 
             dataGridEventosSismicos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridEventosSismicos.Columns.AddRange(new DataGridViewColumn[] { Fecha, Hipocentro });
-            dataGridEventosSismicos.Location = new Point(177, 128);
+            dataGridEventosSismicos.Location = new Point(133, 60);
             dataGridEventosSismicos.Name = "dataGridEventosSismicos";
             dataGridEventosSismicos.RowHeadersWidth = 51;
             dataGridEventosSismicos.Size = new Size(627, 327);

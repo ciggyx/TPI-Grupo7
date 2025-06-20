@@ -1,6 +1,6 @@
 ﻿namespace source.Entidades
 {
-    internal class SerieTemporal
+    public class SerieTemporal
     {
         private bool condicionAlarma;
         private DateTime fechaHoraInicioRegistroMuestras;

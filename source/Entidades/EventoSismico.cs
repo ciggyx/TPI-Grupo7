@@ -1,6 +1,6 @@
 ﻿namespace source.Entidades.EventoSismo
 {
-    internal class EventoSismico
+    public class EventoSismico
     {
         private DateTime fechaHoraOcurrencia;
         private float latitudEpicentro;

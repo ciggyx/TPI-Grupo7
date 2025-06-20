@@ -1,6 +1,6 @@
 ﻿namespace source.Entidades
 {
-    internal class MuestraSismica
+    public class MuestraSismica
     {
         private DateTime fechaHoraMuestra;
         private List<DetalleMuestraSismica> detalleMuestraSismica;

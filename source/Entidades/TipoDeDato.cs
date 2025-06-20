@@ -1,6 +1,6 @@
 ﻿namespace source.Entidades
 {
-    internal class TipoDeDato
+    public class TipoDeDato
     {
         private string denominacion;
         private string nombreUnidadMedida;
