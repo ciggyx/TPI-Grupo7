@@ -100,7 +100,7 @@ namespace source.GestoresCU
             eventoSismicoSeleccionado.bloquear(getFechaHoraActual(), buscarEstadoBloqueadoEnRevision(), buscarEmpleadoLogueado());
         }
 
-        public (string Alcance, string Clasificacion, string Origen, double MagnitudValor, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) buscarDatosSismicos(EventoSismico evento)
+        public IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string EstacionCodigo, string EstacionNombre)> buscarDatosSismicos(EventoSismico evento)
         {
             //Esta aberracion de metodo retorna una lista gigante que contiene, primero los datos unicos de cada EventoSismico (los del punto 9.1) 
             //uno atras del otro en el orden que estan listados ahi, y despues el ultimo elemento de la lista es una tupla que contiene todos los datos
@@ -117,11 +117,11 @@ namespace source.GestoresCU
 
             var datosSismicos = evento.getDatosSismicos();
             listaSerieTemporales = evento.getSerieTemporal();
-            ordenarPorCodigo(datosSismicos.Detalles,listaSerieTemporales);
+            
             //La logica de la obtencion de la info esta adentro del metodo en EventoSismico, me asegure de que respete la encapsulacion,
             //osea esta todo hecho con gets()
             
-            return datosSismicos;
+            return ordenarPorCodigo(datosSismicos.Detalles, listaSerieTemporales);;
         }
 
         public (string codigo, string nombre) buscarDatosEstacion(SerieTemporal serie)
@@ -131,13 +131,20 @@ namespace source.GestoresCU
         
         }
 
-        public SerieTemporal ordenarPorCodigo( IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> serieTemporal, List<SerieTemporal> serieTemporals)
+        public IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string EstacionCodigo, string EstacionNombre)> ordenarPorCodigo(IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> serieTemporalParaMostrar, List<SerieTemporal> serieTemporales)
         {
-            foreach (SerieTemporal serie in serieTemporals)
+            var resultado = new List<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string Codigo, string EstacionNombre)>();
+
+            int index = 0;
+
+            foreach (SerieTemporal serie in serieTemporales)
             {
-                var SerieTemporalConEstacion = 1;
+                var (codigo, nombre) = buscarDatosEstacion(serie);
+                var dato = serieTemporalParaMostrar.ElementAt(index);
+                resultado.Add((dato.Valor, dato.TipoMuestraDenominacion, dato.TipoMuestraUnidad, dato.TipoMuestraValorUmbral, codigo, nombre));
+                index = index + 1;
             }
-            return SerieTemporalConEstacion;//agregar a Serie Temporal lo que se obtenga en serie.getEstacionSismografica(serieTemporals)
+            return resultado.OrderBy(x => x.Codigo);
         }
 
         public void llamarCUGenerarSismograma() { }
