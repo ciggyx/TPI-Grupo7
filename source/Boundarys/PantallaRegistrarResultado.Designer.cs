@@ -35,6 +35,7 @@
             lat_Epicentro = new DataGridViewTextBoxColumn();
             lng_Epicentro = new DataGridViewTextBoxColumn();
             Magnitud = new DataGridViewTextBoxColumn();
+            seleccionarBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridEventosSismicos).BeginInit();
             SuspendLayout();
             // 
@@ -96,11 +97,22 @@
             Magnitud.Name = "Magnitud";
             Magnitud.Width = 125;
             // 
+            // seleccionarBtn
+            // 
+            seleccionarBtn.Location = new Point(507, 499);
+            seleccionarBtn.Name = "seleccionarBtn";
+            seleccionarBtn.Size = new Size(94, 29);
+            seleccionarBtn.TabIndex = 1;
+            seleccionarBtn.Text = "Seleccionar";
+            seleccionarBtn.UseVisualStyleBackColor = true;
+            seleccionarBtn.Click += seleccionarBtn_Click;
+            // 
             // PantallaRegistrarResultado
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1110, 648);
+            Controls.Add(seleccionarBtn);
             Controls.Add(dataGridEventosSismicos);
             Name = "PantallaRegistrarResultado";
             Text = "PantallaRegistrarResultado";
@@ -118,5 +130,6 @@
         private DataGridViewTextBoxColumn lat_Epicentro;
         private DataGridViewTextBoxColumn lng_Epicentro;
         private DataGridViewTextBoxColumn Magnitud;
+        private Button seleccionarBtn;
     }
 }

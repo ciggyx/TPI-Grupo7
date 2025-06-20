@@ -7,6 +7,7 @@
         private float longitudEpicentro;
         private float latitudHipocentro;
         private float longitudHipocentro;
+        private float valorMagnitud;
         private List<SerieTemporal> serieTemporal;
         private Estado estado;
         private ClasificacionSismo clasificacionSismo;
@@ -15,13 +16,14 @@
         private List<CambioEstado> listaCambioEstado;
         private MagnitudRichter magnitud;
 
-        public EventoSismico(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, List<SerieTemporal> serieTemporal, Estado estado, ClasificacionSismo clasificacionSismo, AlcanceSismo alcanceSismo, OrigenDeGeneracion origenDeGeneracion, List<CambioEstado> listaCambioEstado, MagnitudRichter magnitud)
+        public EventoSismico(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud,List<SerieTemporal> serieTemporal, Estado estado, ClasificacionSismo clasificacionSismo, AlcanceSismo alcanceSismo, OrigenDeGeneracion origenDeGeneracion, List<CambioEstado> listaCambioEstado, MagnitudRichter magnitud)
         {
             this.fechaHoraOcurrencia = fechaHoraOcurrencia;
             this.latitudEpicentro = latitudEpicentro;
             this.longitudEpicentro = longitudEpicentro;
             this.latitudHipocentro = latitudHipocentro;
             this.longitudHipocentro = longitudHipocentro;
+            this.valorMagnitud = valorMagnitud;
             this.serieTemporal = serieTemporal;
             this.estado = estado;
             this.clasificacionSismo = clasificacionSismo;
@@ -86,6 +88,11 @@
         public void setEstado(Estado estado)
         {
             this.estado = estado;
+        }
+
+        public float getValorMagnitud()
+        {
+            return valorMagnitud;
         }
 
         public (string Alcance, string Clasificacion, string Origen, double MagnitudValor, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) getDatosSismicos()

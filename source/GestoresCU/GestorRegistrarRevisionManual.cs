@@ -11,8 +11,7 @@ namespace source.GestoresCU
         private float longitudEpicentro;
         private float latitudHipocentro;
         private float longitudHipocentro;
-        private List<EventoSismico> listaEventoSismico;
-        private List<EventoSismico> listaEventoSismicosSinRevision;
+        private List<EventoSismico> listaEventoSismicosSinRevision = new List<EventoSismico>();
         private List<Estado> listaEstado;
         private List<EventoSismico> listaEventoSismicos = new List<EventoSismico>();
         private EventoSismico eventoSismicoSeleccionado;
@@ -25,17 +24,14 @@ namespace source.GestoresCU
         private string accionSobreEvento;
         private EstacionSismologica estacionSismologicaModificada;
         private Sesion sesionActual;
-        private List<EventoSismico> listonga;
 
-
-        //Constructor
         public GestorRegistrarRevisionManual(PantallaRegistrarResultado pantallaRegistrarResultado)
         {
-            listonga = cargarDataBase(); //Aca estoy cargando un evento de prueba para testeo no mas esto no tendria que estar
-            MessageBox.Show($"gestor: {listonga.Count}");
+            var generador = new BaseTestDataGenerator();
+            List<EventoSismico> eventos = generador.GenerarEventosSismicos();
 
             // 4. buscarEventosSimicosSinRevision
-            listaEventoSismicosSinRevision = buscarEventoSismicoSinRevision(this.listonga);
+            listaEventoSismicosSinRevision = buscarEventoSismicoSinRevision(eventos);
             pantallaRegistrarResultado.mostrarEventoSismicoParaRevision(listaEventoSismicosSinRevision); // 16. mostrarEventoSimicosParaSeleccion
         }
 
@@ -45,7 +41,6 @@ namespace source.GestoresCU
 
         public List<EventoSismico> buscarEventoSismicoSinRevision(List<EventoSismico> listaEventoSismicos)
         {
-            MessageBox.Show($"buscarEventoSismico: {listaEventoSismicos.Count}");
             foreach (EventoSismico evento in listaEventoSismicos) //Loop [Eventos Sismicos Auto Detectados]
             {
                 //5. esPendienteRevision
@@ -165,56 +160,7 @@ namespace source.GestoresCU
             //qué diantres hace esto?
         }
 
-
-        public List<EventoSismico> cargarDataBase() // Metodo de testeo!
-        {
-            var tipoDato = new TipoDeDato("Velocidad de onda", "km/seg", 7);
-            var tipoDato2 = new TipoDeDato("Frecuencia de onda", "Hz", 10);
-            var tipoDato3 = new TipoDeDato("Longitud", "km/ciclo", 0.7);
-
-            var detalle = new DetalleMuestraSismica(1, tipoDato);
-            var detalle2 = new DetalleMuestraSismica(2, tipoDato2);
-            var detalle3 = new DetalleMuestraSismica(3, tipoDato3);
-
-            var muestra = new MuestraSismica(DateTime.Now, new List<DetalleMuestraSismica> { detalle, detalle2, detalle3 });
-
-            // ¿Por que hay que crear la lista acá de vuelta si ya la tengo arriba??? 
-            var serie = new SerieTemporal(false, DateTime.Now, DateTime.Now.AddHours(1), 50, new List<MuestraSismica> { muestra });
-
-            var empleado = new Empleado("Juan", "Pérez", "juan.perez@email.com", "3511234567");
-            var usuario = new Usuario("juanperez", "juanperez123", empleado);
-            var sesion = new Sesion(DateTime.Now, DateTime.Now.AddHours(2), usuario);
-
-            var estadoPendiente = new Estado(Ambito.EventoSismico, Nombre.pendienteRevision);
-            var estadoBloqueado = new Estado(Ambito.Sismografo, Nombre.bloqueadoRevision);
-
-            var cambioEstado = new CambioEstado(DateTime.Now.AddMinutes(8), estadoPendiente, empleado);
-
-            var alcance = new AlcanceSismo("Regional");
-            // A chequear los floats que le chante de kms?
-            var clasificacion = new ClasificacionSismo("Moderado", 500, 500);
-            var origen = new OrigenDeGeneracion("Autodetección");
-            var magnitud = new MagnitudRichter(10.0, "Legendario");
-
-            var evento = new EventoSismico(
-                DateTime.Now.AddHours(-1),
-                (float)-31.42,   // latitud epicentro
-                (float)-64.18,   // longitud epicentro
-                (float)30.5,     // latitud hipocentro
-                (float)-64.2,    // longitud hipocentro
-                new List<SerieTemporal> { serie },
-                estadoPendiente,
-                clasificacion,
-                alcance,
-                origen,
-                new List<CambioEstado> { cambioEstado },
-                magnitud
-            );
-
-            List<EventoSismico> listaEventoSismico = new List<EventoSismico> { evento };
-
-            return listaEventoSismico;
-        }
+        public void cargarDataBase(){}
     }
 
 

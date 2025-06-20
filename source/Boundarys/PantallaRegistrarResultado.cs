@@ -28,7 +28,7 @@ namespace source.Boundarys
                 lng_Hipocentro = e.getLongitudHipocentro(),
                 lat_Epicentro = e.getLatitudEpicentro(),
                 lng_Epicentro = e.getLongitudEpicentro(),
-                magnitud = e.getMagnitud()
+                magnitud = e.getValorMagnitud()
             }).ToList();
             dataGridEventosSismicos.DataSource = datosAMostrar;
         }
@@ -37,5 +37,29 @@ namespace source.Boundarys
         {
 
         }
+
+        private EventoSismico eventoSeleccionado;
+
+        private void seleccionarBtn_Click(object sender, EventArgs e)
+        {
+            if (dataGridEventosSismicos.CurrentRow == null)
+            {
+                MessageBox.Show("No hay ninguna fila seleccionada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var selectedRow = dataGridEventosSismicos.CurrentRow.DataBoundItem;
+
+            if (selectedRow is EventoSismico evento)
+            {
+                eventoSeleccionado = evento;
+                MessageBox.Show("Evento sísmico seleccionado correctamente.", "Selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("La fila seleccionada no es un evento sísmico válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }
