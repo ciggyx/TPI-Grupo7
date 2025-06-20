@@ -113,6 +113,8 @@ else Mientras existan series temporales
         end
     end
 end
+
+GRR -> GRR: ordenarPorCodigo()
 GRR -> GRR : buscarDatosEstacion()
 GRR -> ST : *getEstacionSismografica()
 loop Buscar Sismografo
@@ -124,7 +126,7 @@ else mientras haya sismografos
     S -> SSE : getNombre()
     S -> SSE : getCodigo()
 end
-GRR -> GRR : ordenarPorCodigo()
+
 GRR -> GRR : llamarCUGenerarSismograma()
 create participant "GenerarSismograma" as GS
 GRR -> GS : generarSismograma()
