@@ -1,6 +1,6 @@
 ﻿namespace source.Entidades
 {
-    internal class EstacionSismologica
+    public class EstacionSismologica
     {
         private string nombre;
         private string codigo;

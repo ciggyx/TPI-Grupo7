@@ -2,3 +2,4 @@
 [ ] Realizar los métodos que incluyan relación con la pantalla y la toma de datos con ella
 [ ] Realizar las pantallas que reflejen las búsquedas y tomas de datos
 [ ] Ver qué hace finCU()
+[ ] Cambiar el diagrama de secuencia para que corresponda con el ordenar por código

@@ -1,4 +1,5 @@
-﻿using source.Boundarys;
+﻿using System.ComponentModel;
+using source.Boundarys;
 using source.Entidades;
 using source.Entidades.EventoSismo;
 
@@ -24,6 +25,9 @@ namespace source.GestoresCU
         private string accionSobreEvento;
         private EstacionSismologica estacionSismologicaModificada;
         private Sesion sesionActual;
+        private List<Sismografo> listaSismografo; // Se usa para testing, despues esto no va en el modelo final
+
+        public SerieTemporal SerieTemporalConEstacion { get; private set; }
 
 
         //Constructor
@@ -96,8 +100,8 @@ namespace source.GestoresCU
             eventoSismicoSeleccionado.bloquear(getFechaHoraActual(), buscarEstadoBloqueadoEnRevision(), buscarEmpleadoLogueado());
         }
 
-        public (string Alcance, string Clasificacion, string Origen, double MagnitudValor, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) buscarDatosSismicos(EventoSismico evento) 
-            {
+        public (string Alcance, string Clasificacion, string Origen, double MagnitudValor, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) buscarDatosSismicos(EventoSismico evento)
+        {
             //Esta aberracion de metodo retorna una lista gigante que contiene, primero los datos unicos de cada EventoSismico (los del punto 9.1) 
             //uno atras del otro en el orden que estan listados ahi, y despues el ultimo elemento de la lista es una tupla que contiene todos los datos
             //de todos los detalles de todas las muestras sismicas, de todas las series temporales del eventoSismico.
@@ -111,18 +115,30 @@ namespace source.GestoresCU
             //Segun Gepeto la mejor forma de mostrar esto es poner los datos unicos en labels y para el Detalle usar un Grid, como no se manejar las pantallas
             //se lo dejo al pedro eso.
 
-            return evento.getDatosSismicos(); 
+            var datosSismicos = evento.getDatosSismicos();
+            listaSerieTemporales = evento.getSerieTemporal();
+            ordenarPorCodigo(datosSismicos.Detalles,listaSerieTemporales);
             //La logica de la obtencion de la info esta adentro del metodo en EventoSismico, me asegure de que respete la encapsulacion,
             //osea esta todo hecho con gets()
-            }
-
-        public void buscarDatosEstacion()
-        {
-
-
+            
+            return datosSismicos;
         }
 
-        public void ordenarPorCodigo() { }
+        public (string codigo, string nombre) buscarDatosEstacion(SerieTemporal serie)
+        {
+            
+            return serie.getEstacionSismografica(listaSismografo);
+        
+        }
+
+        public SerieTemporal ordenarPorCodigo( IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> serieTemporal, List<SerieTemporal> serieTemporals)
+        {
+            foreach (SerieTemporal serie in serieTemporals)
+            {
+                var SerieTemporalConEstacion = 1;
+            }
+            return SerieTemporalConEstacion;//agregar a Serie Temporal lo que se obtenga en serie.getEstacionSismografica(serieTemporals)
+        }
 
         public void llamarCUGenerarSismograma() { }
 

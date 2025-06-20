@@ -64,6 +64,10 @@
         {
             return longitudHipocentro;
         }
+        public List<SerieTemporal> getSerieTemporal()
+        {
+            return serieTemporal;
+        }
 
         public void bloquear(DateTime fechaHoraActual, Estado estadoBloqueado, Empleado empleadoLogueado) //27.
         {
@@ -74,7 +78,7 @@
                     cambio.setFechaHoraFin(fechaHoraActual); //29. setFechaHoraFin()
                     break;
                 }
-            } 
+            }
             crearCambioEstado(fechaHoraActual, estadoBloqueado, empleadoLogueado); //30. crearCambioEstado
             setEstado(estadoBloqueado);
         }
