@@ -76,6 +76,10 @@
         {
             return longitudHipocentro;
         }
+        public List<SerieTemporal> getSerieTemporal()
+        {
+            return serieTemporal;
+        }
 
         public void bloquear(EventoSismico eventoSismicoSeleccionado, Estado estadoBloqueadoEnRevision, Empleado asLogueado, DateTime fechaHoraActual) //27. bloquear()
         {

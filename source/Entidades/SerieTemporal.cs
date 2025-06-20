@@ -2,6 +2,7 @@
 {
     public class SerieTemporal
     {
+        private int numeroSerie;
         private bool condicionAlarma;
         private DateTime fechaHoraInicioRegistroMuestras;
         private DateTime fechaHoraRegistro;
@@ -21,10 +22,22 @@
 
         public List<MuestraSismica> getMuestrasSismicas()
         {
+            //Acá podríamos pasar las estaciones, aunque no respetaría el orden del diagrama de secuencia
             return muestraSismica;
         }
 
 
-
+        public (string codigo, string nombre) getEstacionSismografica(List<Sismografo> listaSismografo)
+        {
+            foreach (Sismografo sismografo in listaSismografo)
+            {
+                if (sismografo.sosMiSismografo(this))
+                {
+                    return sismografo.getDatosEstacion();
+                }
+            }
+            return (null,null);
+            
+        }
     }
 }
