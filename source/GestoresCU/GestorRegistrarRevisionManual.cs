@@ -1,6 +1,7 @@
 ﻿using source.Boundarys;
 using source.Entidades;
 using source.Entidades.EventoSismo;
+using source.GestoresCU.DTO;
 
 namespace source.GestoresCU
 {
@@ -96,7 +97,7 @@ namespace source.GestoresCU
             eventoSismicoSeleccionado.bloquear(getFechaHoraActual(), buscarEstadoBloqueadoEnRevision(), buscarEmpleadoLogueado());
         }
 
-        public (string Alcance, string Clasificacion, string Origen, double MagnitudValor, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) buscarDatosSismicos(EventoSismico evento) 
+        public DatosSismicosDTO buscarDatosSismicos(EventoSismico evento) //34.getDatosSismico
             {
             //Esta aberracion de metodo retorna una lista gigante que contiene, primero los datos unicos de cada EventoSismico (los del punto 9.1) 
             //uno atras del otro en el orden que estan listados ahi, y despues el ultimo elemento de la lista es una tupla que contiene todos los datos

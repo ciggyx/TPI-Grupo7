@@ -1,6 +1,6 @@
 namespace source.Entidades
 {
-    internal class MagnitudRichter
+    public class MagnitudRichter
     {
         private double numero;
         private string descripcion;

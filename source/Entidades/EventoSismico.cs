@@ -1,4 +1,6 @@
-﻿namespace source.Entidades.EventoSismo
+﻿using source.GestoresCU.DTO;
+
+namespace source.Entidades.EventoSismo
 {
     public class EventoSismico
     {
@@ -69,19 +71,19 @@
         {
             foreach (CambioEstado cambio in listaCambioEstado) // Loop [Buscar ultimo cambio estado]
             {
-                if (cambio.esEstadoActual()) //28.esEstadoActual
+                if (cambio.esEstadoActual()) //28.esEstadoActual()
                 {
                     cambio.setFechaHoraFin(fechaHoraActual); //29. setFechaHoraFin()
                     break;
                 }
             } 
-            crearCambioEstado(fechaHoraActual, estadoBloqueado, empleadoLogueado); //30. crearCambioEstado
-            setEstado(estadoBloqueado);
+            crearCambioEstado(fechaHoraActual, estadoBloqueado, empleadoLogueado); //30. crearCambioEstado()
+            setEstado(estadoBloqueado); // 32. setEstado()
         }
 
         public void crearCambioEstado(DateTime fechaHoraActual, Estado estado, Empleado empleadoLogueado)
         {
-            listaCambioEstado.Add(new CambioEstado(fechaHoraActual, estado, empleadoLogueado)); //31. newBloqueado:CambioEstado
+            listaCambioEstado.Add(new CambioEstado(fechaHoraActual, estado, empleadoLogueado)); //31. newBloqueado:CambioEstado()
         }
 
         public void setEstado(Estado estado)
@@ -89,30 +91,73 @@
             this.estado = estado;
         }
 
-        public (string Alcance, string Clasificacion, string Origen, double MagnitudValor, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) getDatosSismicos()
-            {
-            //Primero que nada lo que hace esta verga es crear una tupla llamada "detalles" donde se va a guardar cada dato de cada detalle
-            //de cada muestra, de cada serie temporal
-            var detalles = serieTemporal
-            .SelectMany(serie => serie.getMuestrasSismicas())
-            .SelectMany(muestra => muestra.getDetalleMuestraSismica())
-            .Select(detalle => (
-            Valor: detalle.getValor(),
-            TipoMuestraDenominacion: detalle.getTipoDeDato().getDenomincacion(),
-            TipoMuestraUnidad: detalle.getTipoDeDato().getNombreUnidadMedida(),
-            TipoMuestraValorUmbral: detalle.getTipoDeDato().getValorUmbral()
-            ));
+        /*  public (string Alcance, string Clasificacion, string Origen, double MagnitudValor, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) getDatosSismicos()
+              {
+              //Primero que nada lo que hace esta verga es crear una tupla llamada "detalles" donde se va a guardar cada dato de cada detalle
+              //de cada muestra, de cada serie temporal
+              var detalles = serieTemporal
+              .SelectMany(serie => serie.getMuestrasSismicas())
+              .SelectMany(muestra => muestra.getDetalleMuestraSismica())
+              .Select(detalle => (
+              Valor: detalle.getValor(),
+              TipoMuestraDenominacion: detalle.getTipoDeDato().getDenomincacion(),
+              TipoMuestraUnidad: detalle.getTipoDeDato().getNombreUnidadMedida(),
+              TipoMuestraValorUmbral: detalle.getTipoDeDato().getValorUmbral()
+              ));
 
-            // Despues retorna una lista que esta compuesta de cada atributo unico del evento sismico en orden y al final la tupla anterior con todos los datos
-            
-            return (
-               Alcance: alcanceSismo.getNombre(),
-               Clasificacion: clasificacionSismo.getNombre(),
-               Origen: origenDeGeneracion.getNombre(),
-               MagnitudValor: magnitud.getNombre(),
-               Detalles: detalles
-                    );
+              // Despues retorna una lista que esta compuesta de cada atributo unico del evento sismico en orden y al final la tupla anterior con todos los datos
+
+              return (
+                 Alcance: alcanceSismo.getNombre(),
+                 Clasificacion: clasificacionSismo.getNombre(),
+                 Origen: origenDeGeneracion.getNombre(),
+                 MagnitudValor: magnitud.getNombre(),
+                 Detalles: detalles
+                      );
+          } */
+
+        public DatosSismicosDTO getDatosSismicos()
+        {
+            List<DatosSismicosDTO.DetalleDTO> detalles = new List<DatosSismicosDTO.DetalleDTO>();
+
+            // Recorre cada serie temporal del evento
+            foreach (SerieTemporal serie in serieTemporal) // LOOP [Valores alcanzados sismo]
+            {
+                // Por cada serie, recorre sus muestras sísmicas
+                List<MuestraSismica> muestras = serie.getMuestrasSismicas();
+                foreach (MuestraSismica muestra in muestras)  // LOOP [Valores muestra sisimica]
+                {
+                    // Por cada muestra, recorre sus detalles
+                    List<DetalleMuestraSismica> detallesMuestra = muestra.getDetalleMuestraSismica();
+                    foreach (DetalleMuestraSismica detalle in detallesMuestra) // LOOP [Valores detalle de la muestra sismica]
+                    {
+                        // Extrae el tipo de dato
+                        TipoDeDato tipo = detalle.getTipoDeDato(); //Que mensaje es este?   
+
+                        // Crea el DTO y lo agrega a la lista
+                        DatosSismicosDTO.DetalleDTO dtoDetalle = new DatosSismicosDTO.DetalleDTO();
+                        dtoDetalle.Valor = detalle.getValor(); //Que mensaje es este?
+                        dtoDetalle.TipoMuestraDenominacion = tipo.getDenomincacion(); //41.getDenominacion()
+                        dtoDetalle.TipoMuestraUnidad = tipo.getNombreUnidadMedida(); //42. getNombreUnidadMedida()
+                        dtoDetalle.TipoMuestraValorUmbral = tipo.getValorUmbral();  //43. getValorUmbral()
+
+                        detalles.Add(dtoDetalle);
+                    }
+                }
+            }
+
+            // Crear el DTO principal
+            DatosSismicosDTO dto = new DatosSismicosDTO();
+            dto.Alcance = alcanceSismo.getNombre();
+            dto.Clasificacion = clasificacionSismo.getNombre();
+            dto.Origen = origenDeGeneracion.getNombre();
+            dto.MagnitudValor = magnitud.getNombre();
+            dto.Detalles = detalles;
+
+            return dto;
         }
+
+
         public void rechazar(DateTime fechaHoraActual, Estado estadoRechazado, Empleado empleadoLogueado)
         {
             foreach (CambioEstado cambio in listaCambioEstado)
