@@ -6,12 +6,20 @@
         Sismografo     // 1   
     }
 
+    public enum Nombre
+    {
+        pendienteRevision, // 0
+        autoDetectado,    // 1   
+        bloqueadoRevision,   //2
+        rechadazado //3
+    }
+
     public class Estado
     {
         private Ambito ambito;
-        private string nombre;
+        private Nombre nombre;
 
-        public Estado(Ambito ambito, string nombre)
+        public Estado(Ambito ambito, Nombre nombre)
         {
             this.ambito = ambito;
             this.nombre = nombre;
@@ -20,12 +28,12 @@
         public bool sosPendienteRevision()
         {
             // ¿Esto es asi? ¿No utilizamos otro enum?
-            return nombre == "pendienteRevision";
+            return nombre == Nombre.pendienteRevision;
         }
 
         public bool sosAutoDetectado()
         {
-            return nombre == "pendienteRevision";
+            return nombre == Nombre.autoDetectado;
         }
 
         public bool sosAmbitoEventoSismico()
@@ -35,12 +43,12 @@
 
         public bool sosBloqueadoEnRevision()
         {
-            return nombre == "bloqueadoEnRevision";
+            return nombre == Nombre.bloqueadoRevision;
         }
 
         public bool sosRechazado()
         {
-            return nombre == "rechadazado";
+            return nombre == Nombre.rechadazado;
         }
     }
 

@@ -44,7 +44,7 @@ namespace source.GestoresCU
         public List<EventoSismico> buscarEventoSismicoSinRevision(List<EventoSismico> listaEventosSimicos)
         {
 
-            foreach (EventoSismico evento in listaEventoSismicosSinRevision) //Loop [Eventos Sismicos Auto Detectados]
+            foreach (EventoSismico evento in listaEventoSismicos) //Loop [Eventos Sismicos Auto Detectados]
             {
                 //5. esPendienteRevision
                 //7. esAutoDetectable
@@ -183,8 +183,8 @@ namespace source.GestoresCU
             var usuario = new Usuario("juanperez", "juanperez123", empleado);
             var sesion = new Sesion(DateTime.Now, DateTime.Now.AddHours(2), usuario);
 
-            var estadoPendiente = new Estado(Ambito.EventoSismico, "PendienteRevisión");
-            var estadoBloqueado = new Estado(Ambito.Sismografo, "BloqueadoRevisión");
+            var estadoPendiente = new Estado(Ambito.EventoSismico, Nombre.pendienteRevision);
+            var estadoBloqueado = new Estado(Ambito.Sismografo, Nombre.bloqueadoRevision);
 
             var cambioEstado = new CambioEstado(DateTime.Now.AddMinutes(8), estadoPendiente, empleado);
 
