@@ -9,6 +9,7 @@ namespace source.Entidades.EventoSismo
         private float longitudEpicentro;
         private float latitudHipocentro;
         private float longitudHipocentro;
+        private float valorMagnitud;
         private List<SerieTemporal> serieTemporal;
         private Estado estado;
         private ClasificacionSismo clasificacionSismo;
@@ -17,13 +18,14 @@ namespace source.Entidades.EventoSismo
         private List<CambioEstado> listaCambioEstado;
         private MagnitudRichter magnitud;
 
-        public EventoSismico(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, List<SerieTemporal> serieTemporal, Estado estado, ClasificacionSismo clasificacionSismo, AlcanceSismo alcanceSismo, OrigenDeGeneracion origenDeGeneracion, List<CambioEstado> listaCambioEstado, MagnitudRichter magnitud)
+        public EventoSismico(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud, List<SerieTemporal> serieTemporal, Estado estado, ClasificacionSismo clasificacionSismo, AlcanceSismo alcanceSismo, OrigenDeGeneracion origenDeGeneracion, List<CambioEstado> listaCambioEstado, MagnitudRichter magnitud)
         {
             this.fechaHoraOcurrencia = fechaHoraOcurrencia;
             this.latitudEpicentro = latitudEpicentro;
             this.longitudEpicentro = longitudEpicentro;
             this.latitudHipocentro = latitudHipocentro;
             this.longitudHipocentro = longitudHipocentro;
+            this.valorMagnitud = valorMagnitud;
             this.serieTemporal = serieTemporal;
             this.estado = estado;
             this.clasificacionSismo = clasificacionSismo;
@@ -31,6 +33,18 @@ namespace source.Entidades.EventoSismo
             this.origenDeGeneracion = origenDeGeneracion;
             this.listaCambioEstado = listaCambioEstado;
             this.magnitud = magnitud;
+        }
+
+        public (DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud) getDatos()
+        {
+            return (
+                fechaHoraOcurrencia: getFechaHoraOcurrencia(),
+                latitudEpicentro: getLatitudEpicentro(),
+                longitudEpicentro: getLongitudEpicentro(),
+                latitudHipocentro: getLatitudHipocentro(),
+                longitudHipocentro: getLongitudHipocentro(),
+                valorMagnitud: getValorMagnitud()
+                );
         }
 
         public bool esPendienteRevision()
@@ -41,13 +55,11 @@ namespace source.Entidades.EventoSismo
         {
             return estado.sosAutoDetectado(); // 8. sosAutodetectado
         }
-        public DateTime getFechaHoraOcurrencia()
+        public DateTime getFechaHoraOcurrencia() // 10. getFechaHoraOcurrenciaEvento()
         {
             return fechaHoraOcurrencia;
         }
-
-
-        public float getLatitudEpicentro()
+        public float getLatitudEpicentro() // 11. getLatitudEpicentro() 
         {
             return latitudEpicentro;
         }
@@ -66,8 +78,12 @@ namespace source.Entidades.EventoSismo
         {
             return longitudHipocentro;
         }
+        public List<SerieTemporal> getSerieTemporal()
+        {
+            return serieTemporal;
+        }
 
-        public void bloquear(DateTime fechaHoraActual, Estado estadoBloqueado, Empleado empleadoLogueado) //27.
+        public void bloquear(Estado estadoBloqueadoEnRevision, Empleado asLogueado, DateTime fechaHoraActual) //27. bloquear()
         {
             foreach (CambioEstado cambio in listaCambioEstado) // Loop [Buscar ultimo cambio estado]
             {
@@ -76,14 +92,14 @@ namespace source.Entidades.EventoSismo
                     cambio.setFechaHoraFin(fechaHoraActual); //29. setFechaHoraFin()
                     break;
                 }
-            } 
-            crearCambioEstado(fechaHoraActual, estadoBloqueado, empleadoLogueado); //30. crearCambioEstado()
-            setEstado(estadoBloqueado); // 32. setEstado()
+            }
+            crearCambioEstado(fechaHoraActual, estadoBloqueadoEnRevision, asLogueado); //30. crearCambioEstado
+            setEstado(estadoBloqueadoEnRevision); //32. setEstado()
         }
 
         public void crearCambioEstado(DateTime fechaHoraActual, Estado estado, Empleado empleadoLogueado)
         {
-            listaCambioEstado.Add(new CambioEstado(fechaHoraActual, estado, empleadoLogueado)); //31. newBloqueado:CambioEstado()
+            listaCambioEstado.Add(new CambioEstado(fechaHoraActual, estado, empleadoLogueado)); //31. new()
         }
 
         public void setEstado(Estado estado)
@@ -91,70 +107,35 @@ namespace source.Entidades.EventoSismo
             this.estado = estado;
         }
 
-        /*  public (string Alcance, string Clasificacion, string Origen, double MagnitudValor, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) getDatosSismicos()
-              {
-              //Primero que nada lo que hace esta verga es crear una tupla llamada "detalles" donde se va a guardar cada dato de cada detalle
-              //de cada muestra, de cada serie temporal
-              var detalles = serieTemporal
-              .SelectMany(serie => serie.getMuestrasSismicas())
-              .SelectMany(muestra => muestra.getDetalleMuestraSismica())
-              .Select(detalle => (
-              Valor: detalle.getValor(),
-              TipoMuestraDenominacion: detalle.getTipoDeDato().getDenomincacion(),
-              TipoMuestraUnidad: detalle.getTipoDeDato().getNombreUnidadMedida(),
-              TipoMuestraValorUmbral: detalle.getTipoDeDato().getValorUmbral()
-              ));
-
-              // Despues retorna una lista que esta compuesta de cada atributo unico del evento sismico en orden y al final la tupla anterior con todos los datos
-
-              return (
-                 Alcance: alcanceSismo.getNombre(),
-                 Clasificacion: clasificacionSismo.getNombre(),
-                 Origen: origenDeGeneracion.getNombre(),
-                 MagnitudValor: magnitud.getNombre(),
-                 Detalles: detalles
-                      );
-          } */
-
-        public DatosSismicosDTO getDatosSismicos()
+        public float getValorMagnitud()
         {
-            List<DatosSismicosDTO.DetalleDTO> detalles = new List<DatosSismicosDTO.DetalleDTO>();
+            return valorMagnitud;
+        }
 
-            // Recorre cada serie temporal del evento
-            foreach (SerieTemporal serie in serieTemporal) // LOOP [Valores alcanzados sismo]
-            {
-                // Por cada serie, recorre sus muestras sísmicas
-                List<MuestraSismica> muestras = serie.getMuestrasSismicas();
-                foreach (MuestraSismica muestra in muestras)  // LOOP [Valores muestra sisimica]
-                {
-                    // Por cada muestra, recorre sus detalles
-                    List<DetalleMuestraSismica> detallesMuestra = muestra.getDetalleMuestraSismica();
-                    foreach (DetalleMuestraSismica detalle in detallesMuestra) // LOOP [Valores detalle de la muestra sismica]
-                    {
-                        // Extrae el tipo de dato
-                        TipoDeDato tipo = detalle.getTipoDeDato(); //Que mensaje es este?   
+        public (string Alcance, string Clasificacion, string Origen, double MagnitudValor, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) getDatosSismicos()
+        {
+            //Primero que nada lo que hace esta verga es crear una tupla llamada "detalles" donde se va a guardar cada dato de cada detalle
+            //de cada muestra, de cada serie temporal
+            var detalles = serieTemporal
+            .SelectMany(serie => serie.getMuestrasSismicas())
+            .SelectMany(muestra => muestra.getDetalleMuestraSismica())
+            .Select(detalle => (
+            Valor: detalle.getValor(),
+            TipoMuestraDenominacion: detalle.getTipoDeDato().getDenomincacion(),
+            TipoMuestraUnidad: detalle.getTipoDeDato().getNombreUnidadMedida(),
+            TipoMuestraValorUmbral: detalle.getTipoDeDato().getValorUmbral()
+            ));
 
-                        // Crea el DTO y lo agrega a la lista
-                        DatosSismicosDTO.DetalleDTO dtoDetalle = new DatosSismicosDTO.DetalleDTO();
-                        dtoDetalle.Valor = detalle.getValor(); //Que mensaje es este?
-                        dtoDetalle.TipoMuestraDenominacion = tipo.getDenomincacion(); //41.getDenominacion()
-                        dtoDetalle.TipoMuestraUnidad = tipo.getNombreUnidadMedida(); //42. getNombreUnidadMedida()
-                        dtoDetalle.TipoMuestraValorUmbral = tipo.getValorUmbral();  //43. getValorUmbral()
+            // Despues retorna una lista que esta compuesta de cada atributo unico del evento sismico en orden y al final la tupla anterior con todos los datos
 
-                        detalles.Add(dtoDetalle);
-                    }
-                }
-            }
+            return (
+               Alcance: alcanceSismo.getNombre(),
+               Clasificacion: clasificacionSismo.getNombre(),
+               Origen: origenDeGeneracion.getNombre(),
+               MagnitudValor: magnitud.getNombre(),
+               Detalles: detalles
+                    );
 
-            // Crear el DTO principal
-            DatosSismicosDTO dto = new DatosSismicosDTO();
-            dto.Alcance = alcanceSismo.getNombre();
-            dto.Clasificacion = clasificacionSismo.getNombre();
-            dto.Origen = origenDeGeneracion.getNombre();
-            dto.MagnitudValor = magnitud.getNombre();
-            dto.Detalles = detalles;
-
-            return dto;
         }
 
 
@@ -184,6 +165,12 @@ namespace source.Entidades.EventoSismo
         {
             return alcanceSismo;
         }
+
+        public Estado getEstado()
+        {
+            return estado;
+        }
+
     }
 
 

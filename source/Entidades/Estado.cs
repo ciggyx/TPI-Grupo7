@@ -5,13 +5,12 @@
         EventoSismico, // 0
         Sismografo     // 1   
     }
-
     public enum Nombre
     {
-        pendienteRevision, // 0
-        autoDetectado,    // 1   
-        bloqueadoRevision,   //2
-        rechadazado //3
+        PendienteRevision, // 0
+        AutoDetectado,    // 1   
+        BloqueadoRevision,   //2
+        Rechazado //3
     }
 
     public class Estado
@@ -27,13 +26,12 @@
 
         public bool sosPendienteRevision()
         {
-            // ¿Esto es asi? ¿No utilizamos otro enum?
-            return nombre == Nombre.pendienteRevision;
+            return nombre == Nombre.PendienteRevision;
         }
 
         public bool sosAutoDetectado()
         {
-            return nombre == Nombre.autoDetectado;
+            return nombre == Nombre.AutoDetectado;
         }
 
         public bool sosAmbitoEventoSismico()
@@ -43,12 +41,17 @@
 
         public bool sosBloqueadoEnRevision()
         {
-            return nombre == Nombre.bloqueadoRevision;
+            return nombre == Nombre.BloqueadoRevision;
         }
 
         public bool sosRechazado()
         {
-            return nombre == Nombre.rechadazado;
+            return nombre == Nombre.Rechazado;
+        }
+
+        public Nombre getNombre()
+        {
+            return nombre;
         }
     }
 

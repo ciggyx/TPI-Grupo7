@@ -14,7 +14,7 @@
         }
 
         public Empleado getUsuarioLogueado() //24.
-        {                                   
+        {
             return usuarioLogueado.getEmpleado(); //25.
         }
     }
