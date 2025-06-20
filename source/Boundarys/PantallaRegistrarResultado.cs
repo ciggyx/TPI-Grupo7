@@ -1,13 +1,4 @@
 ﻿using source.Entidades.EventoSismo;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace source.Boundarys
 {
@@ -18,7 +9,7 @@ namespace source.Boundarys
         {
             InitializeComponent();
             newRevisionManual();  //3.newRevisionManual
-           
+
 
         }
         private void newRevisionManual()

@@ -1,18 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace source.Entidades
+﻿namespace source.Entidades
 {
     internal class EstacionSismologica
     {
         private string nombre;
-        private int codigo;
+        private string codigo;
+
+        public EstacionSismologica(string nombre, string codigo)
+        {
+            this.nombre = nombre;
+            this.codigo = codigo;
+        }
+
+        public string getNombre()
+        {
+            return nombre;
+        }
+
+        public string getCodigo()
+        {
+            return codigo;
+        }
     }
-
-    public getNombre() { }
-
-    public getCodigo() { }
 }

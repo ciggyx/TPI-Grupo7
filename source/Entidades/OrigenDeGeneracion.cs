@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace source.Entidades
+﻿namespace source.Entidades
 {
     public class OrigenDeGeneracion
     {
         private string nombre;
+        public OrigenDeGeneracion(string nombre)
+        {
+            this.nombre = nombre;
+        }
 
         public string getNombre()
         {
             return nombre;
         }
     }
-    
+
 }

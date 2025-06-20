@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace source.Entidades
+﻿namespace source.Entidades
 {
-    public class MuestraSismica
+    internal class MuestraSismica
     {
-        private DetalleMuestraSismica detalleMuestraSismica;
-        public void getDatos()
-            {
+        private DateTime fechaHoraMuestra;
+        private List<DetalleMuestraSismica> detalleMuestraSismica;
 
-            }
+        public MuestraSismica(DateTime fechaHoraMuestra, List<DetalleMuestraSismica> detalleMuestraSismicas)
+        {
+            this.fechaHoraMuestra = fechaHoraMuestra;
+            this.detalleMuestraSismica = detalleMuestraSismicas;
+        }
+
+        public void getDatos() { }
 
     }
 
-    
+
 }

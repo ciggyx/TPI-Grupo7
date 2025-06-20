@@ -1,21 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace source.Entidades
 {
-    public class MagnitudRichter
+    internal class MagnitudRichter
     {
-        private float numero;
+        private double numero;
         private string descripcion;
 
-        public float getNombre()
+        public MagnitudRichter(double numero, string descripcion)
+        {
+            this.numero = numero;
+            this.descripcion = descripcion;
+        }
+
+        public double getNombre()
         {
             return numero;
         }
     }
 
-    
+
 }
