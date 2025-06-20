@@ -16,7 +16,7 @@
         private List<CambioEstado> listaCambioEstado;
         private MagnitudRichter magnitud;
 
-        public EventoSismico(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud,List<SerieTemporal> serieTemporal, Estado estado, ClasificacionSismo clasificacionSismo, AlcanceSismo alcanceSismo, OrigenDeGeneracion origenDeGeneracion, List<CambioEstado> listaCambioEstado, MagnitudRichter magnitud)
+        public EventoSismico(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud, List<SerieTemporal> serieTemporal, Estado estado, ClasificacionSismo clasificacionSismo, AlcanceSismo alcanceSismo, OrigenDeGeneracion origenDeGeneracion, List<CambioEstado> listaCambioEstado, MagnitudRichter magnitud)
         {
             this.fechaHoraOcurrencia = fechaHoraOcurrencia;
             this.latitudEpicentro = latitudEpicentro;
@@ -33,6 +33,18 @@
             this.magnitud = magnitud;
         }
 
+        public (DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud) getDatos()
+        {
+            return (
+                fechaHoraOcurrencia: getFechaHoraOcurrencia(),
+                latitudEpicentro: getLatitudEpicentro(),
+                longitudEpicentro: getLongitudEpicentro(),
+                latitudHipocentro: getLatitudHipocentro(),
+                longitudHipocentro: getLongitudHipocentro(),
+                valorMagnitud: getValorMagnitud()
+                );
+        }
+
         public bool esPendienteRevision(Estado estado)
         {
             return estado.sosPendienteRevision(estado.getNombre()); //6. sosPendienteRevision
@@ -41,12 +53,11 @@
         {
             return estado.sosAutoDetectado(estado.getNombre()); // 8. sosAutodetectado
         }
-        public DateTime getFechaHoraOcurrencia()
+        public DateTime getFechaHoraOcurrencia() // 10. getFechaHoraOcurrenciaEvento()
         {
             return fechaHoraOcurrencia;
         }
-
-        public float getLatitudEpicentro()
+        public float getLatitudEpicentro() // 11. getLatitudEpicentro() 
         {
             return latitudEpicentro;
         }
@@ -66,7 +77,7 @@
             return longitudHipocentro;
         }
 
-        public void bloquear(DateTime fechaHoraActual, Estado estadoBloqueado, Empleado empleadoLogueado) //27.
+        public void bloquear(EventoSismico eventoSismicoSeleccionado, Estado estadoBloqueadoEnRevision, Empleado asLogueado, DateTime fechaHoraActual) //27. bloquear()
         {
             foreach (CambioEstado cambio in listaCambioEstado) // Loop [Buscar ultimo cambio estado]
             {
@@ -76,13 +87,13 @@
                     break;
                 }
             }
-            crearCambioEstado(fechaHoraActual, estadoBloqueado, empleadoLogueado); //30. crearCambioEstado
-            setEstado(estadoBloqueado);
+            crearCambioEstado(fechaHoraActual, estadoBloqueadoEnRevision, asLogueado); //30. crearCambioEstado
+            setEstado(estadoBloqueadoEnRevision); //32. setEstado()
         }
 
         public void crearCambioEstado(DateTime fechaHoraActual, Estado estado, Empleado empleadoLogueado)
         {
-            listaCambioEstado.Add(new CambioEstado(fechaHoraActual, estado, empleadoLogueado)); //31. newBloqueado:CambioEstado
+            listaCambioEstado.Add(new CambioEstado(fechaHoraActual, estado, empleadoLogueado)); //31. new()
         }
 
         public void setEstado(Estado estado)

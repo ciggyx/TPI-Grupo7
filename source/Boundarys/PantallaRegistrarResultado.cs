@@ -1,10 +1,9 @@
-﻿using source.Entidades.EventoSismo;
-
-namespace source.Boundarys
+﻿namespace source.Boundarys
 {
     public partial class PantallaRegistrarResultado : Form
     {
         private GestoresCU.GestorRegistrarRevisionManual gestorRegistrarRevisionManual;
+        private List<(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud)> eventosOriginales;
         public PantallaRegistrarResultado()
         {
             InitializeComponent();
@@ -18,17 +17,18 @@ namespace source.Boundarys
 
         }
 
-        public void mostrarEventoSismicoParaRevision(List<EventoSismico> eventosSismicosSinRevisionOrdenados)
+        public void mostrarEventoSismicoParaRevision(List<(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud)> eventosSismicosSinRevisionOrdenados)
         {
-            List<EventoSismico> todos = eventosSismicosSinRevisionOrdenados;
-            var datosAMostrar = todos.Select(e => new
+            eventosOriginales = eventosSismicosSinRevisionOrdenados;
+
+            var datosAMostrar = eventosSismicosSinRevisionOrdenados.Select(e => new
             {
-                fechaHoraOcurrencia = e.getFechaHoraOcurrencia(),
-                lat_Hipocentro = e.getLatitudHipocentro(),
-                lng_Hipocentro = e.getLongitudHipocentro(),
-                lat_Epicentro = e.getLatitudEpicentro(),
-                lng_Epicentro = e.getLongitudEpicentro(),
-                magnitud = e.getValorMagnitud()
+                fechaHoraOcurrencia = e.fechaHoraOcurrencia,
+                latitudHipocentro = e.latitudHipocentro,
+                longitudHipocentro = e.longitudHipocentro,
+                latitudEpicentro = e.latitudEpicentro,
+                longitudEpicentro = e.longitudEpicentro,
+                valorMagnitud = e.valorMagnitud
             }).ToList();
             dataGridEventosSismicos.DataSource = datosAMostrar;
         }
@@ -38,26 +38,29 @@ namespace source.Boundarys
 
         }
 
-        private EventoSismico eventoSeleccionado;
-
         private void seleccionarBtn_Click(object sender, EventArgs e)
         {
-            if (dataGridEventosSismicos.CurrentRow == null)
+            (DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud) eventoSeleccionado;
+            if (dataGridEventosSismicos.CurrentRow != null)
             {
-                MessageBox.Show("No hay ninguna fila seleccionada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                int index = dataGridEventosSismicos.CurrentRow.Index;
 
-            var selectedRow = dataGridEventosSismicos.CurrentRow.DataBoundItem;
+                if (index >= 0 && index < eventosOriginales.Count)
+                {
+                    eventoSeleccionado = eventosOriginales[index];
 
-            if (selectedRow is EventoSismico evento)
-            {
-                eventoSeleccionado = evento;
-                MessageBox.Show("Evento sísmico seleccionado correctamente.", "Selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Evento sísmico seleccionado correctamente.", "Selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // 18. tomarSeleccionEventoSismico()
+                    gestorRegistrarRevisionManual.tomarSeleccionEventoSismico(eventoSeleccionado);
+                }
+                else
+                {
+                    MessageBox.Show("Índice fuera de rango.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
-                MessageBox.Show("La fila seleccionada no es un evento sísmico válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No se seleccionó ninguna fila.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

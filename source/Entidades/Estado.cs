@@ -5,7 +5,6 @@
         EventoSismico, // 0
         Sismografo     // 1   
     }
-
     public enum Nombre
     {
         pendienteRevision, // 0

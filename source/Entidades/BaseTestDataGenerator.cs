@@ -1,11 +1,20 @@
 ﻿using source.Entidades;
 using source.Entidades.EventoSismo;
-using System;
-using System.Collections.Generic;
 
 public class BaseTestDataGenerator
 {
     private static Random random = new Random();
+
+    public List<Estado> GenerarEstados()
+    {
+        return new List<Estado>
+        {
+            new Estado(Ambito.EventoSismico, Nombre.pendienteRevision),
+            new Estado(Ambito.EventoSismico, Nombre.rechazado),
+            new Estado(Ambito.EventoSismico, Nombre.autoDetectado)
+        };
+
+    }
 
     public List<EventoSismico> GenerarEventosSismicos(int cantidad = 10)
     {
@@ -20,7 +29,7 @@ public class BaseTestDataGenerator
         var usuario = new Usuario("juanperez", "juanperez123", empleado);
         var sesion = new Sesion(DateTime.Now, DateTime.Now.AddHours(2), usuario);
 
-        var estados = new List<Estado>
+        var listaEstado = new List<Estado>
         {
             new Estado(Ambito.EventoSismico, Nombre.pendienteRevision),
             new Estado(Ambito.EventoSismico, Nombre.rechazado),
@@ -52,7 +61,7 @@ public class BaseTestDataGenerator
                 new List<MuestraSismica> { muestra }
             );
 
-            var estado = estados[random.Next(estados.Count)];
+            var estado = listaEstado[random.Next(listaEstado.Count)];
             var cambioEstado = new CambioEstado(DateTime.Now.AddMinutes(-i * 5), estado, empleado);
 
             var alcance = new AlcanceSismo(alcances[random.Next(alcances.Length)]);

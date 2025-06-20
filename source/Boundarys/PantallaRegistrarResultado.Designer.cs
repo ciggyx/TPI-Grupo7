@@ -29,73 +29,30 @@
         private void InitializeComponent()
         {
             dataGridEventosSismicos = new DataGridView();
+            seleccionarBtn = new Button();
             Fecha = new DataGridViewTextBoxColumn();
-            Lat_Hipocentro = new DataGridViewTextBoxColumn();
-            Lng_Hipocentro = new DataGridViewTextBoxColumn();
             lat_Epicentro = new DataGridViewTextBoxColumn();
             lng_Epicentro = new DataGridViewTextBoxColumn();
+            Lat_Hipocentro = new DataGridViewTextBoxColumn();
+            Lng_Hipocentro = new DataGridViewTextBoxColumn();
             Magnitud = new DataGridViewTextBoxColumn();
-            seleccionarBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridEventosSismicos).BeginInit();
             SuspendLayout();
             // 
             // dataGridEventosSismicos
             // 
+            dataGridEventosSismicos.AllowUserToAddRows = false;
+            dataGridEventosSismicos.AllowUserToDeleteRows = false;
             dataGridEventosSismicos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridEventosSismicos.Columns.AddRange(new DataGridViewColumn[] { Fecha, Lat_Hipocentro, Lng_Hipocentro, lat_Epicentro, lng_Epicentro, Magnitud });
-            dataGridEventosSismicos.Location = new Point(169, 99);
+            dataGridEventosSismicos.Columns.AddRange(new DataGridViewColumn[] { Fecha, lat_Epicentro, lng_Epicentro, Lat_Hipocentro, Lng_Hipocentro, Magnitud });
+            dataGridEventosSismicos.Location = new Point(162, 95);
+            dataGridEventosSismicos.MultiSelect = false;
             dataGridEventosSismicos.Name = "dataGridEventosSismicos";
+            dataGridEventosSismicos.ReadOnly = true;
             dataGridEventosSismicos.RowHeadersWidth = 51;
+            dataGridEventosSismicos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridEventosSismicos.Size = new Size(804, 327);
             dataGridEventosSismicos.TabIndex = 0;
-            // 
-            // Fecha
-            // 
-            Fecha.DataPropertyName = "fechaHoraOcurrencia";
-            Fecha.HeaderText = "Fecha";
-            Fecha.MinimumWidth = 6;
-            Fecha.Name = "Fecha";
-            Fecha.Width = 125;
-            // 
-            // Lat_Hipocentro
-            // 
-            Lat_Hipocentro.DataPropertyName = "lat_Hipocentro";
-            Lat_Hipocentro.HeaderText = "Lat_Hipocentro";
-            Lat_Hipocentro.MinimumWidth = 6;
-            Lat_Hipocentro.Name = "Lat_Hipocentro";
-            Lat_Hipocentro.Width = 125;
-            // 
-            // Lng_Hipocentro
-            // 
-            Lng_Hipocentro.DataPropertyName = "lng_Hipocentro";
-            Lng_Hipocentro.HeaderText = "Lng_Hipocentro";
-            Lng_Hipocentro.MinimumWidth = 6;
-            Lng_Hipocentro.Name = "Lng_Hipocentro";
-            Lng_Hipocentro.Width = 125;
-            // 
-            // lat_Epicentro
-            // 
-            lat_Epicentro.DataPropertyName = "lat_Epicentro";
-            lat_Epicentro.HeaderText = "Lat_Epicentro";
-            lat_Epicentro.MinimumWidth = 6;
-            lat_Epicentro.Name = "lat_Epicentro";
-            lat_Epicentro.Width = 125;
-            // 
-            // lng_Epicentro
-            // 
-            lng_Epicentro.DataPropertyName = "lng_Epicentro";
-            lng_Epicentro.HeaderText = "Lng_Epicentro";
-            lng_Epicentro.MinimumWidth = 6;
-            lng_Epicentro.Name = "lng_Epicentro";
-            lng_Epicentro.Width = 125;
-            // 
-            // Magnitud
-            // 
-            Magnitud.DataPropertyName = "magnitud";
-            Magnitud.HeaderText = "Magnitud";
-            Magnitud.MinimumWidth = 6;
-            Magnitud.Name = "Magnitud";
-            Magnitud.Width = 125;
             // 
             // seleccionarBtn
             // 
@@ -106,6 +63,60 @@
             seleccionarBtn.Text = "Seleccionar";
             seleccionarBtn.UseVisualStyleBackColor = true;
             seleccionarBtn.Click += seleccionarBtn_Click;
+            // 
+            // Fecha
+            // 
+            Fecha.DataPropertyName = "fechaHoraOcurrencia";
+            Fecha.HeaderText = "Fecha";
+            Fecha.MinimumWidth = 6;
+            Fecha.Name = "Fecha";
+            Fecha.ReadOnly = true;
+            Fecha.Width = 125;
+            // 
+            // lat_Epicentro
+            // 
+            lat_Epicentro.DataPropertyName = "latitudEpicentro";
+            lat_Epicentro.HeaderText = "Lat_Epicentro";
+            lat_Epicentro.MinimumWidth = 6;
+            lat_Epicentro.Name = "lat_Epicentro";
+            lat_Epicentro.ReadOnly = true;
+            lat_Epicentro.Width = 125;
+            // 
+            // lng_Epicentro
+            // 
+            lng_Epicentro.DataPropertyName = "longitudEpicentro";
+            lng_Epicentro.HeaderText = "Lng_Epicentro";
+            lng_Epicentro.MinimumWidth = 6;
+            lng_Epicentro.Name = "lng_Epicentro";
+            lng_Epicentro.ReadOnly = true;
+            lng_Epicentro.Width = 125;
+            // 
+            // Lat_Hipocentro
+            // 
+            Lat_Hipocentro.DataPropertyName = "latitudHipocentro";
+            Lat_Hipocentro.HeaderText = "Lat_Hipocentro";
+            Lat_Hipocentro.MinimumWidth = 6;
+            Lat_Hipocentro.Name = "Lat_Hipocentro";
+            Lat_Hipocentro.ReadOnly = true;
+            Lat_Hipocentro.Width = 125;
+            // 
+            // Lng_Hipocentro
+            // 
+            Lng_Hipocentro.DataPropertyName = "longitudHipocentro";
+            Lng_Hipocentro.HeaderText = "Lng_Hipocentro";
+            Lng_Hipocentro.MinimumWidth = 6;
+            Lng_Hipocentro.Name = "Lng_Hipocentro";
+            Lng_Hipocentro.ReadOnly = true;
+            Lng_Hipocentro.Width = 125;
+            // 
+            // Magnitud
+            // 
+            Magnitud.DataPropertyName = "valorMagnitud";
+            Magnitud.HeaderText = "Magnitud";
+            Magnitud.MinimumWidth = 6;
+            Magnitud.Name = "Magnitud";
+            Magnitud.ReadOnly = true;
+            Magnitud.Width = 125;
             // 
             // PantallaRegistrarResultado
             // 
@@ -124,12 +135,12 @@
         #endregion
 
         private DataGridView dataGridEventosSismicos;
+        private Button seleccionarBtn;
         private DataGridViewTextBoxColumn Fecha;
-        private DataGridViewTextBoxColumn Lat_Hipocentro;
-        private DataGridViewTextBoxColumn Lng_Hipocentro;
         private DataGridViewTextBoxColumn lat_Epicentro;
         private DataGridViewTextBoxColumn lng_Epicentro;
+        private DataGridViewTextBoxColumn Lat_Hipocentro;
+        private DataGridViewTextBoxColumn Lng_Hipocentro;
         private DataGridViewTextBoxColumn Magnitud;
-        private Button seleccionarBtn;
     }
 }
