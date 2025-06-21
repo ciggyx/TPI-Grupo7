@@ -150,6 +150,19 @@
             crearCambioEstado(fechaHoraActual, estadoRechazado, empleadoLogueado);
             setEstado(estadoRechazado);
         }
+        public void confirmar(DateTime fechaHoraActual, Estado estadoConfirmado, Empleado empleadoLogueado)
+        {
+            foreach (CambioEstado cambio in listaCambioEstado)
+            {
+                if (cambio.esEstadoActual())
+                {
+                    cambio.setFechaHoraFin(fechaHoraActual);
+                    break;
+                }
+            }
+            crearCambioEstado(fechaHoraActual, estadoConfirmado, empleadoLogueado);
+            setEstado(estadoConfirmado);
+        }
         public MagnitudRichter getMagnitud()
         {
             return magnitud;

@@ -1,4 +1,6 @@
-﻿namespace source.Boundarys
+﻿using source.Entidades.EventoSismo;
+
+namespace source.Boundarys
 {
     public partial class PantallaRegistrarResultado : Form
     {
@@ -8,18 +10,13 @@
         {
             InitializeComponent();
             newRevisionManual();  //3.newRevisionManual
-
-
         }
         private void newRevisionManual()
         {
             gestorRegistrarRevisionManual = new GestoresCU.GestorRegistrarRevisionManual(this);
-
         }
 
-        // Pedro como actualizo esto si es de la pantalla!!
-        // Esto deberia ser solicitarSeleccion
-        public void mostrarEventoSismicoParaRevision(List<(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud)> eventosSismicosSinRevisionOrdenados)
+        public void solicitarSeleccionEventoSismico(List<(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud)> eventosSismicosSinRevisionOrdenados)
         {
             lblAlcance.Visible = false;
             lblClasificacion.Visible = false;
@@ -27,6 +24,9 @@
             lblOrigen.Visible = false;
             dataGridDetalles.Visible = false;
             eventosOriginales = eventosSismicosSinRevisionOrdenados;
+            lblSolicitarVisualizacion.Visible = false;
+            noBtn.Visible = false;
+            siBtn.Visible = false;
 
             var datosAMostrar = eventosSismicosSinRevisionOrdenados.Select(e => new
             {
@@ -50,6 +50,7 @@
         {
             dataGridDetalles.Visible = true;
             dataGridEventosSismicos.Visible = false;
+            seleccionarBtn.Visible = false;
             lblAlcance.Visible = true;
             lblClasificacion.Visible = true;
             lblMagnitud.Visible = true;
@@ -73,8 +74,7 @@
             dataGridDetalles.DataSource = detallesFormateados;
         }
 
-
-        private void seleccionarBtn_Click(object sender, EventArgs e)
+        private void tomarSeleccionEventoSismico(object sender, EventArgs e)
         {
             (DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud) eventoSeleccionado;
             if (dataGridEventosSismicos.CurrentRow != null)
@@ -98,6 +98,89 @@
             {
                 MessageBox.Show("No se seleccionó ninguna fila.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        public void solicitarSeleccionMapa()
+        {
+            lblSolicitarVisualizacion.Visible = true;
+            noBtn.Visible = true;
+            siBtn.Visible = true;
+        }
+
+        private void tomarSeleccionMapa(object sender, EventArgs e)
+        {
+            // La manera más simple de hacerlo? si, la menos escalable también
+            gestorRegistrarRevisionManual.tomarSeleccionMapa("No");
+        }
+
+        public void solicitarModificacionDatosES(EventoSismico eventoSismico)
+        {
+            lblSolicitarVisualizacion.Visible = false;
+            noBtn.Visible = false;
+            siBtn.Visible = false;
+
+            alcanceEditBtn.Location = new Point(
+                lblAlcance.Right + 5,
+                lblAlcance.Top + (lblAlcance.Height - alcanceEditBtn.Height) / 2
+            );
+            magnitudEditBtn.Location = new Point(
+                lblMagnitud.Right + 5,
+                lblMagnitud.Top + (lblMagnitud.Height - magnitudEditBtn.Height) / 2
+            );
+            origenEditBtn.Location = new Point(
+                lblOrigen.Right + 5,
+                lblOrigen.Top + (lblOrigen.Height - origenEditBtn.Height) / 2
+            );
+            alcanceEditBtn.Visible = true;
+            magnitudEditBtn.Visible = true;
+            origenEditBtn.Visible = true;
+            guardarCambiosBtn.Visible = true;
+            continuarSinModificarBtn.Visible = true;
+        }
+
+        private void tomarModificacionDatosES(object sender, EventArgs e)
+        {
+            gestorRegistrarRevisionManual.tomarModificacionDatosES("No");
+        }
+
+        public void solicitarAccionSobreEvento()
+        {
+            confirmarEventoBtn.Visible = true;
+            rechazarEventoBtn.Visible = true;
+            solicitarRevisionBtn.Visible = true;
+            alcanceEditBtn.Visible = false;
+            magnitudEditBtn.Visible = false;
+            origenEditBtn.Visible = false;
+            guardarCambiosBtn.Visible = false;
+            continuarSinModificarBtn.Visible = false;
+            lblSolicitarAccionEvento.Visible = true;
+        }
+
+        private void tomarAccionSobreEvento(object sender, EventArgs e)
+        {
+            var boton = sender as Button; // o ToggleButton si usas ese control
+            if (boton != null)
+            {
+                string nombreBoton = boton.Name;
+                if (nombreBoton == "rechazarEventoBtn")
+                {
+                    gestorRegistrarRevisionManual.tomarAccionSobreEvento("Rechazar evento");
+                }
+                else if (nombreBoton == "confirmarEventoBtn")
+                {
+                    gestorRegistrarRevisionManual.tomarAccionSobreEvento("Confirmar evento");
+                }
+                else if (nombreBoton == "solicitarRevisionBtn")
+                {
+                    gestorRegistrarRevisionManual.tomarAccionSobreEvento("Solicitar revision a experto");
+                }
+            }
+        }
+
+        private void cancelarRevision(object sender, EventArgs e)
+        {
+            MessageBox.Show("La revisión ha sido cancelada");
+            this.Close();
         }
     }
 }

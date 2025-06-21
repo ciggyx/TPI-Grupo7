@@ -21,7 +21,9 @@ namespace source.GestoresCU
         private Estado estadoBloqueado;
         private List<SerieTemporal> listaSerieTemporales;
         private EstacionSismologica estacionSismologica;
+        private string accionSobreVisualizarMapa;
         private string accionSobreEvento;
+        private string accionModificacionDatosES;
         private EstacionSismologica estacionSismologicaModificada;
         private Sesion sesionActual;
         private List<Sismografo> listaSismografos; // Se usa para testing, despues esto no va en el modelo final
@@ -36,34 +38,26 @@ namespace source.GestoresCU
         public GestorRegistrarRevisionManual(PantallaRegistrarResultado pantallaRegistrarResultado)
         {
             this.pantallaRegistrarResultado = pantallaRegistrarResultado;
+            Random random = new Random();
+            int cantidad = random.Next(3, 7);
             var generador = new BaseTestDataGenerator();
-            eventos = generador.GenerarEventosSismicos();
-
-            // DEBUG: Mostrar todos los eventos cargados en memoria
-            string debugEventos = "Eventos en memoria:\n\n";
-
-            foreach (var e in eventos)
-            {
-                debugEventos +=
-                    $"SeriesTemporales: {e.getSerieTemporal()}\n\n";
-            }
-
-            MessageBox.Show(debugEventos, "DEBUG - Eventos en memoria", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            eventos = generador.GenerarEventosSismicos(cantidad);
 
             foreach (EventoSismico evento in eventos)
             {
-                foreach(SerieTemporal serie in evento.getSerieTemporal())
+                foreach (SerieTemporal serie in evento.getSerieTemporal())
                 {
                     listaSerieTemporalesTotal.Add(serie);
                 }
             }
+
             listaSismografos = generador.GenerarSismografos(listaSerieTemporalesTotal);
             listaEstados = generador.GenerarEstados();
             sesionActual = generador.GenerarSesion();
 
             // 4. buscarEventosSimicosSinRevision
             listaEventoSismicosSinRevision = buscarEventoSismicoSinRevision(eventos);
-            pantallaRegistrarResultado.mostrarEventoSismicoParaRevision(listaEventoSismicosSinRevision); // 16. mostrarEventoSimicosParaSeleccion
+            pantallaRegistrarResultado.solicitarSeleccionEventoSismico(listaEventoSismicosSinRevision); // 16. mostrarEventoSimicosParaSeleccion
         }
 
 
@@ -97,20 +91,6 @@ namespace source.GestoresCU
 
         public void tomarSeleccionEventoSismico((DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud) eventoSeleccionado) // 18.tomarSeleccionEventoSismico()
         {
-            // Mostramos la tupla seleccionada
-            MessageBox.Show(
-                $"Evento seleccionado:\n" +
-                $"Fecha y hora: {eventoSeleccionado.fechaHoraOcurrencia}\n" +
-                $"Latitud Epicentro: {eventoSeleccionado.latitudEpicentro}\n" +
-                $"Longitud Epicentro: {eventoSeleccionado.longitudEpicentro}\n" +
-                $"Latitud Hipocentro: {eventoSeleccionado.latitudHipocentro}\n" +
-                $"Longitud Hipocentro: {eventoSeleccionado.longitudHipocentro}\n" +
-                $"Magnitud: {eventoSeleccionado.valorMagnitud}",
-                "Debug - Tupla seleccionada",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
-
             // falopa lo de los numeros? matematicas
             this.eventoSismicoSeleccionado = eventos.FirstOrDefault(e =>
                 e.getFechaHoraOcurrencia() == eventoSeleccionado.fechaHoraOcurrencia &&
@@ -120,26 +100,6 @@ namespace source.GestoresCU
                 Math.Abs(e.getLongitudHipocentro() - eventoSeleccionado.longitudHipocentro) < 0.0001f &&
                 Math.Abs(e.getValorMagnitud() - eventoSeleccionado.valorMagnitud) < 0.0001f
             );
-            // Si se encontró, mostramos sus datos
-            if (this.eventoSismicoSeleccionado != null)
-            {
-                MessageBox.Show(
-                    $"EventoSismico encontrado:\n" +
-                    $"Fecha y hora: {eventoSismicoSeleccionado.getFechaHoraOcurrencia()}\n" +
-                    $"Latitud Epicentro: {eventoSismicoSeleccionado.getLatitudEpicentro()}\n" +
-                    $"Longitud Epicentro: {eventoSismicoSeleccionado.getLongitudEpicentro()}\n" +
-                    $"Latitud Hipocentro: {eventoSismicoSeleccionado.getLatitudHipocentro()}\n" +
-                    $"Longitud Hipocentro: {eventoSismicoSeleccionado.getLongitudHipocentro()}\n" +
-                    $"Magnitud: {eventoSismicoSeleccionado.getValorMagnitud()}",
-                    "Debug - EventoSismico encontrado",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
-            }
-            else
-            {
-                MessageBox.Show("No se encontró el EventoSismico correspondiente 😕", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
             estadoBloqueadoEnRevision = buscarEstadoBloqueadoEnRevision();
             fechaHoraActual = getFechaHoraActual(); // 22. getFechaHoraActual()
             asLogueado = buscarEmpleadoLogueado(); // 23. buscarEmpleadoLogueado()
@@ -148,7 +108,7 @@ namespace source.GestoresCU
             bloquearEventoSismico(eventoSismicoSeleccionado, estadoBloqueadoEnRevision, asLogueado, fechaHoraActual);
             // 33. buscarDatosSismicos
             pantallaRegistrarResultado.mostrarDatos(buscarDatosSismicos(eventoSismicoSeleccionado));
-
+            pantallaRegistrarResultado.solicitarSeleccionMapa();
         }
         public Estado buscarEstadoBloqueadoEnRevision()//19. buscarEstadoBloqueadoEnRevision()
         {
@@ -217,11 +177,43 @@ namespace source.GestoresCU
 
         public void llamarCUGenerarSismograma() { }
 
-        public void tomarSeleccionDeMapa() { }
+        public void tomarSeleccionMapa(string accionVisualizarMapa)
+        {
+            this.accionSobreVisualizarMapa = accionVisualizarMapa;
+            // 57. solicitarModificacionDatosES()
+            pantallaRegistrarResultado.solicitarModificacionDatosES(eventoSismicoSeleccionado);
+        }
 
-        public void tomarModificacionDatosES() { }
+        public void tomarModificacionDatosES(string accionModificacionDatosES)
+        {
+            this.accionModificacionDatosES = accionModificacionDatosES;
+            // 60. solicitarAccionSobreEvento()
+            pantallaRegistrarResultado.solicitarAccionSobreEvento();
+        }
 
-        public void tomarAccionSobreEvento() { }
+        public void tomarAccionSobreEvento(string accionSobreEvento)
+        {
+            this.accionSobreEvento = accionSobreEvento;
+            // 63. validarDatos()
+            var datosValidados = validarDatos(eventoSismicoSeleccionado);
+            if (datosValidados == true)
+            {
+                if (accionSobreEvento == "Rechazar evento")
+                {
+                    rechazarEventoSismico(getFechaHoraActual(), buscarEstadoRechazado(), asLogueado);
+                }
+                else if (accionSobreEvento == "Confirmar evento")
+                {
+                    confirmarEventoSismico(getFechaHoraActual(), buscarEstadoConfirmado(), asLogueado);
+                }
+                //67, 64, 68
+                finCU();
+            }
+            else
+            {
+                MessageBox.Show("Datos invalidos");
+            }
+        }
 
         public bool validarDatos(EventoSismico eventoSismico)
         {
@@ -236,6 +228,7 @@ namespace source.GestoresCU
         {
             foreach (Estado estado in listaEstados)
             {
+                // 65 y 66
                 if (estado.sosAmbitoEventoSismico() && estado.sosRechazado())
                 {
                     return estado;
@@ -244,19 +237,33 @@ namespace source.GestoresCU
             return null;
         }
 
-        public void rechazarEventoSismico()
+        public Estado buscarEstadoConfirmado()
         {
-            eventoSismicoSeleccionado.rechazar(getFechaHoraActual(), buscarEstadoBloqueadoEnRevision(), buscarEmpleadoLogueado());
+            foreach (Estado estado in listaEstados)
+            {
+                // 65 y 66
+                if (estado.sosAmbitoEventoSismico() && estado.sosConfirmado())
+                {
+                    return estado;
+                }
+            }
+            return null;
+        }
+
+        public void rechazarEventoSismico(DateTime fechaHoraActual, Estado estadoRechazado, Empleado empleadoLogueado)
+        {
+            eventoSismicoSeleccionado.rechazar(fechaHoraActual, estadoRechazado, empleadoLogueado);
+        }
+
+        public void confirmarEventoSismico(DateTime fechaHoraActual, Estado estadoConfirmado, Empleado empleadoLogueado)
+        {
+            eventoSismicoSeleccionado.confirmar(fechaHoraActual, estadoConfirmado, empleadoLogueado);
         }
 
         public void finCU()
         {
-            //qué diantres hace esto?
+            MessageBox.Show("Resultado de revisión registrado correctamente");
+            pantallaRegistrarResultado.Close();
         }
-
     }
-
-
-
-
 }

@@ -20,7 +20,8 @@ public class BaseTestDataGenerator
             new Estado(Ambito.EventoSismico, Nombre.PendienteRevision),
             new Estado(Ambito.EventoSismico, Nombre.Rechazado),
             new Estado(Ambito.EventoSismico, Nombre.AutoDetectado),
-            new Estado(Ambito.EventoSismico, Nombre.BloqueadoRevision)
+            new Estado(Ambito.EventoSismico, Nombre.BloqueadoRevision),
+            new Estado(Ambito.EventoSismico, Nombre.Confirmado)
         };
 
     }
@@ -45,31 +46,31 @@ public class BaseTestDataGenerator
         {
             int indice = random.Next(0, listaSismografos.Count);
             var sismografoSeleccionado = listaSismografos[indice];
-            sismografoSeleccionado.agregarSerieTemporal(serieTemporal); 
+            sismografoSeleccionado.agregarSerieTemporal(serieTemporal);
         }
 
         return listaSismografos;
     }
 
-    public List<EventoSismico> GenerarEventosSismicos(int cantidad = 10)
+    public List<EventoSismico> GenerarEventosSismicos(int cantidad)
     {
         var tipoDatos = new List<TipoDeDato>
-        {
-            new TipoDeDato("Velocidad de onda", "km/seg", 7),
-            new TipoDeDato("Frecuencia de onda", "Hz", 10),
-            new TipoDeDato("Longitud", "km/ciclo", 0.7)
-        };
+    {
+        new TipoDeDato("Velocidad de onda", "km/seg", 7),
+        new TipoDeDato("Frecuencia de onda", "Hz", 10),
+        new TipoDeDato("Longitud", "km/ciclo", 0.7)
+    };
 
         var empleado = new Empleado("Juan", "Pérez", "juan.perez@email.com", "3511234567");
         var usuario = new Usuario("juanperez", "juanperez123", empleado);
         var sesion = new Sesion(DateTime.Now, DateTime.Now.AddHours(2), usuario);
 
         var listaEstado = new List<Estado>
-        {
-            new Estado(Ambito.EventoSismico, Nombre.PendienteRevision),
-            new Estado(Ambito.EventoSismico, Nombre.Rechazado),
-            new Estado(Ambito.EventoSismico, Nombre.AutoDetectado)
-        };
+    {
+        new Estado(Ambito.EventoSismico, Nombre.PendienteRevision),
+        new Estado(Ambito.EventoSismico, Nombre.Rechazado),
+        new Estado(Ambito.EventoSismico, Nombre.AutoDetectado)
+    };
 
         var alcances = new[] { "Regional", "Local", "Internacional" };
         var clasificaciones = new[] { "Leve", "Moderado", "Fuerte", "Severo" };
@@ -80,21 +81,31 @@ public class BaseTestDataGenerator
 
         for (int i = 0; i < cantidad; i++)
         {
-            var detalles = new List<DetalleMuestraSismica>();
-            for (int j = 0; j < tipoDatos.Count; j++)
+            // Generar un número aleatorio de series temporales entre 1 y 7
+            int cantidadSeries = random.Next(1, 8); // 8 es exclusivo, así que genera entre 1 y 7
+
+            var seriesTemporales = new List<SerieTemporal>();
+
+            for (int k = 0; k < cantidadSeries; k++)
             {
-                detalles.Add(new DetalleMuestraSismica(j + 1, tipoDatos[j]));
+                var detalles = new List<DetalleMuestraSismica>();
+                for (int j = 0; j < tipoDatos.Count; j++)
+                {
+                    detalles.Add(new DetalleMuestraSismica(j + 1, tipoDatos[j]));
+                }
+
+                var muestra = new MuestraSismica(DateTime.Now.AddMinutes(-i * 10), detalles);
+
+                var serie = new SerieTemporal(
+                    false,
+                    DateTime.Now.AddHours(-i - k), // Puedes ajustar la hora para diferenciar las series
+                    DateTime.Now.AddHours(-i - k + 1),
+                    random.Next(30, 100),
+                    new List<MuestraSismica> { muestra }
+                );
+
+                seriesTemporales.Add(serie);
             }
-
-            var muestra = new MuestraSismica(DateTime.Now.AddMinutes(-i * 10), detalles);
-
-            var serie = new SerieTemporal(
-                false,
-                DateTime.Now.AddHours(-i),
-                DateTime.Now.AddHours(-i + 1),
-                random.Next(30, 100),
-                new List<MuestraSismica> { muestra }
-            );
 
             var estado = listaEstado[random.Next(listaEstado.Count)];
             var cambioEstado = new CambioEstado(DateTime.Now.AddMinutes(-i * 5), estado, empleado);
@@ -111,7 +122,7 @@ public class BaseTestDataGenerator
                 RandomCoord(-90, 90),    // lat hipocentro
                 RandomCoord(-180, 180),  // lng hipocentro
                 (float)Math.Round(random.NextDouble() * 30, 1), // profundidad
-                new List<SerieTemporal> { serie },
+                seriesTemporales, // Aquí asignamos la lista con múltiples series temporales
                 estado,
                 clasificacion,
                 alcance,
@@ -125,6 +136,7 @@ public class BaseTestDataGenerator
 
         return eventos;
     }
+
 
     private float RandomCoord(double min, double max)
     {

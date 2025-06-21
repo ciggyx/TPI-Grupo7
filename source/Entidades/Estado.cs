@@ -10,7 +10,8 @@
         PendienteRevision, // 0
         AutoDetectado,    // 1   
         BloqueadoRevision,   //2
-        Rechazado //3
+        Rechazado, //3
+        Confirmado //4
     }
 
     public class Estado
@@ -47,6 +48,11 @@
         public bool sosRechazado()
         {
             return nombre == Nombre.Rechazado;
+        }
+
+        public bool sosConfirmado()
+        {
+            return nombre == Nombre.Confirmado;
         }
 
         public Nombre getNombre()
