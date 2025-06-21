@@ -1,21 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace source.Entidades
+﻿namespace source.Entidades
 {
     public class ClasificacionSismo
     {
         private string nombre;
         private float kmProfundidadDesde;
         private float kmProfundidadHasta;
+
+        public ClasificacionSismo(string nombre, float kmProfundidadDesde, float kmProfundidadHasta)
+        {
+            this.nombre = nombre;
+            this.kmProfundidadDesde = kmProfundidadDesde;
+            this.kmProfundidadHasta = kmProfundidadHasta;
+        }
+
         public string getNombre()
         {
             return nombre;
         }
     }
 
-    
+
 }
