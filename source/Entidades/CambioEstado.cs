@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace source.Entidades
+﻿namespace source.Entidades
 {
     public class CambioEstado
     {
@@ -29,7 +23,7 @@ namespace source.Entidades
         {
             fechaHoraFin = fechaHoraActual;
         }
-    } 
     }
+}
 
-    
+

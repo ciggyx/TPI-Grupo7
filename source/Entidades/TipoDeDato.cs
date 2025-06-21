@@ -1,26 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace source.Entidades
+﻿namespace source.Entidades
 {
-    internal class TipoDeDato
+    public class TipoDeDato
     {
         private string denominacion;
         private string nombreUnidadMedida;
-        private float valorUmbral;
-    }
+        private double valorUmbral;
 
-    public getDenomincacion()
+        public TipoDeDato(string denominacion, string nombreUnidadMedida, double valorUmbral)
         {
-
+            this.denominacion = denominacion;
+            this.nombreUnidadMedida = nombreUnidadMedida;
+            this.valorUmbral = valorUmbral;
         }
 
-    public getNombreUnidadMedida() { }
+        public string getDenomincacion()
+        {
+            return denominacion;
+        }
 
-    public getValorUmbral() { }
+        public string getNombreUnidadMedida()
+        {
+            return nombreUnidadMedida;
+        }
 
+        public double getValorUmbral()
+        {
+            return valorUmbral;
+        }
 
+    }
 }

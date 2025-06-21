@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace source.Entidades
+﻿namespace source.Entidades
 {
-    internal class Sesion
+    public class Sesion
     {
-        private string fechaHoraInicio;
-        private string fechaHoraFin;
+        private DateTime fechaHoraInicio;
+        private DateTime fechaHoraFin;
         private Usuario usuarioLogueado;
 
-        public Empleado getUsuarioLogueado()
+        public Sesion(DateTime fechaHoraInicio, DateTime fechaHoraFin, Usuario usuarioLogueado)
         {
-            return usuarioLogueado.getEmpleado();
+            this.fechaHoraInicio = fechaHoraInicio;
+            this.fechaHoraFin = fechaHoraFin;
+            this.usuarioLogueado = usuarioLogueado;
+        }
+
+        public Empleado getUsuarioLogueado() //24.
+        {
+            return usuarioLogueado.getEmpleado(); //25.
         }
     }
 
-    
+
 }

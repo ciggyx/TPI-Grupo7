@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.DirectoryServices;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace source.Entidades.EventoSismo
+﻿namespace source.Entidades.EventoSismo
 {
     public class EventoSismico
     {
@@ -14,7 +7,8 @@ namespace source.Entidades.EventoSismo
         private float longitudEpicentro;
         private float latitudHipocentro;
         private float longitudHipocentro;
-        private SerieTemporal serieTemporal;
+        private float valorMagnitud;
+        private List<SerieTemporal> serieTemporal;
         private Estado estado;
         private ClasificacionSismo clasificacionSismo;
         private AlcanceSismo alcanceSismo;
@@ -22,6 +16,34 @@ namespace source.Entidades.EventoSismo
         private List<CambioEstado> listaCambioEstado;
         private MagnitudRichter magnitud;
 
+        public EventoSismico(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud, List<SerieTemporal> serieTemporal, Estado estado, ClasificacionSismo clasificacionSismo, AlcanceSismo alcanceSismo, OrigenDeGeneracion origenDeGeneracion, List<CambioEstado> listaCambioEstado, MagnitudRichter magnitud)
+        {
+            this.fechaHoraOcurrencia = fechaHoraOcurrencia;
+            this.latitudEpicentro = latitudEpicentro;
+            this.longitudEpicentro = longitudEpicentro;
+            this.latitudHipocentro = latitudHipocentro;
+            this.longitudHipocentro = longitudHipocentro;
+            this.valorMagnitud = valorMagnitud;
+            this.serieTemporal = serieTemporal;
+            this.estado = estado;
+            this.clasificacionSismo = clasificacionSismo;
+            this.alcanceSismo = alcanceSismo;
+            this.origenDeGeneracion = origenDeGeneracion;
+            this.listaCambioEstado = listaCambioEstado;
+            this.magnitud = magnitud;
+        }
+
+        public (DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud) getDatos()
+        {
+            return (
+                fechaHoraOcurrencia: getFechaHoraOcurrencia(),
+                latitudEpicentro: getLatitudEpicentro(),
+                longitudEpicentro: getLongitudEpicentro(),
+                latitudHipocentro: getLatitudHipocentro(),
+                longitudHipocentro: getLongitudHipocentro(),
+                valorMagnitud: getValorMagnitud()
+                );
+        }
 
         public bool esPendienteRevision()
         {
@@ -31,33 +53,91 @@ namespace source.Entidades.EventoSismo
         {
             return estado.sosAutoDetectado(); // 8. sosAutodetectado
         }
-        public DateTime getFechaHoraOcurrencia()
+        public DateTime getFechaHoraOcurrencia() // 10. getFechaHoraOcurrenciaEvento()
         {
             return fechaHoraOcurrencia;
         }
-
-
-        public void getLatitudEpicentro()
+        public float getLatitudEpicentro() // 11. getLatitudEpicentro() 
         {
+            return latitudEpicentro;
+        }
+
+        public float getLongitudEpicentro()
+        {
+            return longitudEpicentro;
+        }
+
+        public float getLatitudHipocentro()
+        {
+            return latitudHipocentro;
+        }
+
+        public float getLongitudHipocentro()
+        {
+            return longitudHipocentro;
+        }
+        public List<SerieTemporal> getSerieTemporal()
+        {
+            return serieTemporal;
+        }
+
+        public void bloquear(Estado estadoBloqueadoEnRevision, Empleado asLogueado, DateTime fechaHoraActual) //27. bloquear()
+        {
+            foreach (CambioEstado cambio in listaCambioEstado) // Loop [Buscar ultimo cambio estado]
+            {
+                if (cambio.esEstadoActual()) //28.esEstadoActual()
+                {
+                    cambio.setFechaHoraFin(fechaHoraActual); //29. setFechaHoraFin()
+                    break;
+                }
+            }
+            crearCambioEstado(fechaHoraActual, estadoBloqueadoEnRevision, asLogueado); //30. crearCambioEstado
+            setEstado(estadoBloqueadoEnRevision); //32. setEstado()
+        }
+
+        public void crearCambioEstado(DateTime fechaHoraActual, Estado estado, Empleado empleadoLogueado)
+        {
+            listaCambioEstado.Add(new CambioEstado(fechaHoraActual, estado, empleadoLogueado)); //31. new()
+        }
+
+        public void setEstado(Estado estado)
+        {
+            this.estado = estado;
+        }
+
+        public float getValorMagnitud()
+        {
+            return valorMagnitud;
+        }
+
+        public (string Alcance, string Clasificacion, string Origen, double MagnitudValor, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) getDatosSismicos()
+        {
+            //Primero que nada lo que hace esta verga es crear una tupla llamada "detalles" donde se va a guardar cada dato de cada detalle
+            //de cada muestra, de cada serie temporal
+            var detalles = serieTemporal
+            .SelectMany(serie => serie.getMuestrasSismicas())
+            .SelectMany(muestra => muestra.getDetalleMuestraSismica())
+            .Select(detalle => (
+            Valor: detalle.getValor(),
+            TipoMuestraDenominacion: detalle.getTipoDeDato().getDenomincacion(),
+            TipoMuestraUnidad: detalle.getTipoDeDato().getNombreUnidadMedida(),
+            TipoMuestraValorUmbral: detalle.getTipoDeDato().getValorUmbral()
+            ));
+
+            // Despues retorna una lista que esta compuesta de cada atributo unico del evento sismico en orden y al final la tupla anterior con todos los datos
+
+            return (
+               Alcance: alcanceSismo.getNombre(),
+               Clasificacion: clasificacionSismo.getNombre(),
+               Origen: origenDeGeneracion.getNombre(),
+               MagnitudValor: magnitud.getNombre(),
+               Detalles: detalles
+                    );
 
         }
 
-        public void getLongitudEpicentro()
-        {
 
-        }
-
-        public void getLatitudHipocentro()
-        {
-
-        }
-
-        public void getLongitudHipocentro()
-        {
-
-        }
-
-        public void bloquear(DateTime fechaHoraActual, Estado estadoBloqueado, Empleado empleadoLogueado)
+        public void rechazar(DateTime fechaHoraActual, Estado estadoRechazado, Empleado empleadoLogueado)
         {
             foreach (CambioEstado cambio in listaCambioEstado)
             {
@@ -67,39 +147,21 @@ namespace source.Entidades.EventoSismo
                     break;
                 }
             }
-            crearCambioEstado(fechaHoraActual, estadoBloqueado, empleadoLogueado);
-            setEstado(estadoBloqueado);
+            crearCambioEstado(fechaHoraActual, estadoRechazado, empleadoLogueado);
+            setEstado(estadoRechazado);
         }
-
-        public void crearCambioEstado(DateTime fechaHoraActual, Estado estado, Empleado empleadoLogueado)
-        {
-            listaCambioEstado.Add(new CambioEstado(fechaHoraActual, estado, empleadoLogueado));
-        }
-
-        public void setEstado(Estado estado)
-        {
-            this.estado = estado;
-        }
-
-        public List<object> getDatosSismicos()
-        {
-            List<object> datos = [alcanceSismo.getNombre(), clasificacionSismo.getNombre(), origenDeGeneracion.getNombre()];
-            return datos;
-
-        }
-
-        public void rechazar(DateTime fechaHoraActual, Estado estadoRechazado, Empleado empleadoLogueado)
+        public void confirmar(DateTime fechaHoraActual, Estado estadoConfirmado, Empleado empleadoLogueado)
         {
             foreach (CambioEstado cambio in listaCambioEstado)
-                        {
-                            if (cambio.esEstadoActual())
-                            {
-                                cambio.setFechaHoraFin(fechaHoraActual);
-                                break;
-                            }
-                        }
-                        crearCambioEstado(fechaHoraActual, estadoRechazado, empleadoLogueado);
-                        setEstado(estadoRechazado);
+            {
+                if (cambio.esEstadoActual())
+                {
+                    cambio.setFechaHoraFin(fechaHoraActual);
+                    break;
+                }
+            }
+            crearCambioEstado(fechaHoraActual, estadoConfirmado, empleadoLogueado);
+            setEstado(estadoConfirmado);
         }
         public MagnitudRichter getMagnitud()
         {
@@ -109,12 +171,18 @@ namespace source.Entidades.EventoSismo
         {
             return origenDeGeneracion;
         }
-            
+
         public AlcanceSismo getAlcance()
-            {
-                return alcanceSismo;
-            }    
+        {
+            return alcanceSismo;
+        }
+
+        public Estado getEstado()
+        {
+            return estado;
+        }
+
     }
 
-    
+
 }

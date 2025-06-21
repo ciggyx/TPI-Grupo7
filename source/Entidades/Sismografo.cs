@@ -1,17 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace source.Entidades
+﻿namespace source.Entidades
 {
-    internal class Sismografo
+    public class Sismografo
     {
-        EstacionSismologica estacionSismologica;
+        private EstacionSismologica estacionSismologica;
+        private List<SerieTemporal> listaSerieTemporal = new List<SerieTemporal>();
+        public Sismografo(EstacionSismologica estacionSismologica)
+        {
+            this.estacionSismologica = estacionSismologica;
+
+        }
+
+        public bool sosMiSismografo(SerieTemporal serie)
+        {
+            foreach (SerieTemporal s in listaSerieTemporal)
+            {
+                if (listaSerieTemporal.Contains(serie))
+                {
+                    return true;
+                }
+
+            }
+            return false;
+        }
+
+
+        public (string codigo, string nombre) getDatosEstacion()
+        {
+            return
+            (codigo: estacionSismologica.getCodigo(),
+            nombre: estacionSismologica.getNombre()
+            );
+        }
+
+        public void agregarSerieTemporal(SerieTemporal serie)
+        {
+            listaSerieTemporal.Add(serie);
+        }
+
+
+
     }
-
-    public sosMiSismografo() { }
-
-    public getDatosEstacion() { }
 }
