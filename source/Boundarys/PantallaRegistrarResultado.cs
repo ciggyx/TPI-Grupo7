@@ -18,8 +18,14 @@
         }
 
         // Pedro como actualizo esto si es de la pantalla!!
+        // Esto deberia ser solicitarSeleccion
         public void mostrarEventoSismicoParaRevision(List<(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud)> eventosSismicosSinRevisionOrdenados)
         {
+            lblAlcance.Visible = false;
+            lblClasificacion.Visible = false;
+            lblMagnitud.Visible = false;
+            lblOrigen.Visible = false;
+            dataGridDetalles.Visible = false;
             eventosOriginales = eventosSismicosSinRevisionOrdenados;
 
             var datosAMostrar = eventosSismicosSinRevisionOrdenados.Select(e => new
@@ -34,11 +40,6 @@
             dataGridEventosSismicos.DataSource = datosAMostrar;
         }
 
-        private void PantallaRegistrarResultado_Load(object sender, EventArgs e)
-        {
-
-        }
-
         public void mostrarDatos((
             string Alcance,
             string Clasificacion,
@@ -47,6 +48,13 @@
             IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string EstacionCodigo, string EstacionNombre)> Detalles
         ) datos)
         {
+            dataGridDetalles.Visible = true;
+            dataGridEventosSismicos.Visible = false;
+            lblAlcance.Visible = true;
+            lblClasificacion.Visible = true;
+            lblMagnitud.Visible = true;
+            lblOrigen.Visible = true;
+
             lblAlcance.Text = $"Alcance: {datos.Alcance}";
             lblClasificacion.Text = $"Clasificación: {datos.Clasificacion}";
             lblOrigen.Text = $"Origen: {datos.Origen}";
@@ -54,12 +62,12 @@
 
             var detallesFormateados = datos.Detalles.Select(d => new
             {
-                Valor = d.Valor,
-                Denominación = d.TipoMuestraDenominacion,
-                Unidad = d.TipoMuestraUnidad,
-                Umbral = d.TipoMuestraValorUmbral,
-                CódigoEstación = d.EstacionCodigo,
-                NombreEstación = d.EstacionNombre
+                valor = d.Valor,
+                denominacion = d.TipoMuestraDenominacion,
+                unidad = d.TipoMuestraUnidad,
+                umbral = d.TipoMuestraValorUmbral,
+                codigoEstacion = d.EstacionCodigo,
+                nombreEstacion = d.EstacionNombre
             }).ToList();
 
             dataGridDetalles.DataSource = detallesFormateados;
@@ -91,6 +99,5 @@
                 MessageBox.Show("No se seleccionó ninguna fila.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
     }
 }

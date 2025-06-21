@@ -36,11 +36,17 @@
             Lng_Hipocentro = new DataGridViewTextBoxColumn();
             Magnitud = new DataGridViewTextBoxColumn();
             seleccionarBtn = new Button();
-            lblAlcance = new Label();
+            dataGridDetalles = new DataGridView();
             lblClasificacion = new Label();
             lblOrigen = new Label();
             lblMagnitud = new Label();
-            dataGridDetalles = new DataGridView();
+            lblAlcance = new Label();
+            Valor = new DataGridViewTextBoxColumn();
+            Denominacion = new DataGridViewTextBoxColumn();
+            Unidad = new DataGridViewTextBoxColumn();
+            Umbral = new DataGridViewTextBoxColumn();
+            CodigoEstacion = new DataGridViewTextBoxColumn();
+            NombreEstacion = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridEventosSismicos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridDetalles).BeginInit();
             SuspendLayout();
@@ -124,61 +130,118 @@
             seleccionarBtn.UseVisualStyleBackColor = true;
             seleccionarBtn.Click += seleccionarBtn_Click;
             // 
-            // lblAlcance
-            // 
-            lblAlcance.Location = new Point(0, 0);
-            lblAlcance.Name = "lblAlcance";
-            lblAlcance.Size = new Size(100, 23);
-            lblAlcance.TabIndex = 2;
-            // 
-            // lblClasificacion
-            // 
-            lblClasificacion.Location = new Point(0, 0);
-            lblClasificacion.Name = "lblClasificacion";
-            lblClasificacion.Size = new Size(100, 23);
-            lblClasificacion.TabIndex = 3;
-            // 
-            // lblOrigen
-            // 
-            lblOrigen.Location = new Point(0, 0);
-            lblOrigen.Name = "lblOrigen";
-            lblOrigen.Size = new Size(100, 23);
-            lblOrigen.TabIndex = 4;
-            // 
-            // lblMagnitud
-            // 
-            lblMagnitud.Location = new Point(0, 0);
-            lblMagnitud.Name = "lblMagnitud";
-            lblMagnitud.Size = new Size(100, 23);
-            lblMagnitud.TabIndex = 5;
-            // 
             // dataGridDetalles
             // 
             dataGridDetalles.ColumnHeadersHeight = 29;
-            dataGridDetalles.Location = new Point(0, 0);
+            dataGridDetalles.Columns.AddRange(new DataGridViewColumn[] { Valor, Denominacion, Unidad, Umbral, CodigoEstacion, NombreEstacion });
+            dataGridDetalles.Location = new Point(162, 95);
             dataGridDetalles.Name = "dataGridDetalles";
             dataGridDetalles.RowHeadersWidth = 51;
-            dataGridDetalles.Size = new Size(240, 150);
+            dataGridDetalles.Size = new Size(828, 327);
             dataGridDetalles.TabIndex = 6;
+            // 
+            // lblClasificacion
+            // 
+            lblClasificacion.AutoSize = true;
+            lblClasificacion.Location = new Point(366, 45);
+            lblClasificacion.Name = "lblClasificacion";
+            lblClasificacion.Size = new Size(109, 20);
+            lblClasificacion.TabIndex = 7;
+            lblClasificacion.Text = "lblClasificacion";
+            // 
+            // lblOrigen
+            // 
+            lblOrigen.AutoSize = true;
+            lblOrigen.Location = new Point(600, 45);
+            lblOrigen.Name = "lblOrigen";
+            lblOrigen.Size = new Size(71, 20);
+            lblOrigen.TabIndex = 8;
+            lblOrigen.Text = "lblOrigen";
+            // 
+            // lblMagnitud
+            // 
+            lblMagnitud.AutoSize = true;
+            lblMagnitud.Location = new Point(843, 45);
+            lblMagnitud.Name = "lblMagnitud";
+            lblMagnitud.Size = new Size(90, 20);
+            lblMagnitud.TabIndex = 9;
+            lblMagnitud.Text = "lblMagnitud";
+            // 
+            // lblAlcance
+            // 
+            lblAlcance.AutoSize = true;
+            lblAlcance.Location = new Point(172, 44);
+            lblAlcance.Name = "lblAlcance";
+            lblAlcance.Size = new Size(78, 20);
+            lblAlcance.TabIndex = 10;
+            lblAlcance.Text = "lblAlcance";
+            // 
+            // Valor
+            // 
+            Valor.DataPropertyName = "valor";
+            Valor.HeaderText = "Valor";
+            Valor.MinimumWidth = 6;
+            Valor.Name = "Valor";
+            Valor.Width = 125;
+            // 
+            // Denominacion
+            // 
+            Denominacion.DataPropertyName = "denominacion";
+            Denominacion.HeaderText = "Denominación";
+            Denominacion.MinimumWidth = 6;
+            Denominacion.Name = "Denominacion";
+            Denominacion.Width = 125;
+            // 
+            // Unidad
+            // 
+            Unidad.DataPropertyName = "unidad";
+            Unidad.HeaderText = "Unidad";
+            Unidad.MinimumWidth = 6;
+            Unidad.Name = "Unidad";
+            Unidad.Width = 125;
+            // 
+            // Umbral
+            // 
+            Umbral.DataPropertyName = "umbral";
+            Umbral.HeaderText = "Umbral";
+            Umbral.MinimumWidth = 6;
+            Umbral.Name = "Umbral";
+            Umbral.Width = 125;
+            // 
+            // CodigoEstacion
+            // 
+            CodigoEstacion.DataPropertyName = "codigoEstacion";
+            CodigoEstacion.HeaderText = "Código Estación";
+            CodigoEstacion.MinimumWidth = 6;
+            CodigoEstacion.Name = "CodigoEstacion";
+            CodigoEstacion.Width = 125;
+            // 
+            // NombreEstacion
+            // 
+            NombreEstacion.DataPropertyName = "nombreEstacion";
+            NombreEstacion.HeaderText = "Nombre Estación";
+            NombreEstacion.MinimumWidth = 6;
+            NombreEstacion.Name = "NombreEstacion";
+            NombreEstacion.Width = 150;
             // 
             // PantallaRegistrarResultado
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1110, 648);
-            Controls.Add(seleccionarBtn);
-            Controls.Add(dataGridEventosSismicos);
             Controls.Add(lblAlcance);
-            Controls.Add(lblClasificacion);
-            Controls.Add(lblOrigen);
             Controls.Add(lblMagnitud);
+            Controls.Add(lblOrigen);
+            Controls.Add(lblClasificacion);
+            Controls.Add(seleccionarBtn);
             Controls.Add(dataGridDetalles);
+            Controls.Add(dataGridEventosSismicos);
             Name = "PantallaRegistrarResultado";
             Text = "PantallaRegistrarResultado";
-            Load += PantallaRegistrarResultado_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridEventosSismicos).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridDetalles).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -193,12 +256,22 @@
         private DataGridViewTextBoxColumn Magnitud;
 
         // Labels para los datos únicos
-        Label lblAlcance;
-        Label lblClasificacion;
-        Label lblOrigen;
-        Label lblMagnitud;
+        //Label lblAlcance;
+        //Label lblClasificacion;
+        //Label lblOrigen;
+        //Label lblMagnitud;
 
         // Nuevo DataGridView para los detalles
         DataGridView dataGridDetalles;
+        private Label lblClasificacion;
+        private Label lblOrigen;
+        private Label lblMagnitud;
+        private Label lblAlcance;
+        private DataGridViewTextBoxColumn Valor;
+        private DataGridViewTextBoxColumn Denominacion;
+        private DataGridViewTextBoxColumn Unidad;
+        private DataGridViewTextBoxColumn Umbral;
+        private DataGridViewTextBoxColumn CodigoEstacion;
+        private DataGridViewTextBoxColumn NombreEstacion;
     }
 }
