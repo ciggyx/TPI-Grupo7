@@ -29,14 +29,20 @@
         private void InitializeComponent()
         {
             dataGridEventosSismicos = new DataGridView();
-            seleccionarBtn = new Button();
             Fecha = new DataGridViewTextBoxColumn();
             lat_Epicentro = new DataGridViewTextBoxColumn();
             lng_Epicentro = new DataGridViewTextBoxColumn();
             Lat_Hipocentro = new DataGridViewTextBoxColumn();
             Lng_Hipocentro = new DataGridViewTextBoxColumn();
             Magnitud = new DataGridViewTextBoxColumn();
+            seleccionarBtn = new Button();
+            lblAlcance = new Label();
+            lblClasificacion = new Label();
+            lblOrigen = new Label();
+            lblMagnitud = new Label();
+            dataGridDetalles = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridEventosSismicos).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridDetalles).BeginInit();
             SuspendLayout();
             // 
             // dataGridEventosSismicos
@@ -53,16 +59,6 @@
             dataGridEventosSismicos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridEventosSismicos.Size = new Size(804, 327);
             dataGridEventosSismicos.TabIndex = 0;
-            // 
-            // seleccionarBtn
-            // 
-            seleccionarBtn.Location = new Point(507, 499);
-            seleccionarBtn.Name = "seleccionarBtn";
-            seleccionarBtn.Size = new Size(94, 29);
-            seleccionarBtn.TabIndex = 1;
-            seleccionarBtn.Text = "Seleccionar";
-            seleccionarBtn.UseVisualStyleBackColor = true;
-            seleccionarBtn.Click += seleccionarBtn_Click;
             // 
             // Fecha
             // 
@@ -118,6 +114,53 @@
             Magnitud.ReadOnly = true;
             Magnitud.Width = 125;
             // 
+            // seleccionarBtn
+            // 
+            seleccionarBtn.Location = new Point(507, 499);
+            seleccionarBtn.Name = "seleccionarBtn";
+            seleccionarBtn.Size = new Size(94, 29);
+            seleccionarBtn.TabIndex = 1;
+            seleccionarBtn.Text = "Seleccionar";
+            seleccionarBtn.UseVisualStyleBackColor = true;
+            seleccionarBtn.Click += seleccionarBtn_Click;
+            // 
+            // lblAlcance
+            // 
+            lblAlcance.Location = new Point(0, 0);
+            lblAlcance.Name = "lblAlcance";
+            lblAlcance.Size = new Size(100, 23);
+            lblAlcance.TabIndex = 2;
+            // 
+            // lblClasificacion
+            // 
+            lblClasificacion.Location = new Point(0, 0);
+            lblClasificacion.Name = "lblClasificacion";
+            lblClasificacion.Size = new Size(100, 23);
+            lblClasificacion.TabIndex = 3;
+            // 
+            // lblOrigen
+            // 
+            lblOrigen.Location = new Point(0, 0);
+            lblOrigen.Name = "lblOrigen";
+            lblOrigen.Size = new Size(100, 23);
+            lblOrigen.TabIndex = 4;
+            // 
+            // lblMagnitud
+            // 
+            lblMagnitud.Location = new Point(0, 0);
+            lblMagnitud.Name = "lblMagnitud";
+            lblMagnitud.Size = new Size(100, 23);
+            lblMagnitud.TabIndex = 5;
+            // 
+            // dataGridDetalles
+            // 
+            dataGridDetalles.ColumnHeadersHeight = 29;
+            dataGridDetalles.Location = new Point(0, 0);
+            dataGridDetalles.Name = "dataGridDetalles";
+            dataGridDetalles.RowHeadersWidth = 51;
+            dataGridDetalles.Size = new Size(240, 150);
+            dataGridDetalles.TabIndex = 6;
+            // 
             // PantallaRegistrarResultado
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -125,10 +168,16 @@
             ClientSize = new Size(1110, 648);
             Controls.Add(seleccionarBtn);
             Controls.Add(dataGridEventosSismicos);
+            Controls.Add(lblAlcance);
+            Controls.Add(lblClasificacion);
+            Controls.Add(lblOrigen);
+            Controls.Add(lblMagnitud);
+            Controls.Add(dataGridDetalles);
             Name = "PantallaRegistrarResultado";
             Text = "PantallaRegistrarResultado";
             Load += PantallaRegistrarResultado_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridEventosSismicos).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridDetalles).EndInit();
             ResumeLayout(false);
         }
 
@@ -142,5 +191,14 @@
         private DataGridViewTextBoxColumn Lat_Hipocentro;
         private DataGridViewTextBoxColumn Lng_Hipocentro;
         private DataGridViewTextBoxColumn Magnitud;
+
+        // Labels para los datos únicos
+        Label lblAlcance;
+        Label lblClasificacion;
+        Label lblOrigen;
+        Label lblMagnitud;
+
+        // Nuevo DataGridView para los detalles
+        DataGridView dataGridDetalles;
     }
 }

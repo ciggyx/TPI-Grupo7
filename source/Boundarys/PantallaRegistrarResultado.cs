@@ -39,6 +39,33 @@
 
         }
 
+        public void mostrarDatos((
+            string Alcance,
+            string Clasificacion,
+            string Origen,
+            double MagnitudValor,
+            IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string EstacionCodigo, string EstacionNombre)> Detalles
+        ) datos)
+        {
+            lblAlcance.Text = $"Alcance: {datos.Alcance}";
+            lblClasificacion.Text = $"Clasificación: {datos.Clasificacion}";
+            lblOrigen.Text = $"Origen: {datos.Origen}";
+            lblMagnitud.Text = $"Magnitud: {datos.MagnitudValor}";
+
+            var detallesFormateados = datos.Detalles.Select(d => new
+            {
+                Valor = d.Valor,
+                Denominación = d.TipoMuestraDenominacion,
+                Unidad = d.TipoMuestraUnidad,
+                Umbral = d.TipoMuestraValorUmbral,
+                CódigoEstación = d.EstacionCodigo,
+                NombreEstación = d.EstacionNombre
+            }).ToList();
+
+            dataGridDetalles.DataSource = detallesFormateados;
+        }
+
+
         private void seleccionarBtn_Click(object sender, EventArgs e)
         {
             (DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud) eventoSeleccionado;

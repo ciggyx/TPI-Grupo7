@@ -3,7 +3,7 @@
     public class Sismografo
     {
         private EstacionSismologica estacionSismologica;
-        private List<SerieTemporal> listaSerieTemporal;
+        private List<SerieTemporal> listaSerieTemporal = new List<SerieTemporal>();
         public Sismografo(EstacionSismologica estacionSismologica)
         {
             this.estacionSismologica = estacionSismologica;
@@ -18,7 +18,7 @@
                 {
                     return true;
                 }
-                
+
             }
             return false;
         }
@@ -31,5 +31,13 @@
             nombre: estacionSismologica.getNombre()
             );
         }
+
+        public void agregarSerieTemporal(SerieTemporal serie)
+        {
+            listaSerieTemporal.Add(serie);
+        }
+
+
+
     }
 }

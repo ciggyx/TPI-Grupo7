@@ -1,6 +1,4 @@
-﻿using source.GestoresCU.DTO;
-
-namespace source.Entidades.EventoSismo
+﻿namespace source.Entidades.EventoSismo
 {
     public class EventoSismico
     {

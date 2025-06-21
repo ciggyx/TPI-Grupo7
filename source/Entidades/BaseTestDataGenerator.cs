@@ -19,9 +19,36 @@ public class BaseTestDataGenerator
         {
             new Estado(Ambito.EventoSismico, Nombre.PendienteRevision),
             new Estado(Ambito.EventoSismico, Nombre.Rechazado),
-            new Estado(Ambito.EventoSismico, Nombre.AutoDetectado)
+            new Estado(Ambito.EventoSismico, Nombre.AutoDetectado),
+            new Estado(Ambito.EventoSismico, Nombre.BloqueadoRevision)
         };
 
+    }
+
+    public List<Sismografo> GenerarSismografos(List<SerieTemporal> listaSerieTemporal)
+    {
+        var listaEstacionSismologica = new List<EstacionSismologica>
+        {
+            new EstacionSismologica("Estacion 001", "E001"),
+            new EstacionSismologica("Estacion 002", "E002"),
+            new EstacionSismologica("Estacion 003", "E003")
+        };
+
+        var listaSismografos = new List<Sismografo>
+        {
+            new Sismografo(listaEstacionSismologica[0]),
+            new Sismografo(listaEstacionSismologica[1]),
+            new Sismografo(listaEstacionSismologica[2]),
+        };
+
+        foreach (SerieTemporal serieTemporal in listaSerieTemporal)
+        {
+            int indice = random.Next(0, listaSismografos.Count);
+            var sismografoSeleccionado = listaSismografos[indice];
+            sismografoSeleccionado.agregarSerieTemporal(serieTemporal); 
+        }
+
+        return listaSismografos;
     }
 
     public List<EventoSismico> GenerarEventosSismicos(int cantidad = 10)

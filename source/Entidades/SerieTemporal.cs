@@ -36,8 +36,8 @@
                     return sismografo.getDatosEstacion();
                 }
             }
-            return (null,null);
-            
+            return (null, null);
+
         }
     }
 }
