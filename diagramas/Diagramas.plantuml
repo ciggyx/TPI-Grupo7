@@ -54,6 +54,7 @@ else Mientras existan eventos sísmicos
     ES -> ES : getLongitudEpicentro()
     ES -> ES : getLatitudHipocentro()
     ES -> ES : getLongitudHipocentro()
+    ES -> ES : getValorMagnitud()
 end
 GRR -> GRR : ordenarEventosSísmicos()
 GRR -> PRR : solicitarSelecciónEventoSísmico()
@@ -179,15 +180,15 @@ class PantallaRegistrarRevisión<<Boundary>>{
     - opcSolicitarRevisiónAExperto
     + 1. opcRegistrarResultadoManual()
     + 2. abrirVentana()
-    + 16. solicitarSelecciónEventoSísmico()
-    + 17. tomarSeleccionEventoSismico()
-    + 53. mostrarDatos()
-    + 54. solicitarSelecciónMapa()
-    + 55. tomarSeleccionMapa()
-    + 57. solicitarModificacionDatosES()
-    + 58. tomarModificaciónDatosES()
-    + 60. solicitarAcciónSobreEvento()
-    + 61. tomarAcciónSobreEvento()
+    + 17. solicitarSelecciónEventoSísmico()
+    + 18. tomarSeleccionEventoSismico()
+    + 54. mostrarDatos()
+    + 55. solicitarSelecciónMapa()
+    + 56. tomarSeleccionMapa()
+    + 58. solicitarModificacionDatosES()
+    + 59. tomarModificaciónDatosES()
+    + 61. solicitarAcciónSobreEvento()
+    + 62. tomarAcciónSobreEvento()
 }
 
 class GestorRegistrarRevisión<<Control>>{
@@ -211,23 +212,23 @@ class GestorRegistrarRevisión<<Control>>{
     - estaciónSismográficaModificada
     + 3. newRevisiónManual()
     + 4. buscarEventosSísmicosSinRevision()
-    + 15. ordenarEventosSísmicos()
-    + 18. tomarSelecciónEventoSísmico()
-    + 19. buscarEstadoBloqueadoEnRevision()
-    + 22. getFechaHoraActual()
-    + 23. buscarEmpleadoLogueado()
-    + 26. bloquearEventoSismico()
-    + 33. buscarDatosSismicos()
-    + 44. buscarDatosEstacion()
-    + 50. ordenarPorCodigo() 
-    + 51. llamarCUGenerarSismograma()
-    + 56. tomarSelecciónMapa()
-    + 59. tomarModificaciónDatosES()
-    + 62. tomarAcciónSobreEvento()
-    + 63. validarDatos()
-    + 64. buscarEstadoRechazado()
-    + 68. rechazarEventoSismico()
-    + 73. finCU()
+    + 16. ordenarEventosSísmicos()
+    + 19. tomarSelecciónEventoSísmico()
+    + 20. buscarEstadoBloqueadoEnRevision()
+    + 23. getFechaHoraActual()
+    + 24. buscarEmpleadoLogueado()
+    + 27. bloquearEventoSismico()
+    + 34. buscarDatosSismicos()
+    + 46. buscarDatosEstacion()
+    + 45. ordenarPorCodigo() 
+    + 52. llamarCUGenerarSismograma()
+    + 57. tomarSelecciónMapa()
+    + 60. tomarModificaciónDatosES()
+    + 63. tomarAcciónSobreEvento()
+    + 64. validarDatos()
+    + 65. buscarEstadoRechazado()
+    + 69. rechazarEventoSismico()
+    + 74. finCU()
 }
 
 class EventoSísmico<<Entity>>{
@@ -236,6 +237,7 @@ class EventoSísmico<<Entity>>{
     - longitudEpicentro
     - latidudHipocentro
     - longitudHipocentro
+    - valorMagnitud
     + 5. esPendienteRevisión()
     + 7. esAutodetectado()
     + 9. getDatos()
@@ -244,12 +246,13 @@ class EventoSísmico<<Entity>>{
     + 12. getLongitudEpicentro()
     + 13. getLatitudHipocentro()
     + 14. getLongitudHipocentro()
-    + 27. bloquear()
-    + 30. crearCambioEstado()
-    + 32. setEstado()
-    + 33. getDatosSísmicos()
-    + 69. rechazar()
-    + new()
+    + 15. getValorMagnitud()
+    + 28. bloquear()
+    + 31. crearCambioEstado()
+    + 32. new()
+    + 33. setEstado()
+    + 35. getDatosSísmicos()
+    + 70. rechazar()
     + revisar()
     + derivar()
     + confirmarDerivado()
@@ -263,64 +266,64 @@ class Estado<<Entity>>{
     - nombre
     + 6. sosPendienteRevisión()
     + 8. sosAutodetectado()
-    + 20. sosÁmbitoEventoSísmico()
-    + 21. sosBloqueadoEnRevisión()
-    + 66. sosRechazado()
+    + 21. sosÁmbitoEventoSísmico()
+    + 22. sosBloqueadoEnRevisión()
+    + 67. sosRechazado()
 }
 
 class CambioEstado<<Entity>>{
     - fechaHoraInicio
     - fechaHoraFin
-    + 28. esEstadoActual()
-    + 29. setFechaHoraFin()
-    + 31. new()
+    + 29. esEstadoActual()
+    + 30. setFechaHoraFin()
+    + 32. new()
 }
 
 class AlcanceSismo<<Entity>>{
     - nombre
-    + 35. getNombre()
+    + 36. getNombre()
 }
 
 class ClasificaciónSismo<<Entity>>{
     - nombre
-    + 36. getNombre()
+    + 37. getNombre()
 }
 
 class OrigenDeGeneración<<Entity>>{
     - nombre
-    + 37. getNombre()
+    + 38. getNombre()
 }
 
 class SerieTemporal<<Entity>>{
-    + 38. getDatos()
-    + 45. getEstaciónSismográfica()
+    + 39. getDatos()
+    + 47. getEstaciónSismográfica()
 }
 
 class MuestraSísmica<<Entity>>{
-    + 39. getDatos()
+    + 40. getDatos()
 }
 
 class DetalleMuestraSísmica<<Entity>>{
-    + 40. getDatos()
+    + 41. getDatos()
 }
 
 class TipoDeDato<<Entity>>{
     - denominación
     - nombreUnidadMedida
     - valorUmbral
-    + 41. getDenominación()
-    + 42. getNombreUnidadMedida()
-    + 43. getValorUmbral()
+    + 42. getDenominación()
+    + 43. getNombreUnidadMedida()
+    + 44. getValorUmbral()
 }
 
 class Sesion<<Entity>>{
     - fechaHoraInicio
     - fechaHoraFin
-    + 24. getUsuarioLogueado()
+    + 25. getUsuarioLogueado()
 }
 
 class Usuario<<Entity>>{
-    + 25. getEmpleado()
+    + 26. getEmpleado()
 }
 
 class Empleado<<Entity>>{
@@ -331,15 +334,15 @@ class Empleado<<Entity>>{
 }
 
 class Sismografo<<Entity>>{
-    + 46. sosMiSismográfo()
-    + 47. getDatosEstación()
+    + 48. sosMiSismográfo()
+    + 49. getDatosEstación()
 }
 
 class EstaciónSismológica<<Entity>>{
     - nombre
     - código
-    + 48. getNombre()
-    + 49. getCódigo()
+    + 50. getNombre()
+    + 51. getCódigo()
 }
 Sesion "usuario" --> "1" Usuario
 Usuario "empleado" --> "1" Empleado
