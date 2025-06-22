@@ -39,7 +39,7 @@
             registrarResultadoRevisionManualBtn.TabIndex = 0;
             registrarResultadoRevisionManualBtn.Text = "Registrar Resultado Revision Manual";
             registrarResultadoRevisionManualBtn.UseVisualStyleBackColor = true;
-            registrarResultadoRevisionManualBtn.Click += registrarResultadoRevisionManualBtn_Click;
+            registrarResultadoRevisionManualBtn.Click += opcionRegistrarResultadoManual;
             // 
             // MainInterface
             // 

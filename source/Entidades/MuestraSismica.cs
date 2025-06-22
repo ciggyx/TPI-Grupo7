@@ -16,6 +16,11 @@
             return detalleMuestraSismica;
         }
 
+        public DateTime getFecha()
+        {
+            return fechaHoraMuestra;
+        }
+
     }
 
 

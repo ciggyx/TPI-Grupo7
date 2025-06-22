@@ -8,9 +8,17 @@ namespace source.Boundarys
         private List<(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud)> eventosOriginales;
         public PantallaRegistrarResultado()
         {
-            InitializeComponent();
-            newRevisionManual();  //3.newRevisionManual
+            // 2. abrirVentana()
+            abrirVentana();
+            //3.newRevisionManual
+            newRevisionManual();
         }
+
+        public void abrirVentana()
+        {
+            InitializeComponent();
+        }
+
         private void newRevisionManual()
         {
             gestorRegistrarRevisionManual = new GestoresCU.GestorRegistrarRevisionManual(this);
@@ -41,12 +49,12 @@ namespace source.Boundarys
         }
 
         public void mostrarDatos((
-            string Alcance,
-            string Clasificacion,
-            string Origen,
-            double MagnitudValor,
-            IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string EstacionCodigo, string EstacionNombre)> Detalles
-        ) datos)
+    string Alcance,
+    string Clasificacion,
+    string Origen,
+    double valorMagnitud,
+    IEnumerable<(int numeroSerieTemporal, int numeroMuestra,double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string EstacionCodigo, string EstacionNombre)> Detalles
+) datos)
         {
             dataGridDetalles.Visible = true;
             dataGridEventosSismicos.Visible = false;
@@ -59,10 +67,12 @@ namespace source.Boundarys
             lblAlcance.Text = $"Alcance: {datos.Alcance}";
             lblClasificacion.Text = $"Clasificación: {datos.Clasificacion}";
             lblOrigen.Text = $"Origen: {datos.Origen}";
-            lblMagnitud.Text = $"Magnitud: {datos.MagnitudValor}";
+            lblMagnitud.Text = $"Magnitud: {Math.Round(datos.valorMagnitud, 2)}";
 
             var detallesFormateados = datos.Detalles.Select(d => new
             {
+                numeroMuestra = $"Muestra: {d.numeroMuestra}",
+                numeroSerieTemporal  = $"Serie: {d.numeroSerieTemporal}",
                 valor = d.Valor,
                 denominacion = d.TipoMuestraDenominacion,
                 unidad = d.TipoMuestraUnidad,
@@ -74,6 +84,8 @@ namespace source.Boundarys
             dataGridDetalles.DataSource = detallesFormateados;
         }
 
+
+        // 18. tomarSeleccionEventoSismico()
         private void tomarSeleccionEventoSismico(object sender, EventArgs e)
         {
             (DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud) eventoSeleccionado;
@@ -100,6 +112,7 @@ namespace source.Boundarys
             }
         }
 
+        // 54. solicitarSeleccionMapa()
         public void solicitarSeleccionMapa()
         {
             lblSolicitarVisualizacion.Visible = true;
@@ -107,9 +120,10 @@ namespace source.Boundarys
             siBtn.Visible = true;
         }
 
+        // 55. tomarSeleccionMapa()
         private void tomarSeleccionMapa(object sender, EventArgs e)
         {
-            // La manera más simple de hacerlo? si, la menos escalable también
+            // 56. tomarSeleccionMapa()
             gestorRegistrarRevisionManual.tomarSeleccionMapa("No");
         }
 
@@ -138,8 +152,10 @@ namespace source.Boundarys
             continuarSinModificarBtn.Visible = true;
         }
 
+        // 58. tomarModificacionDatosES()
         private void tomarModificacionDatosES(object sender, EventArgs e)
         {
+            // 59. tomarModificacionDatosES()
             gestorRegistrarRevisionManual.tomarModificacionDatosES("No");
         }
 
@@ -156,6 +172,7 @@ namespace source.Boundarys
             lblSolicitarAccionEvento.Visible = true;
         }
 
+        // 61. tomarAccionSobreEvento()
         private void tomarAccionSobreEvento(object sender, EventArgs e)
         {
             var boton = sender as Button; // o ToggleButton si usas ese control
@@ -164,6 +181,7 @@ namespace source.Boundarys
                 string nombreBoton = boton.Name;
                 if (nombreBoton == "rechazarEventoBtn")
                 {
+                    // 62. tomarAccionSobreEvento()
                     gestorRegistrarRevisionManual.tomarAccionSobreEvento("Rechazar evento");
                 }
                 else if (nombreBoton == "confirmarEventoBtn")

@@ -38,12 +38,6 @@
             Magnitud = new DataGridViewTextBoxColumn();
             seleccionarBtn = new Button();
             dataGridDetalles = new DataGridView();
-            Valor = new DataGridViewTextBoxColumn();
-            Denominacion = new DataGridViewTextBoxColumn();
-            Unidad = new DataGridViewTextBoxColumn();
-            Umbral = new DataGridViewTextBoxColumn();
-            CodigoEstacion = new DataGridViewTextBoxColumn();
-            NombreEstacion = new DataGridViewTextBoxColumn();
             lblClasificacion = new Label();
             lblOrigen = new Label();
             lblMagnitud = new Label();
@@ -61,6 +55,14 @@
             solicitarRevisionBtn = new Button();
             lblSolicitarAccionEvento = new Label();
             cancelarCU = new Button();
+            NroSerie = new DataGridViewTextBoxColumn();
+            numeroMuestra = new DataGridViewTextBoxColumn();
+            Valor = new DataGridViewTextBoxColumn();
+            Denominacion = new DataGridViewTextBoxColumn();
+            Unidad = new DataGridViewTextBoxColumn();
+            Umbral = new DataGridViewTextBoxColumn();
+            CodigoEstacion = new DataGridViewTextBoxColumn();
+            NombreEstacion = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridEventosSismicos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridDetalles).BeginInit();
             ((System.ComponentModel.ISupportInitialize)alcanceEditBtn).BeginInit();
@@ -153,62 +155,14 @@
             dataGridDetalles.AllowUserToDeleteRows = false;
             dataGridDetalles.AllowUserToResizeRows = false;
             dataGridDetalles.ColumnHeadersHeight = 29;
-            dataGridDetalles.Columns.AddRange(new DataGridViewColumn[] { Valor, Denominacion, Unidad, Umbral, CodigoEstacion, NombreEstacion });
-            dataGridDetalles.Location = new Point(131, 95);
+            dataGridDetalles.Columns.AddRange(new DataGridViewColumn[] { NroSerie, numeroMuestra, Valor, Denominacion, Unidad, Umbral, CodigoEstacion, NombreEstacion });
+            dataGridDetalles.Location = new Point(53, 95);
             dataGridDetalles.MultiSelect = false;
             dataGridDetalles.Name = "dataGridDetalles";
             dataGridDetalles.RowHeadersWidth = 51;
             dataGridDetalles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridDetalles.Size = new Size(853, 327);
+            dataGridDetalles.Size = new Size(1019, 327);
             dataGridDetalles.TabIndex = 6;
-            // 
-            // Valor
-            // 
-            Valor.DataPropertyName = "valor";
-            Valor.HeaderText = "Valor";
-            Valor.MinimumWidth = 6;
-            Valor.Name = "Valor";
-            Valor.Width = 125;
-            // 
-            // Denominacion
-            // 
-            Denominacion.DataPropertyName = "denominacion";
-            Denominacion.HeaderText = "Denominación";
-            Denominacion.MinimumWidth = 6;
-            Denominacion.Name = "Denominacion";
-            Denominacion.Width = 150;
-            // 
-            // Unidad
-            // 
-            Unidad.DataPropertyName = "unidad";
-            Unidad.HeaderText = "Unidad";
-            Unidad.MinimumWidth = 6;
-            Unidad.Name = "Unidad";
-            Unidad.Width = 125;
-            // 
-            // Umbral
-            // 
-            Umbral.DataPropertyName = "umbral";
-            Umbral.HeaderText = "Umbral";
-            Umbral.MinimumWidth = 6;
-            Umbral.Name = "Umbral";
-            Umbral.Width = 125;
-            // 
-            // CodigoEstacion
-            // 
-            CodigoEstacion.DataPropertyName = "codigoEstacion";
-            CodigoEstacion.HeaderText = "Código Estación";
-            CodigoEstacion.MinimumWidth = 6;
-            CodigoEstacion.Name = "CodigoEstacion";
-            CodigoEstacion.Width = 125;
-            // 
-            // NombreEstacion
-            // 
-            NombreEstacion.DataPropertyName = "nombreEstacion";
-            NombreEstacion.HeaderText = "Nombre Estación";
-            NombreEstacion.MinimumWidth = 6;
-            NombreEstacion.Name = "NombreEstacion";
-            NombreEstacion.Width = 150;
             // 
             // lblClasificacion
             // 
@@ -381,6 +335,70 @@
             cancelarCU.UseVisualStyleBackColor = true;
             cancelarCU.Click += cancelarRevision;
             // 
+            // NroSerie
+            // 
+            NroSerie.DataPropertyName = "numeroSerieTemporal";
+            NroSerie.HeaderText = "Nro Serie";
+            NroSerie.MinimumWidth = 6;
+            NroSerie.Name = "NroSerie";
+            NroSerie.Width = 125;
+            // 
+            // numeroMuestra
+            // 
+            numeroMuestra.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            numeroMuestra.DataPropertyName = "numeroMuestra";
+            numeroMuestra.HeaderText = "Nro Muestra";
+            numeroMuestra.MinimumWidth = 6;
+            numeroMuestra.Name = "numeroMuestra";
+            // 
+            // Valor
+            // 
+            Valor.DataPropertyName = "valor";
+            Valor.HeaderText = "Valor";
+            Valor.MinimumWidth = 6;
+            Valor.Name = "Valor";
+            Valor.Width = 60;
+            // 
+            // Denominacion
+            // 
+            Denominacion.DataPropertyName = "denominacion";
+            Denominacion.HeaderText = "Denominación";
+            Denominacion.MinimumWidth = 6;
+            Denominacion.Name = "Denominacion";
+            Denominacion.Width = 150;
+            // 
+            // Unidad
+            // 
+            Unidad.DataPropertyName = "unidad";
+            Unidad.HeaderText = "Unidad";
+            Unidad.MinimumWidth = 6;
+            Unidad.Name = "Unidad";
+            Unidad.Width = 125;
+            // 
+            // Umbral
+            // 
+            Umbral.DataPropertyName = "umbral";
+            Umbral.HeaderText = "Umbral";
+            Umbral.MinimumWidth = 6;
+            Umbral.Name = "Umbral";
+            Umbral.Width = 125;
+            // 
+            // CodigoEstacion
+            // 
+            CodigoEstacion.DataPropertyName = "codigoEstacion";
+            CodigoEstacion.HeaderText = "Código Estación";
+            CodigoEstacion.MinimumWidth = 6;
+            CodigoEstacion.Name = "CodigoEstacion";
+            CodigoEstacion.Width = 125;
+            // 
+            // NombreEstacion
+            // 
+            NombreEstacion.DataPropertyName = "nombreEstacion";
+            NombreEstacion.HeaderText = "Nombre Estación";
+            NombreEstacion.MinimumWidth = 6;
+            NombreEstacion.Name = "NombreEstacion";
+            NombreEstacion.Width = 150;
+            // 
             // PantallaRegistrarResultado
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -440,12 +458,6 @@
         private Label lblOrigen;
         private Label lblMagnitud;
         private Label lblAlcance;
-        private DataGridViewTextBoxColumn Valor;
-        private DataGridViewTextBoxColumn Denominacion;
-        private DataGridViewTextBoxColumn Unidad;
-        private DataGridViewTextBoxColumn Umbral;
-        private DataGridViewTextBoxColumn CodigoEstacion;
-        private DataGridViewTextBoxColumn NombreEstacion;
         private Label lblSolicitarVisualizacion;
         private Button noBtn;
         private Button siBtn;
@@ -459,5 +471,13 @@
         private Button solicitarRevisionBtn;
         private Label lblSolicitarAccionEvento;
         private Button cancelarCU;
+        private DataGridViewTextBoxColumn NroSerie;
+        private DataGridViewTextBoxColumn numeroMuestra;
+        private DataGridViewTextBoxColumn Valor;
+        private DataGridViewTextBoxColumn Denominacion;
+        private DataGridViewTextBoxColumn Unidad;
+        private DataGridViewTextBoxColumn Umbral;
+        private DataGridViewTextBoxColumn CodigoEstacion;
+        private DataGridViewTextBoxColumn NombreEstacion;
     }
 }

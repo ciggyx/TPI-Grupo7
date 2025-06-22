@@ -6,11 +6,9 @@
         private bool condicionAlarma;
         private DateTime fechaHoraInicioRegistroMuestras;
         private DateTime fechaHoraRegistro;
-        // Quizás es int? Ej: 50 Hz
         private float frecuenciaMuestreo;
         private List<MuestraSismica> muestraSismica;
 
-        // ? Como definir este constructor?
         public SerieTemporal(bool condicionAlarma, DateTime fechaHoraRegistroMuestras, DateTime fechaHoraRegistro, float frecuenciaMuestreo, List<MuestraSismica> muestraSismica)
         {
             this.condicionAlarma = condicionAlarma;
@@ -22,7 +20,6 @@
 
         public List<MuestraSismica> getMuestrasSismicas()
         {
-            //Acá podríamos pasar las estaciones, aunque no respetaría el orden del diagrama de secuencia
             return muestraSismica;
         }
 
@@ -31,8 +28,10 @@
         {
             foreach (Sismografo sismografo in listaSismografo)
             {
+                // 47. sosMiSismografo()
                 if (sismografo.sosMiSismografo(this))
                 {
+                    // 48. getDatosEstacion()
                     return sismografo.getDatosEstacion();
                 }
             }

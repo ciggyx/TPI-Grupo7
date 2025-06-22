@@ -89,24 +89,18 @@ SES --> NCE: new()
 SES -> SES : setEstado()
 GRR -> GRR : buscarDatosSísmicos()
 GRR -> SES : getDatosSísmicos()
-entity "__:AlcanceSismo__" as AS
-SES -> AS : getNombre()
-entity "__:ClasificaciónSismo__" as CS
-SES -> CS : getNombre()
-entity "__:OrigenDeGeneración__" as OG
-SES -> OG : getNombre()
 loop Valores alcanzados sísmo
 else Mientras existan series temporales
     entity "__:SerieTemporal__" as ST #LightCoral
-    SES --> ST : getDatos()
+    SES --> ST : getMuestrasSismicas()
     loop Valores muestras sísmicas
     else Mientras existan muestras sísmicas
         entity "__:MuestraSísmica__" as MS
-        ST --> MS : getDatos()
+        ST --> MS : getDetalleMuestraSismica()
         loop Valores detalle muestras sísmicas
         else Mientras existan detalles muestras sísmicas
             entity "__:DetalleMuestraSísmica__" as DMS
-            MS --> DMS :  getDatos()
+            MS --> DMS :  getValor()
             entity "__:TipoDeDato__" as TD
             DMS --> TD :  getDenominación()
             DMS -> TD :  getNombreUnidadMedida()
@@ -114,9 +108,13 @@ else Mientras existan series temporales
         end
     end
 end
-
+entity "__:AlcanceSismo__" as AS
+SES -> AS : getNombre()
+entity "__:ClasificaciónSismo__" as CS
+SES -> CS : getNombre()
+entity "__:OrigenDeGeneración__" as OG
+SES -> OG : getNombre()
 GRR -> GRR: ordenarPorCodigo()
-GRR -> GRR : buscarDatosEstacion()
 GRR -> ST : *getEstacionSismografica()
 loop Buscar Sismografo
 else mientras haya sismografos
@@ -124,8 +122,8 @@ else mientras haya sismografos
     ST -> S : sosMiSismografo()
     ST -> S : getDatosEstacion()
     entity "__Sismografo:Estacion Sismologica__" as SSE
-    S -> SSE : getNombre()
     S -> SSE : getCodigo()
+    S -> SSE : getNombre()
 end
 
 GRR -> GRR : llamarCUGenerarSismograma()
@@ -152,10 +150,15 @@ GRR -> GRR :getFechaHoraActual()
 GRR -> GRR : rechazarEventoSísmico()
 entity "__Selecc:EventoSísmico__" as SES
 GRR -> SES : rechazar()
+loop Buscar último cambio estado
+else Mientras existan cambios de estado
+    SES -> CE : esEstadoActual() 
+end
 SES -> NCE : setFechaHoraFin()
 SES -> SES : crearCambioEstado()
 entity "__Rechazado:CambioEstado__" as RCE
 SES --> RCE : new()
+SES -> SES : setEstado()
 GRR -> GRR : finCU()
 @enduml
 

@@ -36,11 +36,17 @@
         public (DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud) getDatos()
         {
             return (
+                // 10. getFechaHoraOcurrencia()
                 fechaHoraOcurrencia: getFechaHoraOcurrencia(),
+                // 11. getLatitudEpicentro()
                 latitudEpicentro: getLatitudEpicentro(),
+                // 12. getLongitudEpicentro()
                 longitudEpicentro: getLongitudEpicentro(),
+                // 13. getLatitudHipocentro()
                 latitudHipocentro: getLatitudHipocentro(),
+                // 14. getLongitudHipocentro()
                 longitudHipocentro: getLongitudHipocentro(),
+                // 15. getValorMagnitud()
                 valorMagnitud: getValorMagnitud()
                 );
         }
@@ -85,19 +91,25 @@
         {
             foreach (CambioEstado cambio in listaCambioEstado) // Loop [Buscar ultimo cambio estado]
             {
-                if (cambio.esEstadoActual()) //28.esEstadoActual()
+                // 29. esEstadoActual()
+                if (cambio.esEstadoActual())
                 {
-                    cambio.setFechaHoraFin(fechaHoraActual); //29. setFechaHoraFin()
+                    //30. setFechaHoraFin()
+                    cambio.setFechaHoraFin(fechaHoraActual);
                     break;
                 }
             }
-            crearCambioEstado(fechaHoraActual, estadoBloqueadoEnRevision, asLogueado); //30. crearCambioEstado
-            setEstado(estadoBloqueadoEnRevision); //32. setEstado()
+            //31. crearCambioEstado
+            crearCambioEstado(fechaHoraActual, estadoBloqueadoEnRevision, asLogueado);
+            //33. setEstado()
+            setEstado(estadoBloqueadoEnRevision);
         }
 
         public void crearCambioEstado(DateTime fechaHoraActual, Estado estado, Empleado empleadoLogueado)
         {
-            listaCambioEstado.Add(new CambioEstado(fechaHoraActual, estado, empleadoLogueado)); //31. new()
+            // 32. new() 
+            // 73. new()
+            listaCambioEstado.Add(new CambioEstado(fechaHoraActual, estado, empleadoLogueado));
         }
 
         public void setEstado(Estado estado)
@@ -110,27 +122,36 @@
             return valorMagnitud;
         }
 
-        public (string Alcance, string Clasificacion, string Origen, double MagnitudValor, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) getDatosSismicos()
+        public (string Alcance, string Clasificacion, string Origen, List<DateTime> fechasMuestra, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) getDatosSismicos()
         {
-            //Primero que nada lo que hace esta verga es crear una tupla llamada "detalles" donde se va a guardar cada dato de cada detalle
-            //de cada muestra, de cada serie temporal
             var detalles = serieTemporal
+            // 36. getMuestrasSismicas()
             .SelectMany(serie => serie.getMuestrasSismicas())
+            // 37. getDetalleMuestrasSismicas()
             .SelectMany(muestra => muestra.getDetalleMuestraSismica())
             .Select(detalle => (
+            // 38. getValor()
             Valor: detalle.getValor(),
-            TipoMuestraDenominacion: detalle.getTipoDeDato().getDenomincacion(),
+            // 39. getDenominacion()
+            TipoMuestraDenominacion: detalle.getTipoDeDato().getDenominacion(),
+            // 40. getNombreUnidadMedida()
             TipoMuestraUnidad: detalle.getTipoDeDato().getNombreUnidadMedida(),
+            // 41. getValorUmbral()
             TipoMuestraValorUmbral: detalle.getTipoDeDato().getValorUmbral()
             ));
-
-            // Despues retorna una lista que esta compuesta de cada atributo unico del evento sismico en orden y al final la tupla anterior con todos los datos
+            var fechasDeMuestra = serieTemporal
+            .SelectMany(serie => serie.getMuestrasSismicas())
+            .Select(muestra => muestra.getFecha())
+            .ToList();
 
             return (
+               // 42. getNombre()
                Alcance: alcanceSismo.getNombre(),
+               // 43. getNombre()
                Clasificacion: clasificacionSismo.getNombre(),
+               // 44. getNombre()
                Origen: origenDeGeneracion.getNombre(),
-               MagnitudValor: magnitud.getNombre(),
+               fechasMuestra: fechasDeMuestra,
                Detalles: detalles
                     );
 
@@ -141,13 +162,17 @@
         {
             foreach (CambioEstado cambio in listaCambioEstado)
             {
+                // 70. esEstadoActual()
                 if (cambio.esEstadoActual())
                 {
+                    // 71. setFechaHoraFin()
                     cambio.setFechaHoraFin(fechaHoraActual);
                     break;
                 }
             }
+            // 72. crearCambioEstado()
             crearCambioEstado(fechaHoraActual, estadoRechazado, empleadoLogueado);
+            // 74. setEstado()
             setEstado(estadoRechazado);
         }
         public void confirmar(DateTime fechaHoraActual, Estado estadoConfirmado, Empleado empleadoLogueado)
