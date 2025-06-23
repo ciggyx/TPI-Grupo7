@@ -12,7 +12,7 @@
         public SerieTemporal(bool condicionAlarma, DateTime fechaHoraRegistroMuestras, DateTime fechaHoraRegistro, float frecuenciaMuestreo, List<MuestraSismica> muestraSismica)
         {
             this.condicionAlarma = condicionAlarma;
-            this.fechaHoraInicioRegistroMuestras = fechaHoraInicioRegistroMuestras;
+            this.fechaHoraInicioRegistroMuestras = fechaHoraRegistroMuestras;
             this.fechaHoraRegistro = fechaHoraRegistro;
             this.frecuenciaMuestreo = frecuenciaMuestreo;
             this.muestraSismica = muestraSismica;
@@ -21,6 +21,11 @@
         public List<MuestraSismica> getMuestrasSismicas()
         {
             return muestraSismica;
+        }
+
+        public DateTime getFecha()
+        {
+            return fechaHoraInicioRegistroMuestras;
         }
 
 

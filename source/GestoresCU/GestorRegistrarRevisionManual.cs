@@ -34,7 +34,6 @@ namespace source.GestoresCU
 
         public SerieTemporal SerieTemporalConEstacion { get; private set; }
 
-        //Constructor
         public GestorRegistrarRevisionManual(PantallaRegistrarResultado pantallaRegistrarResultado)
         {
             this.pantallaRegistrarResultado = pantallaRegistrarResultado;
@@ -145,7 +144,7 @@ namespace source.GestoresCU
             eventoSismicoSeleccionado.bloquear(estadoBloqueadoEnRevision, asLogueado, fechaHoraActual);
         }
 
-        public (string Alcance, string Clasificacion, string Origen, float valorMagnitud,
+        public (string Alcance, string Clasificacion, string Origen, List<DateTime> fechasMuestra, List<DateTime> fechasSeriesTemporales, float valorMagnitud,
         IEnumerable<(int numeroSerieTemporal,int numeroMuestra,double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string EstacionCodigo, string EstacionNombre)> Detalles) buscarDatosSismicos(EventoSismico evento)
         {
             // 35. getDatosSismicos()
@@ -159,6 +158,8 @@ namespace source.GestoresCU
                 datosSismicos.Alcance,
                 datosSismicos.Clasificacion,
                 datosSismicos.Origen,
+                datosSismicos.fechasMuestra,
+                datosSismicos.fechasSeriesTemporales,
                 eventoSismicoSeleccionado.getValorMagnitud(),
                 Detalles: seriesOrdenadas
                 );
@@ -197,7 +198,7 @@ namespace source.GestoresCU
                     }
                 }
             }
-            return resultados.OrderBy(x => x.Codigo);
+            return resultados;
         }
 
 

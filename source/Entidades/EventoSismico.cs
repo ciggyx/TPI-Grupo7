@@ -122,7 +122,7 @@
             return valorMagnitud;
         }
 
-        public (string Alcance, string Clasificacion, string Origen, List<DateTime> fechasMuestra, IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) getDatosSismicos()
+        public (string Alcance, string Clasificacion, string Origen, List<DateTime> fechasMuestra, List<DateTime> fechasSeriesTemporales,IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> Detalles) getDatosSismicos()
         {
             var detalles = serieTemporal
             // 36. getMuestrasSismicas()
@@ -144,6 +144,11 @@
             .Select(muestra => muestra.getFecha())
             .ToList();
 
+            // TODO: Añadir esto en la parte dinámica
+            var fechasDeSerie = serieTemporal
+            .Select(serie => serie.getFecha())
+            .ToList();
+
             return (
                // 42. getNombre()
                Alcance: alcanceSismo.getNombre(),
@@ -152,6 +157,7 @@
                // 44. getNombre()
                Origen: origenDeGeneracion.getNombre(),
                fechasMuestra: fechasDeMuestra,
+               fechasSeriesTemporales: fechasDeSerie,
                Detalles: detalles
                     );
 
