@@ -43,11 +43,11 @@ GRR -> GRR : buscarEventosSísmicosSinRevision()
 loop Eventos Sísmicos Auto Detectados
 else Mientras existan eventos sísmicos
     entity "__:EventoSísmico__" as ES #LightCoral
-    GRR --> ES : esPendienteRevisión()
+    GRR -> ES : esPendienteRevisión()
     entity "__Evento:Estado__" as E
-    ES --> E : sosPendienteRevisión()
-    GRR --> ES : esAutodetectado()
-    ES --> E : sosAutodetectado()
+    ES -> E : sosPendienteRevisión()
+    GRR -> ES : esAutodetectado()
+    ES -> E : sosAutodetectado()
     GRR -> ES : getDatos()
     ES -> ES : getFechaHoraOcurrenciaEvento()
     ES -> ES : getLatitudEpicentro()
@@ -91,18 +91,20 @@ GRR -> GRR : buscarDatosSísmicos()
 GRR -> SES : getDatosSísmicos()
 loop Valores alcanzados sísmo
 else Mientras existan series temporales
+    SES -> ST: getFecha()
     entity "__:SerieTemporal__" as ST #LightCoral
-    SES --> ST : getMuestrasSismicas()
+    SES -> ST : getMuestrasSismicas()
+    entity "__:MuestraSísmica__" as MS
+    ST -> MS : getFecha()
     loop Valores muestras sísmicas
     else Mientras existan muestras sísmicas
-        entity "__:MuestraSísmica__" as MS
-        ST --> MS : getDetalleMuestraSismica()
+        ST -> MS : getDetalleMuestraSismica()
         loop Valores detalle muestras sísmicas
         else Mientras existan detalles muestras sísmicas
             entity "__:DetalleMuestraSísmica__" as DMS
-            MS --> DMS :  getValor()
+            MS -> DMS :  getValor()
             entity "__:TipoDeDato__" as TD
-            DMS --> TD :  getDenominación()
+            DMS -> TD :  getDenominación()
             DMS -> TD :  getNombreUnidadMedida()
             DMS -> TD :  getValorUmbral()
         end
@@ -156,7 +158,7 @@ else Mientras existan cambios de estado
 end
 SES -> NCE : setFechaHoraFin()
 SES -> SES : crearCambioEstado()
-entity "__Rechazado:CambioEstado__" as RCE
+create entity "__Rechazado:CambioEstado__" as RCE
 SES --> RCE : new()
 SES -> SES : setEstado()
 GRR -> GRR : finCU()

@@ -127,24 +127,24 @@
             var detalles = serieTemporal
             // 36. getMuestrasSismicas()
             .SelectMany(serie => serie.getMuestrasSismicas())
-            // 37. getDetalleMuestrasSismicas()
+            // 38. getDetalleMuestrasSismicas()
             .SelectMany(muestra => muestra.getDetalleMuestraSismica())
             .Select(detalle => (
-            // 38. getValor()
+            // 39. getValor()
             Valor: detalle.getValor(),
-            // 39. getDenominacion()
+            // 40. getDenominacion()
             TipoMuestraDenominacion: detalle.getTipoDeDato().getDenominacion(),
-            // 40. getNombreUnidadMedida()
+            // 41. getNombreUnidadMedida()
             TipoMuestraUnidad: detalle.getTipoDeDato().getNombreUnidadMedida(),
-            // 41. getValorUmbral()
+            // 42. getValorUmbral()
             TipoMuestraValorUmbral: detalle.getTipoDeDato().getValorUmbral()
             ));
             var fechasDeMuestra = serieTemporal
             .SelectMany(serie => serie.getMuestrasSismicas())
+            // 37. getFecha()
             .Select(muestra => muestra.getFecha())
             .ToList();
 
-            // TODO: Añadir esto en la parte dinámica
             var fechasDeSerie = serieTemporal
             .Select(serie => serie.getFecha())
             .ToList();
