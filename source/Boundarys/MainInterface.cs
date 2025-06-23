@@ -9,7 +9,8 @@ namespace source
             InitializeComponent();
         }
 
-        private void registrarResultadoRevisionManualBtn_Click(object sender, EventArgs e)
+        // 1. opcionRegistrarResultadoManual()
+        private void opcionRegistrarResultadoManual(object sender, EventArgs e)
         {
             using (PantallaRegistrarResultado formRegistrarResultado = new PantallaRegistrarResultado())
             {

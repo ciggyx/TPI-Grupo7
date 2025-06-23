@@ -13,7 +13,7 @@
             this.valorUmbral = valorUmbral;
         }
 
-        public string getDenomincacion()
+        public string getDenominacion()
         {
             return denominacion;
         }

@@ -37,13 +37,6 @@
             Lng_Hipocentro = new DataGridViewTextBoxColumn();
             Magnitud = new DataGridViewTextBoxColumn();
             seleccionarBtn = new Button();
-            dataGridDetalles = new DataGridView();
-            Valor = new DataGridViewTextBoxColumn();
-            Denominacion = new DataGridViewTextBoxColumn();
-            Unidad = new DataGridViewTextBoxColumn();
-            Umbral = new DataGridViewTextBoxColumn();
-            CodigoEstacion = new DataGridViewTextBoxColumn();
-            NombreEstacion = new DataGridViewTextBoxColumn();
             lblClasificacion = new Label();
             lblOrigen = new Label();
             lblMagnitud = new Label();
@@ -61,8 +54,8 @@
             solicitarRevisionBtn = new Button();
             lblSolicitarAccionEvento = new Label();
             cancelarCU = new Button();
+            richTextBoxSeries = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridEventosSismicos).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridDetalles).BeginInit();
             ((System.ComponentModel.ISupportInitialize)alcanceEditBtn).BeginInit();
             ((System.ComponentModel.ISupportInitialize)origenEditBtn).BeginInit();
             ((System.ComponentModel.ISupportInitialize)magnitudEditBtn).BeginInit();
@@ -139,116 +132,57 @@
             // 
             // seleccionarBtn
             // 
-            seleccionarBtn.Location = new Point(507, 499);
+            seleccionarBtn.Location = new Point(484, 584);
             seleccionarBtn.Name = "seleccionarBtn";
-            seleccionarBtn.Size = new Size(94, 29);
+            seleccionarBtn.Size = new Size(92, 29);
             seleccionarBtn.TabIndex = 1;
             seleccionarBtn.Text = "Seleccionar";
             seleccionarBtn.UseVisualStyleBackColor = true;
             seleccionarBtn.Click += tomarSeleccionEventoSismico;
             // 
-            // dataGridDetalles
-            // 
-            dataGridDetalles.AllowUserToAddRows = false;
-            dataGridDetalles.AllowUserToDeleteRows = false;
-            dataGridDetalles.AllowUserToResizeRows = false;
-            dataGridDetalles.ColumnHeadersHeight = 29;
-            dataGridDetalles.Columns.AddRange(new DataGridViewColumn[] { Valor, Denominacion, Unidad, Umbral, CodigoEstacion, NombreEstacion });
-            dataGridDetalles.Location = new Point(131, 95);
-            dataGridDetalles.MultiSelect = false;
-            dataGridDetalles.Name = "dataGridDetalles";
-            dataGridDetalles.RowHeadersWidth = 51;
-            dataGridDetalles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridDetalles.Size = new Size(853, 327);
-            dataGridDetalles.TabIndex = 6;
-            // 
-            // Valor
-            // 
-            Valor.DataPropertyName = "valor";
-            Valor.HeaderText = "Valor";
-            Valor.MinimumWidth = 6;
-            Valor.Name = "Valor";
-            Valor.Width = 125;
-            // 
-            // Denominacion
-            // 
-            Denominacion.DataPropertyName = "denominacion";
-            Denominacion.HeaderText = "Denominación";
-            Denominacion.MinimumWidth = 6;
-            Denominacion.Name = "Denominacion";
-            Denominacion.Width = 150;
-            // 
-            // Unidad
-            // 
-            Unidad.DataPropertyName = "unidad";
-            Unidad.HeaderText = "Unidad";
-            Unidad.MinimumWidth = 6;
-            Unidad.Name = "Unidad";
-            Unidad.Width = 125;
-            // 
-            // Umbral
-            // 
-            Umbral.DataPropertyName = "umbral";
-            Umbral.HeaderText = "Umbral";
-            Umbral.MinimumWidth = 6;
-            Umbral.Name = "Umbral";
-            Umbral.Width = 125;
-            // 
-            // CodigoEstacion
-            // 
-            CodigoEstacion.DataPropertyName = "codigoEstacion";
-            CodigoEstacion.HeaderText = "Código Estación";
-            CodigoEstacion.MinimumWidth = 6;
-            CodigoEstacion.Name = "CodigoEstacion";
-            CodigoEstacion.Width = 125;
-            // 
-            // NombreEstacion
-            // 
-            NombreEstacion.DataPropertyName = "nombreEstacion";
-            NombreEstacion.HeaderText = "Nombre Estación";
-            NombreEstacion.MinimumWidth = 6;
-            NombreEstacion.Name = "NombreEstacion";
-            NombreEstacion.Width = 150;
-            // 
             // lblClasificacion
             // 
             lblClasificacion.AutoSize = true;
-            lblClasificacion.Location = new Point(385, 43);
+            lblClasificacion.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblClasificacion.Location = new Point(67, 189);
             lblClasificacion.Name = "lblClasificacion";
-            lblClasificacion.Size = new Size(109, 20);
+            lblClasificacion.Size = new Size(139, 25);
             lblClasificacion.TabIndex = 7;
             lblClasificacion.Text = "lblClasificacion";
             // 
             // lblOrigen
             // 
             lblOrigen.AutoSize = true;
-            lblOrigen.Location = new Point(589, 43);
+            lblOrigen.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblOrigen.Location = new Point(67, 314);
             lblOrigen.Name = "lblOrigen";
-            lblOrigen.Size = new Size(71, 20);
+            lblOrigen.Size = new Size(91, 25);
             lblOrigen.TabIndex = 8;
             lblOrigen.Text = "lblOrigen";
             // 
             // lblMagnitud
             // 
             lblMagnitud.AutoSize = true;
-            lblMagnitud.Location = new Point(786, 43);
+            lblMagnitud.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMagnitud.Location = new Point(67, 449);
             lblMagnitud.Name = "lblMagnitud";
-            lblMagnitud.Size = new Size(90, 20);
+            lblMagnitud.Size = new Size(116, 25);
             lblMagnitud.TabIndex = 9;
             lblMagnitud.Text = "lblMagnitud";
             // 
             // lblAlcance
             // 
             lblAlcance.AutoSize = true;
-            lblAlcance.Location = new Point(162, 43);
+            lblAlcance.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAlcance.Location = new Point(67, 67);
             lblAlcance.Name = "lblAlcance";
-            lblAlcance.Size = new Size(78, 20);
+            lblAlcance.Size = new Size(100, 25);
             lblAlcance.TabIndex = 10;
             lblAlcance.Text = "lblAlcance";
             // 
             // lblSolicitarVisualizacion
             // 
-            lblSolicitarVisualizacion.Location = new Point(385, 425);
+            lblSolicitarVisualizacion.Location = new Point(511, 491);
             lblSolicitarVisualizacion.Name = "lblSolicitarVisualizacion";
             lblSolicitarVisualizacion.Size = new Size(357, 67);
             lblSolicitarVisualizacion.TabIndex = 12;
@@ -257,9 +191,9 @@
             // 
             // noBtn
             // 
-            noBtn.Location = new Point(607, 499);
+            noBtn.Location = new Point(751, 583);
             noBtn.Name = "noBtn";
-            noBtn.Size = new Size(94, 29);
+            noBtn.Size = new Size(92, 29);
             noBtn.TabIndex = 13;
             noBtn.Text = "No";
             noBtn.UseVisualStyleBackColor = true;
@@ -267,9 +201,9 @@
             // 
             // siBtn
             // 
-            siBtn.Location = new Point(407, 499);
+            siBtn.Location = new Point(624, 583);
             siBtn.Name = "siBtn";
-            siBtn.Size = new Size(94, 29);
+            siBtn.Size = new Size(92, 29);
             siBtn.TabIndex = 14;
             siBtn.Text = "Si";
             siBtn.UseVisualStyleBackColor = true;
@@ -277,7 +211,7 @@
             // alcanceEditBtn
             // 
             alcanceEditBtn.Image = (Image)resources.GetObject("alcanceEditBtn.Image");
-            alcanceEditBtn.Location = new Point(246, 38);
+            alcanceEditBtn.Location = new Point(151, 62);
             alcanceEditBtn.Name = "alcanceEditBtn";
             alcanceEditBtn.Size = new Size(27, 32);
             alcanceEditBtn.SizeMode = PictureBoxSizeMode.Zoom;
@@ -288,7 +222,7 @@
             // origenEditBtn
             // 
             origenEditBtn.Image = (Image)resources.GetObject("origenEditBtn.Image");
-            origenEditBtn.Location = new Point(666, 39);
+            origenEditBtn.Location = new Point(144, 310);
             origenEditBtn.Name = "origenEditBtn";
             origenEditBtn.Size = new Size(27, 32);
             origenEditBtn.SizeMode = PictureBoxSizeMode.Zoom;
@@ -299,7 +233,7 @@
             // magnitudEditBtn
             // 
             magnitudEditBtn.Image = (Image)resources.GetObject("magnitudEditBtn.Image");
-            magnitudEditBtn.Location = new Point(882, 39);
+            magnitudEditBtn.Location = new Point(189, 445);
             magnitudEditBtn.Name = "magnitudEditBtn";
             magnitudEditBtn.Size = new Size(27, 32);
             magnitudEditBtn.SizeMode = PictureBoxSizeMode.Zoom;
@@ -309,9 +243,9 @@
             // 
             // guardarCambiosBtn
             // 
-            guardarCambiosBtn.Location = new Point(407, 499);
+            guardarCambiosBtn.Location = new Point(542, 583);
             guardarCambiosBtn.Name = "guardarCambiosBtn";
-            guardarCambiosBtn.Size = new Size(130, 29);
+            guardarCambiosBtn.Size = new Size(131, 29);
             guardarCambiosBtn.TabIndex = 18;
             guardarCambiosBtn.Text = "Guardar cambios";
             guardarCambiosBtn.UseVisualStyleBackColor = true;
@@ -319,9 +253,9 @@
             // 
             // continuarSinModificarBtn
             // 
-            continuarSinModificarBtn.Location = new Point(553, 499);
+            continuarSinModificarBtn.Location = new Point(695, 583);
             continuarSinModificarBtn.Name = "continuarSinModificarBtn";
-            continuarSinModificarBtn.Size = new Size(175, 29);
+            continuarSinModificarBtn.Size = new Size(176, 29);
             continuarSinModificarBtn.TabIndex = 19;
             continuarSinModificarBtn.Text = "Continuar sin modificar";
             continuarSinModificarBtn.UseVisualStyleBackColor = true;
@@ -330,9 +264,9 @@
             // 
             // confirmarEventoBtn
             // 
-            confirmarEventoBtn.Location = new Point(305, 499);
+            confirmarEventoBtn.Location = new Point(463, 583);
             confirmarEventoBtn.Name = "confirmarEventoBtn";
-            confirmarEventoBtn.Size = new Size(136, 29);
+            confirmarEventoBtn.Size = new Size(134, 29);
             confirmarEventoBtn.TabIndex = 20;
             confirmarEventoBtn.Text = "Confirmar evento";
             confirmarEventoBtn.UseVisualStyleBackColor = true;
@@ -341,9 +275,9 @@
             // 
             // rechazarEventoBtn
             // 
-            rechazarEventoBtn.Location = new Point(493, 499);
+            rechazarEventoBtn.Location = new Point(806, 583);
             rechazarEventoBtn.Name = "rechazarEventoBtn";
-            rechazarEventoBtn.Size = new Size(137, 29);
+            rechazarEventoBtn.Size = new Size(135, 29);
             rechazarEventoBtn.TabIndex = 21;
             rechazarEventoBtn.Text = "Rechazar evento";
             rechazarEventoBtn.UseVisualStyleBackColor = true;
@@ -352,9 +286,9 @@
             // 
             // solicitarRevisionBtn
             // 
-            solicitarRevisionBtn.Location = new Point(666, 499);
+            solicitarRevisionBtn.Location = new Point(605, 583);
             solicitarRevisionBtn.Name = "solicitarRevisionBtn";
-            solicitarRevisionBtn.Size = new Size(195, 29);
+            solicitarRevisionBtn.Size = new Size(193, 29);
             solicitarRevisionBtn.TabIndex = 22;
             solicitarRevisionBtn.Text = "Solicitar revisión a experto";
             solicitarRevisionBtn.UseVisualStyleBackColor = true;
@@ -363,9 +297,9 @@
             // 
             // lblSolicitarAccionEvento
             // 
-            lblSolicitarAccionEvento.Location = new Point(385, 429);
+            lblSolicitarAccionEvento.Location = new Point(523, 496);
             lblSolicitarAccionEvento.Name = "lblSolicitarAccionEvento";
-            lblSolicitarAccionEvento.Size = new Size(357, 67);
+            lblSolicitarAccionEvento.Size = new Size(357, 62);
             lblSolicitarAccionEvento.TabIndex = 23;
             lblSolicitarAccionEvento.Text = "Seleccione alguna acción sobre el evento";
             lblSolicitarAccionEvento.TextAlign = ContentAlignment.MiddleCenter;
@@ -381,35 +315,46 @@
             cancelarCU.UseVisualStyleBackColor = true;
             cancelarCU.Click += cancelarRevision;
             // 
+            // richTextBoxSeries
+            // 
+            richTextBoxSeries.BorderStyle = BorderStyle.FixedSingle;
+            richTextBoxSeries.Font = new Font("Segoe UI", 11F);
+            richTextBoxSeries.Location = new Point(329, 54);
+            richTextBoxSeries.Name = "richTextBoxSeries";
+            richTextBoxSeries.ReadOnly = true;
+            richTextBoxSeries.Size = new Size(743, 434);
+            richTextBoxSeries.TabIndex = 25;
+            richTextBoxSeries.Text = "";
+            richTextBoxSeries.Visible = false;
+            // 
             // PantallaRegistrarResultado
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1110, 648);
-            Controls.Add(cancelarCU);
-            Controls.Add(lblSolicitarAccionEvento);
-            Controls.Add(solicitarRevisionBtn);
-            Controls.Add(rechazarEventoBtn);
-            Controls.Add(confirmarEventoBtn);
             Controls.Add(continuarSinModificarBtn);
-            Controls.Add(guardarCambiosBtn);
+            Controls.Add(confirmarEventoBtn);
+            Controls.Add(siBtn);
+            Controls.Add(richTextBoxSeries);
+            Controls.Add(cancelarCU);
             Controls.Add(magnitudEditBtn);
             Controls.Add(lblMagnitud);
             Controls.Add(origenEditBtn);
-            Controls.Add(siBtn);
             Controls.Add(lblOrigen);
             Controls.Add(lblClasificacion);
             Controls.Add(noBtn);
-            Controls.Add(lblSolicitarVisualizacion);
             Controls.Add(alcanceEditBtn);
-            Controls.Add(dataGridDetalles);
             Controls.Add(lblAlcance);
             Controls.Add(dataGridEventosSismicos);
+            Controls.Add(rechazarEventoBtn);
+            Controls.Add(solicitarRevisionBtn);
             Controls.Add(seleccionarBtn);
+            Controls.Add(guardarCambiosBtn);
+            Controls.Add(lblSolicitarAccionEvento);
+            Controls.Add(lblSolicitarVisualizacion);
             Name = "PantallaRegistrarResultado";
             Text = "PantallaRegistrarResultado";
             ((System.ComponentModel.ISupportInitialize)dataGridEventosSismicos).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridDetalles).EndInit();
             ((System.ComponentModel.ISupportInitialize)alcanceEditBtn).EndInit();
             ((System.ComponentModel.ISupportInitialize)origenEditBtn).EndInit();
             ((System.ComponentModel.ISupportInitialize)magnitudEditBtn).EndInit();
@@ -427,25 +372,10 @@
         private DataGridViewTextBoxColumn Lat_Hipocentro;
         private DataGridViewTextBoxColumn Lng_Hipocentro;
         private DataGridViewTextBoxColumn Magnitud;
-
-        // Labels para los datos únicos
-        //Label lblAlcance;
-        //Label lblClasificacion;
-        //Label lblOrigen;
-        //Label lblMagnitud;
-
-        // Nuevo DataGridView para los detalles
-        DataGridView dataGridDetalles;
         private Label lblClasificacion;
         private Label lblOrigen;
         private Label lblMagnitud;
         private Label lblAlcance;
-        private DataGridViewTextBoxColumn Valor;
-        private DataGridViewTextBoxColumn Denominacion;
-        private DataGridViewTextBoxColumn Unidad;
-        private DataGridViewTextBoxColumn Umbral;
-        private DataGridViewTextBoxColumn CodigoEstacion;
-        private DataGridViewTextBoxColumn NombreEstacion;
         private Label lblSolicitarVisualizacion;
         private Button noBtn;
         private Button siBtn;
@@ -459,5 +389,6 @@
         private Button solicitarRevisionBtn;
         private Label lblSolicitarAccionEvento;
         private Button cancelarCU;
+        private RichTextBox richTextBoxSeries;
     }
 }

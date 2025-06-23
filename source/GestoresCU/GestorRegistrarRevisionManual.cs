@@ -34,7 +34,6 @@ namespace source.GestoresCU
 
         public SerieTemporal SerieTemporalConEstacion { get; private set; }
 
-        //Constructor
         public GestorRegistrarRevisionManual(PantallaRegistrarResultado pantallaRegistrarResultado)
         {
             this.pantallaRegistrarResultado = pantallaRegistrarResultado;
@@ -55,9 +54,10 @@ namespace source.GestoresCU
             listaEstados = generador.GenerarEstados();
             sesionActual = generador.GenerarSesion();
 
-            // 4. buscarEventosSimicosSinRevision
+            // 4. buscarEventosSimicosSinRevision()
             listaEventoSismicosSinRevision = buscarEventoSismicoSinRevision(eventos);
-            pantallaRegistrarResultado.solicitarSeleccionEventoSismico(listaEventoSismicosSinRevision); // 16. mostrarEventoSimicosParaSeleccion
+            // 17. solicitarSeleccionEventoSismico()
+            pantallaRegistrarResultado.solicitarSeleccionEventoSismico(listaEventoSismicosSinRevision);
         }
 
 
@@ -78,11 +78,12 @@ namespace source.GestoresCU
                 }
             }
 
-            return ordenarEventoSismicos(listaEventoSismicosSinRevision); // 15 OrdenarEventosSismicos
+            // 16. ordenarEventosSismicos()
+            return ordenarEventosSismicos(listaEventoSismicosSinRevision);
         }
 
 
-        public List<(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud)> ordenarEventoSismicos(List<(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud)> listaEventoSismicosSinRevisionDesordenada)
+        public List<(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud)> ordenarEventosSismicos(List<(DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud)> listaEventoSismicosSinRevisionDesordenada)
         {
             return listaEventoSismicosSinRevisionDesordenada
                 .OrderBy(evento => evento.fechaHoraOcurrencia)
@@ -91,7 +92,6 @@ namespace source.GestoresCU
 
         public void tomarSeleccionEventoSismico((DateTime fechaHoraOcurrencia, float latitudEpicentro, float longitudEpicentro, float latitudHipocentro, float longitudHipocentro, float valorMagnitud) eventoSeleccionado) // 18.tomarSeleccionEventoSismico()
         {
-            // falopa lo de los numeros? matematicas
             this.eventoSismicoSeleccionado = eventos.FirstOrDefault(e =>
                 e.getFechaHoraOcurrencia() == eventoSeleccionado.fechaHoraOcurrencia &&
                 Math.Abs(e.getLatitudEpicentro() - eventoSeleccionado.latitudEpicentro) < 0.0001f &&
@@ -100,20 +100,25 @@ namespace source.GestoresCU
                 Math.Abs(e.getLongitudHipocentro() - eventoSeleccionado.longitudHipocentro) < 0.0001f &&
                 Math.Abs(e.getValorMagnitud() - eventoSeleccionado.valorMagnitud) < 0.0001f
             );
+            // 20. buscarEstadoBloqueadoEnRevision()
             estadoBloqueadoEnRevision = buscarEstadoBloqueadoEnRevision();
-            fechaHoraActual = getFechaHoraActual(); // 22. getFechaHoraActual()
-            asLogueado = buscarEmpleadoLogueado(); // 23. buscarEmpleadoLogueado()
-
-            // 26. bloquearEventoSismico()
+            // 23. getFechaHoraActual()
+            fechaHoraActual = getFechaHoraActual();
+            // 24. buscarEmpleadoLogueado()
+            asLogueado = buscarEmpleadoLogueado();
+            // 27. bloquearEventoSismico()
             bloquearEventoSismico(eventoSismicoSeleccionado, estadoBloqueadoEnRevision, asLogueado, fechaHoraActual);
-            // 33. buscarDatosSismicos
+            // 34. buscarDatosSismicos()
+            // 53. mostrarDatos()
             pantallaRegistrarResultado.mostrarDatos(buscarDatosSismicos(eventoSismicoSeleccionado));
             pantallaRegistrarResultado.solicitarSeleccionMapa();
         }
-        public Estado buscarEstadoBloqueadoEnRevision()//19. buscarEstadoBloqueadoEnRevision()
+        public Estado buscarEstadoBloqueadoEnRevision()
         {
             foreach (Estado estado in listaEstados)
             {
+                // 21. sosAmbitoEventoSismico()
+                // 22. sosBloqueadoEnRevision()
                 if (estado.sosAmbitoEventoSismico() && estado.sosBloqueadoEnRevision())
                 {
                     return estado;
@@ -129,27 +134,33 @@ namespace source.GestoresCU
 
         public Empleado buscarEmpleadoLogueado()
         {
+            // 25. getUsuarioLogueado()
             return sesionActual.getUsuarioLogueado();
         }
 
         public void bloquearEventoSismico(EventoSismico eventoSismicoSeleccionado, Estado estadoBloqueadoEnRevision, Empleado asLogueado, DateTime fechaHoraActual)
         {
+            // 28. bloquear()
             eventoSismicoSeleccionado.bloquear(estadoBloqueadoEnRevision, asLogueado, fechaHoraActual);
         }
 
-        public (string Alcance, string Clasificacion, string Origen, double MagnitudValor,
-        IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string EstacionCodigo, string EstacionNombre)> Detalles) buscarDatosSismicos(EventoSismico evento)
+        public (string Alcance, string Clasificacion, string Origen, List<DateTime> fechasMuestra, List<DateTime> fechasSeriesTemporales, float valorMagnitud,
+        IEnumerable<(int numeroSerieTemporal,int numeroMuestra,double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string EstacionCodigo, string EstacionNombre)> Detalles) buscarDatosSismicos(EventoSismico evento)
         {
+            // 35. getDatosSismicos()
             var datosSismicos = evento.getDatosSismicos();
             listaSerieTemporales = evento.getSerieTemporal();
 
+            // 45. ordenarPorCodigo()
             var seriesOrdenadas = ordenarPorCodigo(datosSismicos.Detalles, listaSerieTemporales);
 
             return (
                 datosSismicos.Alcance,
                 datosSismicos.Clasificacion,
                 datosSismicos.Origen,
-                datosSismicos.MagnitudValor,
+                datosSismicos.fechasMuestra,
+                datosSismicos.fechasSeriesTemporales,
+                eventoSismicoSeleccionado.getValorMagnitud(),
                 Detalles: seriesOrdenadas
                 );
         }
@@ -159,22 +170,39 @@ namespace source.GestoresCU
             return serie.getEstacionSismografica(listaSismografos);
         }
 
-        public IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string EstacionCodigo, string EstacionNombre)> ordenarPorCodigo(IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> serieTemporalParaMostrar, List<SerieTemporal> serieTemporales)
+        public IEnumerable<(int numeroSerieTemporal, int numeroMuestra,double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string EstacionCodigo, string EstacionNombre)> ordenarPorCodigo(IEnumerable<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral)> serieTemporalParaMostrar, List<SerieTemporal> serieTemporales)
         {
-            var resultado = new List<(double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string Codigo, string EstacionNombre)>();
-
-            int index = 0;
-
-            foreach (SerieTemporal serie in serieTemporales)
+            var resultados = new List<(int numeroSerieTemporal,int numeroMuestra, double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string Codigo, string EstacionNombre)>();
+            for(int k = 0; k < serieTemporales.Count; k++)
             {
-                var (codigo, nombre) = buscarDatosEstacion(serie);
-                var dato = serieTemporalParaMostrar.ElementAt(index);
-                resultado.Add((dato.Valor, dato.TipoMuestraDenominacion, dato.TipoMuestraUnidad, dato.TipoMuestraValorUmbral, codigo, nombre));
-                index = index + 1;
+                // 46. getEstacionSismografica()
+                var (codigo, nombre) = serieTemporales[k].getEstacionSismografica(listaSismografos);
+
+                for (int j = 0; j < serieTemporales[k].getMuestrasSismicas().Count; j++)
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        var dato = serieTemporalParaMostrar.ElementAt(i);
+                        var nuevoElemento = (
+                        k + 1,
+                        j + 1,
+                        dato.Valor,
+                        dato.TipoMuestraDenominacion,
+                        dato.TipoMuestraUnidad,
+                        dato.TipoMuestraValorUmbral,
+                        codigo,
+                        nombre
+                        );
+
+                        resultados.Add(nuevoElemento);
+                    }
+                }
             }
-            return resultado.OrderBy(x => x.Codigo);
+            return resultados;
         }
 
+
+        // 51. llamarCUGenerarSismograma()
         public void llamarCUGenerarSismograma() { }
 
         public void tomarSeleccionMapa(string accionVisualizarMapa)
@@ -200,13 +228,16 @@ namespace source.GestoresCU
             {
                 if (accionSobreEvento == "Rechazar evento")
                 {
+                    // 64. buscarEstadoRechazado()
+                    // 67. getFechaHoraActual()
+                    // 68. rechazarEventoSismico()
                     rechazarEventoSismico(getFechaHoraActual(), buscarEstadoRechazado(), asLogueado);
                 }
                 else if (accionSobreEvento == "Confirmar evento")
                 {
                     confirmarEventoSismico(getFechaHoraActual(), buscarEstadoConfirmado(), asLogueado);
                 }
-                //67, 64, 68
+                // 75. finCU()
                 finCU();
             }
             else
@@ -228,7 +259,8 @@ namespace source.GestoresCU
         {
             foreach (Estado estado in listaEstados)
             {
-                // 65 y 66
+                // 65. sosAmbitoEventoSismico()
+                // 66. sosRechazado()
                 if (estado.sosAmbitoEventoSismico() && estado.sosRechazado())
                 {
                     return estado;
@@ -241,7 +273,6 @@ namespace source.GestoresCU
         {
             foreach (Estado estado in listaEstados)
             {
-                // 65 y 66
                 if (estado.sosAmbitoEventoSismico() && estado.sosConfirmado())
                 {
                     return estado;
@@ -252,6 +283,7 @@ namespace source.GestoresCU
 
         public void rechazarEventoSismico(DateTime fechaHoraActual, Estado estadoRechazado, Empleado empleadoLogueado)
         {
+            // 69. rechazar()
             eventoSismicoSeleccionado.rechazar(fechaHoraActual, estadoRechazado, empleadoLogueado);
         }
 
