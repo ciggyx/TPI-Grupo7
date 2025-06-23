@@ -80,7 +80,7 @@ public class BaseTestDataGenerator
 
         for (int i = 0; i < cantidad; i++)
         {
-            int cantidadSeries = 2;// random.Next(10, 15);
+            int cantidadSeries = random.Next(10, 15);
 
             var seriesTemporales = new List<SerieTemporal>();
 
@@ -93,14 +93,15 @@ public class BaseTestDataGenerator
                 }
 
                 var muestra = new MuestraSismica(DateTime.Now.AddMinutes(-i * 10), detalles);
-                var muestra2 = new MuestraSismica(DateTime.Now.AddMinutes(-i * 10), detalles);
+                var muestra2 = new MuestraSismica(DateTime.Now.AddMinutes(-i * 15), detalles);
+                var muestra3 = new MuestraSismica(DateTime.Now.AddMinutes(-i * 20), detalles);
 
                 var serie = new SerieTemporal(
                     false,
                     DateTime.Now.AddHours(-i - k), // Puedes ajustar la hora para diferenciar las series
                     DateTime.Now.AddHours(-i - k + 1),
                     random.Next(30, 100),
-                    new List<MuestraSismica> { muestra, muestra2 }
+                    new List<MuestraSismica> { muestra, muestra2, muestra3 }
                 );
 
                 seriesTemporales.Add(serie);
@@ -121,7 +122,7 @@ public class BaseTestDataGenerator
                 RandomCoord(-90, 90),    // lat hipocentro
                 RandomCoord(-180, 180),  // lng hipocentro
                 (float)Math.Round(random.NextDouble() * 10, 2), // profundidad
-                seriesTemporales, // Aquí asignamos la lista con múltiples series temporales
+                seriesTemporales, 
                 estado,
                 clasificacion,
                 alcance,

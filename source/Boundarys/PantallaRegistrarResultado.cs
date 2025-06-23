@@ -30,7 +30,7 @@ namespace source.Boundarys
             lblClasificacion.Visible = false;
             lblMagnitud.Visible = false;
             lblOrigen.Visible = false;
-            dataGridDetalles.Visible = false;
+            //dataGridDetalles.Visible = false;
             eventosOriginales = eventosSismicosSinRevisionOrdenados;
             lblSolicitarVisualizacion.Visible = false;
             noBtn.Visible = false;
@@ -52,13 +52,14 @@ namespace source.Boundarys
     string Alcance,
     string Clasificacion,
     string Origen,
+    List<DateTime> fechasMuestra,
+    List<DateTime> fechasSeriesTemporales,
     double valorMagnitud,
-    IEnumerable<(int numeroSerieTemporal, int numeroMuestra,double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string EstacionCodigo, string EstacionNombre)> Detalles
+    IEnumerable<(int numeroSerieTemporal, int numeroMuestra, double Valor, string TipoMuestraDenominacion, string TipoMuestraUnidad, double TipoMuestraValorUmbral, string EstacionCodigo, string EstacionNombre)> Detalles
 ) datos)
         {
-            dataGridDetalles.Visible = true;
             dataGridEventosSismicos.Visible = false;
-            seleccionarBtn.Visible = false;
+            richTextBoxSeries.Visible = true;
             lblAlcance.Visible = true;
             lblClasificacion.Visible = true;
             lblMagnitud.Visible = true;
@@ -69,21 +70,50 @@ namespace source.Boundarys
             lblOrigen.Text = $"Origen: {datos.Origen}";
             lblMagnitud.Text = $"Magnitud: {Math.Round(datos.valorMagnitud, 2)}";
 
-            var detallesFormateados = datos.Detalles.Select(d => new
-            {
-                numeroMuestra = $"Muestra: {d.numeroMuestra}",
-                numeroSerieTemporal  = $"Serie: {d.numeroSerieTemporal}",
-                valor = d.Valor,
-                denominacion = d.TipoMuestraDenominacion,
-                unidad = d.TipoMuestraUnidad,
-                umbral = d.TipoMuestraValorUmbral,
-                codigoEstacion = d.EstacionCodigo,
-                nombreEstacion = d.EstacionNombre
-            }).ToList();
+            richTextBoxSeries.Visible = true;
+            richTextBoxSeries.Clear();
 
-            dataGridDetalles.DataSource = detallesFormateados;
+            var series = datos.Detalles
+                .GroupBy(d => d.numeroSerieTemporal)
+                .OrderBy(g => g.Key);
+
+            foreach (var serie in series)
+            {
+                var nombreEstacion = serie.First().EstacionNombre;
+                AppendBold($"Serie temporal {serie.Key}: {datos.fechasSeriesTemporales[serie.Key-1]} \n");
+                AppendItalicLine($"Estación: {nombreEstacion}");
+                var contador = 3;
+                foreach (var muestra in serie.OrderBy(m => m.numeroMuestra))
+                {
+                    if(contador % 3 == 0) 
+                    {
+                        AppendNormal($"         Muestra {contador / 3}: {datos.fechasMuestra[contador / 3]} \n");
+                    }
+                    AppendItalicLine($"             {muestra.TipoMuestraDenominacion}: {muestra.Valor} {muestra.TipoMuestraUnidad}");
+                    contador++;
+                }
+
+                AppendNormal("\n");
+            }
         }
 
+        private void AppendBold(string text)
+        {
+            richTextBoxSeries.SelectionFont = new Font(richTextBoxSeries.Font, FontStyle.Bold);
+            richTextBoxSeries.AppendText(text);
+        }
+
+        private void AppendNormal(string text)
+        {
+            richTextBoxSeries.SelectionFont = new Font(richTextBoxSeries.Font, FontStyle.Regular);
+            richTextBoxSeries.AppendText(text);
+        }
+
+        private void AppendItalicLine(string text)
+        {
+            richTextBoxSeries.SelectionFont = new Font(richTextBoxSeries.Font, FontStyle.Italic);
+            richTextBoxSeries.AppendText(text + "\n");
+        }
 
         // 18. tomarSeleccionEventoSismico()
         private void tomarSeleccionEventoSismico(object sender, EventArgs e)
@@ -115,6 +145,7 @@ namespace source.Boundarys
         // 54. solicitarSeleccionMapa()
         public void solicitarSeleccionMapa()
         {
+            seleccionarBtn.Visible = false;
             lblSolicitarVisualizacion.Visible = true;
             noBtn.Visible = true;
             siBtn.Visible = true;
