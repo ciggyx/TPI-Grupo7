@@ -9,7 +9,7 @@ Este documento describe el Trabajo Práctico Integrador de la cátedra **Diseño
 ## 🎯 Objetivos
 
 1. **Analizar** los requerimientos funcionales y no funcionales de un dominio de negocio.
-2. **Modelar** la estructura de datos y los procesos mediante UML (diagramas de casos de uso, de clases y de secuencia).
+2. **Modelar** la estructura de datos y los procesos mediante UML (diagramas de casos de uso, de clases, maquina de estados y diagrama de secuencia).
 3. **Diseñar** una arquitectura modular y escalable, seleccionando tecnologías adecuadas.
 4. **Implementar** prototipos de las principales capas (persistencia, lógica de negocio, presentación).
 5. **Documentar** todo el ciclo de vida del proyecto.
@@ -20,16 +20,20 @@ Este documento describe el Trabajo Práctico Integrador de la cátedra **Diseño
 
 ```
 tp_integrador/
-├── docs/                   # Documentación UML y manuales
-│   ├── casos_de_uso.md
-│   ├── diagrama_clases.puml
-│   └── diagrama_secuencia.puml
-├── src/                    # Código fuente
-│   ├── backend/           https://discord.gg/JZzMkPFG # API y lógica de negocio
-│   └── frontend/           # Interfaz de usuario
-├── data/                   # Scripts y datos de prueba
-├── scripts/                # Scripts de despliegue y configuración
+├── diagramas/                   # Documentación UML y manuales
+│   ├── Diagramas/Parte_Estática_CU_23.svg
+│   ├── Diagramas/Diagramas/Parte_Dinámica_CU_23.svg
+│   ├── Diagramas/Diagramas/maquinaEstadoEventoSismico.svg
+│   └── Diagramas.plantuml
+├── source/                 # Código fuente
+│   ├── Boundary/           # Diferentes pantallas
+│   ├── Database/           # Base de datos
+│   ├── Entidades/          # Entidades
+│   ├── GestoresCU/         # Gestores
+│   ├── Images/             # Imagenes
+│   └── Properties/           # Base de datos
 ├── README.md               # Este archivo
+├── ToDo.md
 └── LICENSE                 # Licencia del proyecto
 ```
 
@@ -45,7 +49,7 @@ tp_integrador/
 
 ---
 
-## 🚀 Instalación
+## 🚀 Instalación y Ejecución del proyecto
 
 1. Clonar el repositorio:
 
@@ -54,21 +58,11 @@ tp_integrador/
    cd tp_integrador
    ```
 
-2. Configurar base de datos (PostgreSQL):
-
-   - Crear base `tp_integrador`.
-   - Ejecutar script de creación en `data/schema.sql`.
-
-3. Backend:
-
+2. Ejecución del proyecto:
    ```
-   cd src/backend
-   mvn install
-   mvn spring-boot:run
-   ```
-
-   ```
-
+   cd source
+   dotnet build
+   dotnet run
    ```
 
 ---
