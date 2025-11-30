@@ -274,7 +274,7 @@
             // 
             // confirmarEventoBtn
             // 
-            confirmarEventoBtn.Location = new Point(504, 566);
+            confirmarEventoBtn.Location = new Point(467, 566);
             confirmarEventoBtn.Margin = new Padding(3, 2, 3, 2);
             confirmarEventoBtn.Name = "confirmarEventoBtn";
             confirmarEventoBtn.Size = new Size(117, 30);
@@ -286,7 +286,7 @@
             // 
             // rechazarEventoBtn
             // 
-            rechazarEventoBtn.Location = new Point(788, 566);
+            rechazarEventoBtn.Location = new Point(801, 566);
             rechazarEventoBtn.Margin = new Padding(3, 2, 3, 2);
             rechazarEventoBtn.Name = "rechazarEventoBtn";
             rechazarEventoBtn.Size = new Size(118, 30);
@@ -298,7 +298,7 @@
             // 
             // solicitarRevisionBtn
             // 
-            solicitarRevisionBtn.Location = new Point(612, 566);
+            solicitarRevisionBtn.Location = new Point(608, 566);
             solicitarRevisionBtn.Margin = new Padding(3, 2, 3, 2);
             solicitarRevisionBtn.Name = "solicitarRevisionBtn";
             solicitarRevisionBtn.Size = new Size(169, 30);
@@ -310,7 +310,7 @@
             // 
             // lblSolicitarAccionEvento
             // 
-            lblSolicitarAccionEvento.Location = new Point(556, 485);
+            lblSolicitarAccionEvento.Location = new Point(545, 485);
             lblSolicitarAccionEvento.Name = "lblSolicitarAccionEvento";
             lblSolicitarAccionEvento.Size = new Size(312, 46);
             lblSolicitarAccionEvento.TabIndex = 23;
