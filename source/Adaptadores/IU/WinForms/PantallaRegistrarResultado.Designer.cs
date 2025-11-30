@@ -339,7 +339,6 @@
             pictureBox1.TabIndex = 25;
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
-            richTextBoxSeries.Visible = false;
             // 
             // PantallaRegistrarResultado
             // 
