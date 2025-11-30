@@ -259,5 +259,15 @@ namespace source.Boundarys
         {
 
         }
+
+        private void PantallaRegistrarResultado_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblSolicitarAccionEvento_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

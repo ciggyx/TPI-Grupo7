@@ -68,14 +68,14 @@
             dataGridEventosSismicos.AllowUserToDeleteRows = false;
             dataGridEventosSismicos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridEventosSismicos.Columns.AddRange(new DataGridViewColumn[] { Fecha, lat_Epicentro, lng_Epicentro, Lat_Hipocentro, Lng_Hipocentro, Magnitud });
-            dataGridEventosSismicos.Location = new Point(142, 71);
+            dataGridEventosSismicos.Location = new Point(174, 140);
             dataGridEventosSismicos.Margin = new Padding(3, 2, 3, 2);
             dataGridEventosSismicos.MultiSelect = false;
             dataGridEventosSismicos.Name = "dataGridEventosSismicos";
             dataGridEventosSismicos.ReadOnly = true;
             dataGridEventosSismicos.RowHeadersWidth = 51;
             dataGridEventosSismicos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridEventosSismicos.Size = new Size(704, 245);
+            dataGridEventosSismicos.Size = new Size(778, 286);
             dataGridEventosSismicos.TabIndex = 0;
             // 
             // Fecha
@@ -134,10 +134,10 @@
             // 
             // seleccionarBtn
             // 
-            seleccionarBtn.Location = new Point(424, 438);
+            seleccionarBtn.Location = new Point(507, 567);
             seleccionarBtn.Margin = new Padding(3, 2, 3, 2);
             seleccionarBtn.Name = "seleccionarBtn";
-            seleccionarBtn.Size = new Size(80, 22);
+            seleccionarBtn.Size = new Size(80, 30);
             seleccionarBtn.TabIndex = 1;
             seleccionarBtn.Text = "Seleccionar";
             seleccionarBtn.UseVisualStyleBackColor = true;
@@ -147,7 +147,7 @@
             // 
             lblClasificacion.AutoSize = true;
             lblClasificacion.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblClasificacion.Location = new Point(59, 142);
+            lblClasificacion.Location = new Point(123, 196);
             lblClasificacion.Name = "lblClasificacion";
             lblClasificacion.Size = new Size(112, 20);
             lblClasificacion.TabIndex = 7;
@@ -157,7 +157,7 @@
             // 
             lblOrigen.AutoSize = true;
             lblOrigen.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblOrigen.Location = new Point(59, 236);
+            lblOrigen.Location = new Point(123, 290);
             lblOrigen.Name = "lblOrigen";
             lblOrigen.Size = new Size(73, 20);
             lblOrigen.TabIndex = 8;
@@ -167,7 +167,7 @@
             // 
             lblMagnitud.AutoSize = true;
             lblMagnitud.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMagnitud.Location = new Point(59, 337);
+            lblMagnitud.Location = new Point(123, 391);
             lblMagnitud.Name = "lblMagnitud";
             lblMagnitud.Size = new Size(94, 20);
             lblMagnitud.TabIndex = 9;
@@ -177,7 +177,7 @@
             // 
             lblAlcance.AutoSize = true;
             lblAlcance.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAlcance.Location = new Point(59, 50);
+            lblAlcance.Location = new Point(123, 104);
             lblAlcance.Name = "lblAlcance";
             lblAlcance.Size = new Size(80, 20);
             lblAlcance.TabIndex = 10;
@@ -185,7 +185,7 @@
             // 
             // lblSolicitarVisualizacion
             // 
-            lblSolicitarVisualizacion.Location = new Point(447, 368);
+            lblSolicitarVisualizacion.Location = new Point(557, 483);
             lblSolicitarVisualizacion.Name = "lblSolicitarVisualizacion";
             lblSolicitarVisualizacion.Size = new Size(312, 50);
             lblSolicitarVisualizacion.TabIndex = 12;
@@ -194,10 +194,10 @@
             // 
             // noBtn
             // 
-            noBtn.Location = new Point(657, 437);
+            noBtn.Location = new Point(740, 566);
             noBtn.Margin = new Padding(3, 2, 3, 2);
             noBtn.Name = "noBtn";
-            noBtn.Size = new Size(80, 22);
+            noBtn.Size = new Size(80, 30);
             noBtn.TabIndex = 13;
             noBtn.Text = "No";
             noBtn.UseVisualStyleBackColor = true;
@@ -205,10 +205,10 @@
             // 
             // siBtn
             // 
-            siBtn.Location = new Point(546, 437);
+            siBtn.Location = new Point(629, 566);
             siBtn.Margin = new Padding(3, 2, 3, 2);
             siBtn.Name = "siBtn";
-            siBtn.Size = new Size(80, 22);
+            siBtn.Size = new Size(80, 30);
             siBtn.TabIndex = 14;
             siBtn.Text = "Si";
             siBtn.UseVisualStyleBackColor = true;
@@ -216,7 +216,7 @@
             // alcanceEditBtn
             // 
             alcanceEditBtn.Image = (Image)resources.GetObject("alcanceEditBtn.Image");
-            alcanceEditBtn.Location = new Point(132, 46);
+            alcanceEditBtn.Location = new Point(196, 100);
             alcanceEditBtn.Margin = new Padding(3, 2, 3, 2);
             alcanceEditBtn.Name = "alcanceEditBtn";
             alcanceEditBtn.Size = new Size(24, 24);
@@ -228,7 +228,7 @@
             // origenEditBtn
             // 
             origenEditBtn.Image = (Image)resources.GetObject("origenEditBtn.Image");
-            origenEditBtn.Location = new Point(126, 232);
+            origenEditBtn.Location = new Point(190, 286);
             origenEditBtn.Margin = new Padding(3, 2, 3, 2);
             origenEditBtn.Name = "origenEditBtn";
             origenEditBtn.Size = new Size(24, 24);
@@ -240,7 +240,7 @@
             // magnitudEditBtn
             // 
             magnitudEditBtn.Image = (Image)resources.GetObject("magnitudEditBtn.Image");
-            magnitudEditBtn.Location = new Point(165, 334);
+            magnitudEditBtn.Location = new Point(229, 388);
             magnitudEditBtn.Margin = new Padding(3, 2, 3, 2);
             magnitudEditBtn.Name = "magnitudEditBtn";
             magnitudEditBtn.Size = new Size(24, 24);
@@ -251,10 +251,10 @@
             // 
             // guardarCambiosBtn
             // 
-            guardarCambiosBtn.Location = new Point(474, 437);
+            guardarCambiosBtn.Location = new Point(557, 566);
             guardarCambiosBtn.Margin = new Padding(3, 2, 3, 2);
             guardarCambiosBtn.Name = "guardarCambiosBtn";
-            guardarCambiosBtn.Size = new Size(115, 22);
+            guardarCambiosBtn.Size = new Size(115, 30);
             guardarCambiosBtn.TabIndex = 18;
             guardarCambiosBtn.Text = "Guardar cambios";
             guardarCambiosBtn.UseVisualStyleBackColor = true;
@@ -262,10 +262,10 @@
             // 
             // continuarSinModificarBtn
             // 
-            continuarSinModificarBtn.Location = new Point(608, 437);
+            continuarSinModificarBtn.Location = new Point(691, 566);
             continuarSinModificarBtn.Margin = new Padding(3, 2, 3, 2);
             continuarSinModificarBtn.Name = "continuarSinModificarBtn";
-            continuarSinModificarBtn.Size = new Size(154, 22);
+            continuarSinModificarBtn.Size = new Size(154, 30);
             continuarSinModificarBtn.TabIndex = 19;
             continuarSinModificarBtn.Text = "Continuar sin modificar";
             continuarSinModificarBtn.UseVisualStyleBackColor = true;
@@ -274,10 +274,10 @@
             // 
             // confirmarEventoBtn
             // 
-            confirmarEventoBtn.Location = new Point(405, 437);
+            confirmarEventoBtn.Location = new Point(504, 566);
             confirmarEventoBtn.Margin = new Padding(3, 2, 3, 2);
             confirmarEventoBtn.Name = "confirmarEventoBtn";
-            confirmarEventoBtn.Size = new Size(117, 22);
+            confirmarEventoBtn.Size = new Size(117, 30);
             confirmarEventoBtn.TabIndex = 20;
             confirmarEventoBtn.Text = "Confirmar evento";
             confirmarEventoBtn.UseVisualStyleBackColor = true;
@@ -286,10 +286,10 @@
             // 
             // rechazarEventoBtn
             // 
-            rechazarEventoBtn.Location = new Point(705, 437);
+            rechazarEventoBtn.Location = new Point(788, 566);
             rechazarEventoBtn.Margin = new Padding(3, 2, 3, 2);
             rechazarEventoBtn.Name = "rechazarEventoBtn";
-            rechazarEventoBtn.Size = new Size(118, 22);
+            rechazarEventoBtn.Size = new Size(118, 30);
             rechazarEventoBtn.TabIndex = 21;
             rechazarEventoBtn.Text = "Rechazar evento";
             rechazarEventoBtn.UseVisualStyleBackColor = true;
@@ -298,11 +298,11 @@
             // 
             // solicitarRevisionBtn
             // 
-            solicitarRevisionBtn.Location = new Point(529, 437);
+            solicitarRevisionBtn.Location = new Point(612, 566);
             solicitarRevisionBtn.Margin = new Padding(3, 2, 3, 2);
             solicitarRevisionBtn.Name = "solicitarRevisionBtn";
-            solicitarRevisionBtn.Size = new Size(169, 22);
-            solicitarRevisionBtn.TabIndex = 22;
+            solicitarRevisionBtn.Size = new Size(169, 30);
+            solicitarRevisionBtn.TabIndex = 30;
             solicitarRevisionBtn.Text = "Solicitar revisión a experto";
             solicitarRevisionBtn.UseVisualStyleBackColor = true;
             solicitarRevisionBtn.Visible = false;
@@ -310,20 +310,21 @@
             // 
             // lblSolicitarAccionEvento
             // 
-            lblSolicitarAccionEvento.Location = new Point(458, 372);
+            lblSolicitarAccionEvento.Location = new Point(556, 485);
             lblSolicitarAccionEvento.Name = "lblSolicitarAccionEvento";
             lblSolicitarAccionEvento.Size = new Size(312, 46);
             lblSolicitarAccionEvento.TabIndex = 23;
             lblSolicitarAccionEvento.Text = "Seleccione alguna acción sobre el evento";
             lblSolicitarAccionEvento.TextAlign = ContentAlignment.MiddleCenter;
             lblSolicitarAccionEvento.Visible = false;
+            lblSolicitarAccionEvento.Click += lblSolicitarAccionEvento_Click;
             // 
             // cancelarCU
             // 
-            cancelarCU.Location = new Point(29, 437);
+            cancelarCU.Location = new Point(123, 566);
             cancelarCU.Margin = new Padding(3, 2, 3, 2);
             cancelarCU.Name = "cancelarCU";
-            cancelarCU.Size = new Size(126, 22);
+            cancelarCU.Size = new Size(126, 30);
             cancelarCU.TabIndex = 24;
             cancelarCU.Text = "Cancelar revisión";
             cancelarCU.UseVisualStyleBackColor = true;
@@ -333,7 +334,7 @@
             // 
             pictureBox1.BackgroundImage = Properties.Resources.Sismograma;
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Location = new Point(354, 46);
+            pictureBox1.Location = new Point(399, 99);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(587, 330);
             pictureBox1.TabIndex = 25;
@@ -342,10 +343,8 @@
             // 
             // PantallaRegistrarResultado
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            ClientSize = new Size(971, 486);
-            Controls.Add(pictureBox1);
             ClientSize = new Size(1110, 648);
+            Controls.Add(pictureBox1);
             Controls.Add(continuarSinModificarBtn);
             Controls.Add(confirmarEventoBtn);
             Controls.Add(siBtn);
@@ -367,7 +366,9 @@
             Controls.Add(lblSolicitarVisualizacion);
             Margin = new Padding(3, 2, 3, 2);
             Name = "PantallaRegistrarResultado";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "PantallaRegistrarResultado";
+            Load += PantallaRegistrarResultado_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridEventosSismicos).EndInit();
             ((System.ComponentModel.ISupportInitialize)alcanceEditBtn).EndInit();
             ((System.ComponentModel.ISupportInitialize)origenEditBtn).EndInit();
