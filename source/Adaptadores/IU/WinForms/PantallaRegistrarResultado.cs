@@ -250,7 +250,11 @@ namespace source.Boundarys
         }
 
         private void cancelarRevision(object sender, EventArgs e)
-        {
+        {   if (dataGridEventosSismicos.Visible == false)
+            {
+                gestorRegistrarRevisionManual.tomarAccionSobreEvento("Cancelar revision evento");
+            }
+             
             MessageBox.Show("La revisión ha sido cancelada");
             this.Close();
         }
@@ -266,6 +270,11 @@ namespace source.Boundarys
         }
 
         private void lblSolicitarAccionEvento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridEventosSismicos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

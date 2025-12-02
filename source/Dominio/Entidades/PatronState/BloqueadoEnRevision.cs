@@ -80,6 +80,10 @@ namespace source.Dominio.Entidades.PatronState
             // Chequear si cambiar el diagrama con un new?
             return await repoEstado.ObtenerPorNombreAsync("Confirmado");
         }
+        public async Task<Estado> crearEstadoPendienteEnRevision(IRepositorioEstado repoEstado)
+        {
+            return await repoEstado.ObtenerPorNombreAsync("PendienteRevision");
+        }
 
         public CambioEstado crearCambioEstado(
             DateTime fechaHoraActual,
@@ -117,6 +121,33 @@ namespace source.Dominio.Entidades.PatronState
             evento.agregarCambioEstado(cambioEstado);
 
             return estadoConfirmado;
+        }
+        public override async Task<Estado> Cancelar(
+            DateTime fechaHoraActual,
+            Empleado asLogueado,
+            IList<CambioEstado> cambiosEstado,
+            EventoSismico evento,
+            IRepositorioEstado repoEstado
+        )
+        {
+            //72. cerrarCambioEstado()
+            cerrarCambioEstado(fechaHoraActual, cambiosEstado);
+
+            //75. crearEstadoRechazado()
+            Estado estadoPendienteRevision = await crearEstadoPendienteEnRevision(repoEstado);
+
+            // 77. crearCambioEstado()
+            CambioEstado cambioEstado = crearCambioEstado(
+                fechaHoraActual,
+                estadoPendienteRevision,
+                asLogueado
+            );
+            // 79. setEstado()
+            evento.setEstado(estadoPendienteRevision);
+            // 80. agregarCambioEstado()
+            evento.agregarCambioEstado(cambioEstado);
+
+            return estadoPendienteRevision;
         }
     }
 }

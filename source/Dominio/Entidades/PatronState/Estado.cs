@@ -46,6 +46,16 @@ namespace source.Dominio.Entidades.PatronState
         }
 
         public virtual bool EsFinal => false;
+        public virtual Task<Estado> Cancelar(
+            DateTime fechaHoraActual,
+            Empleado actor,
+            IList<CambioEstado> cambios,
+            EventoSismico evento,
+            IRepositorioEstado repoEstado
+        )
+        {
+            throw new InvalidOperationException($"El estado {Nombre} no permite cancelar.");
+        }
 
         public virtual Task<Estado> Bloquear(
             DateTime fechaHoraActual,

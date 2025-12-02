@@ -26,6 +26,9 @@ namespace source
 
                 var appSeeder = scope.ServiceProvider.GetRequiredService<AppDataSeeder>();
                 appSeeder.SeedAsync().Wait();
+
+                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                db.Database.Migrate();
             }
 
             ApplicationConfiguration.Initialize();

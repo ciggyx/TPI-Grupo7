@@ -238,6 +238,19 @@ namespace source.Domain.Entities
                 Detalles: detalles
             );
         }
+        public async Task<Estado> cancelar(
+            DateTime fechaHoraActual,
+            Empleado empleadoLogueado,
+            IRepositorioEstado repoEstado
+         )
+        {
+            return await Estado.Cancelar(
+                fechaHoraActual,
+                empleadoLogueado,
+                ListaCambioEstado,
+                this,
+                repoEstado);
+        }
 
         public async Task<Estado> rechazar(
             DateTime fechaHoraActual,

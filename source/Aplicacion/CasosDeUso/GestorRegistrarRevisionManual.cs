@@ -1,5 +1,6 @@
 ﻿using System.CodeDom;
 using System.Linq.Expressions;
+using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using source.Boundarys;
@@ -328,24 +329,35 @@ namespace source.Application.UseCases
             this.accionSobreEvento = accionSobreEvento;
             // 67. validarDatos()
             var datosValidados = validarDatos(eventoSismicoSeleccionado);
-            if (datosValidados == true)
+            if (datosValidados)
             {
-                if (accionSobreEvento == "Rechazar evento")
+                switch (accionSobreEvento)
                 {
-                    // 68. rechazarEventoSismico()
-                    await rechazarEventoSismico();
-                }
-                else if (accionSobreEvento == "Confirmar evento")
-                {
-                    await confirmarEventoSismico();
+                    case "Rechazar evento":
+                        // 68. rechazarEventoSismico()
+                        await rechazarEventoSismico();
+                        break;
+
+                    case "Confirmar evento":
+                        await confirmarEventoSismico();
+                        break;
+
+                    case "Cancelar revision evento" when eventoSismicoSeleccionado != null:
+                        await cancelarRevisionEventoSismico();
+                        return;   
+
+                    default:
+                        MessageBox.Show("Acción no reconocida o inválida.");
+                        return;
                 }
                 // 75. finCU()
-                finCU();
+                finCU();   
             }
             else
             {
                 MessageBox.Show("Datos invalidos");
             }
+
         }
 
         public async Task rechazarEventoSismico()
@@ -377,6 +389,13 @@ namespace source.Application.UseCases
             unitOfWork.Begin();
             fechaHoraActual = getFechaHoraActual();
             await eventoSismicoSeleccionado.confirmar(fechaHoraActual, asLogueado, estadoRepo);
+            unitOfWork.Commit();
+        }
+        public async Task cancelarRevisionEventoSismico()
+        {
+            unitOfWork.Begin();
+            fechaHoraActual = getFechaHoraActual();
+            await eventoSismicoSeleccionado.cancelar(fechaHoraActual, asLogueado, estadoRepo);
             unitOfWork.Commit();
         }
 
