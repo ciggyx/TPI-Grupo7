@@ -15,6 +15,7 @@ AutoDetectado-->PendienteRevision :  25. \n revisar() \n [tiempoEspera=5min]
 PendienteRevision-->BloqueadoRevision: 25 \n bloquear() [revisionSi=Si \n & tiempoEspera<5min]
 PendienteRevision-->EventoSinRevision: 27. bloquear() [revisionSi=No \n & tiempoEspera=5min]
 AutoDetectado --> BloqueadoRevision: 25. \n revisar() \n [tiempoEspera<5min]
+BloqueadoRevision-->PendienteRevision: cancelar()
 BloqueadoRevision-->Confirmado: 23.\n confirmarDirecto()
 BloqueadoRevision-->Rechazado:  23.\n rechazar()
 BloqueadoRevision-->DerivadoExperto:  23.\n derivar()
