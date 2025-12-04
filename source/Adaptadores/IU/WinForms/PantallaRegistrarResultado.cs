@@ -26,6 +26,14 @@ namespace source.Boundarys
         public void abrirVentana()
         {
             InitializeComponent();
+            lblAlcance.Visible = false;
+            lblClasificacion.Visible = false;
+            lblMagnitud.Visible = false;
+            lblOrigen.Visible = false;
+            pictureBox1.Visible = false;
+            lblSolicitarVisualizacion.Visible = false;
+            noBtn.Visible = false;
+            siBtn.Visible = false;
             //3.newRevisionManual
             newRevisionManual();
         }
@@ -54,16 +62,9 @@ namespace source.Boundarys
             )> eventosSismicosSinRevisionOrdenados
         )
         {
-            lblAlcance.Visible = false;
-            lblClasificacion.Visible = false;
-            lblMagnitud.Visible = false;
-            lblOrigen.Visible = false;
-            pictureBox1.Visible = false;
-            eventosOriginales = eventosSismicosSinRevisionOrdenados;
-            lblSolicitarVisualizacion.Visible = false;
-            noBtn.Visible = false;
-            siBtn.Visible = false;
+            
 
+            eventosOriginales = eventosSismicosSinRevisionOrdenados;
             var datosAMostrar = eventosSismicosSinRevisionOrdenados
                 .Select(e => new
                 {

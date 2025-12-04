@@ -134,10 +134,10 @@
             // 
             // seleccionarBtn
             // 
-            seleccionarBtn.Location = new Point(507, 567);
+            seleccionarBtn.Location = new Point(486, 567);
             seleccionarBtn.Margin = new Padding(3, 2, 3, 2);
             seleccionarBtn.Name = "seleccionarBtn";
-            seleccionarBtn.Size = new Size(80, 30);
+            seleccionarBtn.Size = new Size(101, 30);
             seleccionarBtn.TabIndex = 1;
             seleccionarBtn.Text = "Seleccionar";
             seleccionarBtn.UseVisualStyleBackColor = true;
@@ -149,7 +149,7 @@
             lblClasificacion.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblClasificacion.Location = new Point(123, 196);
             lblClasificacion.Name = "lblClasificacion";
-            lblClasificacion.Size = new Size(112, 20);
+            lblClasificacion.Size = new Size(139, 25);
             lblClasificacion.TabIndex = 7;
             lblClasificacion.Text = "lblClasificacion";
             // 
@@ -159,7 +159,7 @@
             lblOrigen.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblOrigen.Location = new Point(123, 290);
             lblOrigen.Name = "lblOrigen";
-            lblOrigen.Size = new Size(73, 20);
+            lblOrigen.Size = new Size(91, 25);
             lblOrigen.TabIndex = 8;
             lblOrigen.Text = "lblOrigen";
             // 
@@ -169,7 +169,7 @@
             lblMagnitud.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblMagnitud.Location = new Point(123, 391);
             lblMagnitud.Name = "lblMagnitud";
-            lblMagnitud.Size = new Size(94, 20);
+            lblMagnitud.Size = new Size(116, 25);
             lblMagnitud.TabIndex = 9;
             lblMagnitud.Text = "lblMagnitud";
             // 
@@ -179,15 +179,15 @@
             lblAlcance.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblAlcance.Location = new Point(123, 104);
             lblAlcance.Name = "lblAlcance";
-            lblAlcance.Size = new Size(80, 20);
+            lblAlcance.Size = new Size(100, 25);
             lblAlcance.TabIndex = 10;
             lblAlcance.Text = "lblAlcance";
             // 
             // lblSolicitarVisualizacion
             // 
-            lblSolicitarVisualizacion.Location = new Point(557, 483);
+            lblSolicitarVisualizacion.Location = new Point(557, 453);
             lblSolicitarVisualizacion.Name = "lblSolicitarVisualizacion";
-            lblSolicitarVisualizacion.Size = new Size(312, 50);
+            lblSolicitarVisualizacion.Size = new Size(328, 50);
             lblSolicitarVisualizacion.TabIndex = 12;
             lblSolicitarVisualizacion.Text = "¿Desea visualizar en un mapa el evento sísmico y las estaciones simológicas involucradas?";
             lblSolicitarVisualizacion.TextAlign = ContentAlignment.MiddleCenter;
@@ -262,6 +262,7 @@
             // 
             // continuarSinModificarBtn
             // 
+            continuarSinModificarBtn.Font = new Font("Segoe UI", 7F);
             continuarSinModificarBtn.Location = new Point(691, 566);
             continuarSinModificarBtn.Margin = new Padding(3, 2, 3, 2);
             continuarSinModificarBtn.Name = "continuarSinModificarBtn";
@@ -298,10 +299,11 @@
             // 
             // solicitarRevisionBtn
             // 
-            solicitarRevisionBtn.Location = new Point(608, 566);
+            solicitarRevisionBtn.Font = new Font("Segoe UI", 8F);
+            solicitarRevisionBtn.Location = new Point(602, 566);
             solicitarRevisionBtn.Margin = new Padding(3, 2, 3, 2);
             solicitarRevisionBtn.Name = "solicitarRevisionBtn";
-            solicitarRevisionBtn.Size = new Size(169, 30);
+            solicitarRevisionBtn.Size = new Size(184, 30);
             solicitarRevisionBtn.TabIndex = 30;
             solicitarRevisionBtn.Text = "Solicitar revisión a experto";
             solicitarRevisionBtn.UseVisualStyleBackColor = true;
@@ -310,7 +312,7 @@
             // 
             // lblSolicitarAccionEvento
             // 
-            lblSolicitarAccionEvento.Location = new Point(545, 485);
+            lblSolicitarAccionEvento.Location = new Point(557, 455);
             lblSolicitarAccionEvento.Name = "lblSolicitarAccionEvento";
             lblSolicitarAccionEvento.Size = new Size(312, 46);
             lblSolicitarAccionEvento.TabIndex = 23;
@@ -332,8 +334,8 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.Sismograma;
-            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox1.Location = new Point(399, 99);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(587, 330);
